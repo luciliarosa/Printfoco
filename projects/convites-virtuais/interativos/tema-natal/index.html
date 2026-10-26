@@ -156,6 +156,27 @@
             </button>
           </div>
         </article>
+
+        <!-- Ceia Compartilhada (O que cada convidado deve levar) -->
+        <article class="detail-card light-card card-full-width">
+          <div class="card-icon-box dish-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div class="card-info">
+            <span class="info-tag">Ceia da Família • O que Levar</span>
+            <h3 class="info-title">1 Prato (Doce ou Salgado) + 1 Bebida</h3>
+            <p class="info-desc">
+              Para celebrarmos juntos uma ceia farta, deliciosa e colaborativa, <strong>cada convidado / família deve levar um prato (doce ou salgado) e uma bebida</strong> de sua preferência.
+            </p>
+          </div>
+          <div class="card-actions">
+            <a href="#rsvpForm" class="btn-subtle" title="Informar prato e bebida na confirmação">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              <span>Informar na Confirmação de Presença</span>
+            </a>
+          </div>
+        </article>
+
       </div>
 
       <!-- SIMULADOR INTERATIVO: A ÁRVORE DA FAMÍLIA -->
@@ -224,6 +245,14 @@
                 <span class="ornament-preview gift-item">🎁</span>
                 <span>União</span>
               </button>
+              <button class="ornament-choice" data-type="thor" aria-label="Bolinha do Thor">
+                <span class="ornament-preview thor-ball-preview"></span>
+                <span>Thor 🐾</span>
+              </button>
+              <button class="ornament-choice" data-type="jade" aria-label="Bolinha da Jade">
+                <span class="ornament-preview jade-ball-preview"></span>
+                <span>Jade 🎀</span>
+              </button>
             </div>
 
             <!-- Contador e Botão Bonito e Estilizado de Limpar -->
@@ -280,6 +309,11 @@
               <input type="text" id="guestName" placeholder="Ex: Família Silva, Carlos e Ana" required autocomplete="off">
             </div>
 
+            <div class="input-group">
+              <label for="guestDish">Prato e Bebida que vai trazer (1 Prato + 1 Bebida):</label>
+              <input type="text" id="guestDish" placeholder="Ex: Torta salgada + Refrigerante / Vinho" autocomplete="off">
+            </div>
+
             <!-- Opção de Solicitar Endereço com Checkbox Elegante -->
             <label class="custom-checkbox-row" for="requestAddressCheck">
               <input type="checkbox" id="requestAddressCheck">
@@ -311,31 +345,6 @@
 
     </section>
   </main>
-
-  <!-- PISTA DE CORRIDA ANIMADA: THOR E JADE CORRENDO LIVRES PELO CONVITE -->
-  <div class="dogs-running-track" id="dogsRunningTrack" aria-label="Thor e Jade correndo pelo convite">
-    <div class="dogs-pack" id="dogsPack">
-      <!-- Thor -->
-      <div class="dog-runner" id="dogRunnerThor" title="Toque no Thor!">
-        <div class="runner-tag tag-thor">Thor 🐾</div>
-        <div class="runner-body">
-          <img src="assets/thor_face.jpg" alt="Rosto do Thor" class="runner-photo">
-          <span class="runner-hat">🎅</span>
-        </div>
-        <span class="runner-trail">🐾</span>
-      </div>
-
-      <!-- Jade -->
-      <div class="dog-runner" id="dogRunnerJade" title="Toque na Jade!">
-        <div class="runner-tag tag-jade">Jade 🎀</div>
-        <div class="runner-body">
-          <img src="assets/jade_face.jpg" alt="Rosto da Jade" class="runner-photo">
-          <span class="runner-hat">🎀</span>
-        </div>
-        <span class="runner-trail">🐾</span>
-      </div>
-    </div>
-  </div>
 
   <!-- Notificação Flutuante / Toast Feedback -->
   <div id="toast" class="toast" role="alert" aria-live="polite"></div>

@@ -347,6 +347,24 @@ document.addEventListener('DOMContentLoaded', () => {
       innerContent = `<div class="emoji-ornament" title="Sininho da Alegria">🔔</div>`;
     } else if (type === 'gift') {
       innerContent = `<div class="emoji-ornament" title="Presente da União">🎁</div>`;
+    } else if (type === 'thor') {
+      innerContent = `
+        <div class="pet-ornament thor-ornament" title="Thor 🐾">
+          <div class="ornament-cap"></div>
+          <div class="pet-ornament-frame">
+            <img src="assets/thor_face.jpg" alt="Thor" class="pet-ornament-img">
+            <span class="pet-ornament-accessory">🎅</span>
+          </div>
+        </div>`;
+    } else if (type === 'jade') {
+      innerContent = `
+        <div class="pet-ornament jade-ornament" title="Jade 🎀">
+          <div class="ornament-cap"></div>
+          <div class="pet-ornament-frame">
+            <img src="assets/jade_face.jpg" alt="Jade" class="pet-ornament-img">
+            <span class="pet-ornament-accessory">🎀</span>
+          </div>
+        </div>`;
     }
 
     wrapper.innerHTML = innerContent;
@@ -356,7 +374,15 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapper.classList.remove('shake');
       void wrapper.offsetWidth;
       wrapper.classList.add('shake');
-      soundSystem.playChime();
+      if (type === 'thor') {
+        soundSystem.playBark();
+        showToast('Thor 🐾: Au au! Feliz Natal em família!');
+      } else if (type === 'jade') {
+        soundSystem.playBark();
+        showToast('Jade 🎀: Au au! Muito amor na ceia!');
+      } else {
+        soundSystem.playChime();
+      }
     });
 
     return wrapper;
@@ -380,23 +406,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     placedCount++;
     ornamentCounter.textContent = placedCount;
-    soundSystem.playChime();
 
     const typesName = {
       red: 'Amor ❤️',
       gold: 'Prosperidade ✨',
       silver: 'Paz 🕊️',
       bell: 'Alegria 🔔',
-      gift: 'União 🎁'
+      gift: 'União 🎁',
+      thor: 'Thor 🐾',
+      jade: 'Jade 🎀'
     };
-    showToast(`Enfeite de ${typesName[selectedType] || 'Natal'} pendurado!`);
+
+    if (selectedType === 'thor') {
+      soundSystem.playBark();
+      showToast('Bolinha do Thor pendurada na árvore! 🐾');
+    } else if (selectedType === 'jade') {
+      soundSystem.playBark();
+      showToast('Bolinha da Jade pendurada na árvore! 🎀');
+    } else {
+      soundSystem.playChime();
+      showToast(`Enfeite de ${typesName[selectedType] || 'Natal'} pendurado!`);
+    }
   });
 
   const initialOrnaments = [
-    { type: 'gold', x: 50, y: 35 },
-    { type: 'red', x: 38, y: 55 },
-    { type: 'silver', x: 62, y: 58 },
-    { type: 'gift', x: 48, y: 72 }
+    { type: 'gold', x: 50, y: 32 },
+    { type: 'thor', x: 38, y: 52 },
+    { type: 'jade', x: 62, y: 54 },
+    { type: 'red', x: 42, y: 72 },
+    { type: 'gift', x: 58, y: 73 }
   ];
 
   initialOrnaments.forEach(item => {
@@ -510,9 +548,11 @@ document.addEventListener('DOMContentLoaded', () => {
      8. CONFIRMAÇÃO DE PRESENÇA NO WHATSAPP (SEM EXPOR NÚMERO)
      ========================================================== */
   const confirmWhatsappBtn = document.getElementById('confirmWhatsappBtn');
+  const guestDishInput = document.getElementById('guestDish');
 
   confirmWhatsappBtn.addEventListener('click', () => {
     const name = guestNameInput.value.trim();
+    const dish = guestDishInput ? guestDishInput.value.trim() : '';
     const targetPhone = "5511975855682"; // Número seguro enviado diretamente à API
     const wantsAddress = requestAddressCheck.checked;
 
@@ -522,6 +562,11 @@ document.addEventListener('DOMContentLoaded', () => {
       messageText = `Olá! 🎄✨ Aqui é *${name}*. Confirmo com muita alegria a nossa presença no Natal da nossa família na casa da Elaine e do Edson! Nos vemos lá a partir das 19:00. ❤️🥂`;
     } else {
       messageText = `Olá! 🎄✨ Gostaria de confirmar nossa presença na ceia de Natal da família na casa da Elaine e do Edson! Nos vemos lá a partir das 19:00. ❤️🥂`;
+    }
+
+    // Se a pessoa informou o prato e a bebida
+    if (dish) {
+      messageText += `\n\n🍽️ *Prato e Bebida que vamos levar:* ${dish}`;
     }
 
     // Se a pessoa marcou o checkbox pedindo endereço/localização
@@ -548,45 +593,6 @@ document.addEventListener('DOMContentLoaded', () => {
     toastTimer = setTimeout(() => {
       toast.classList.remove('show');
     }, 2800);
-  }
-
-
-  /* ==========================================================
-     10. INTERAÇÃO COM OS MASCOTES THOR & JADE
-     ========================================================== */
-  const dogRunnerThor = document.getElementById('dogRunnerThor');
-  const dogRunnerJade = document.getElementById('dogRunnerJade');
-
-  function interactThor(e) {
-    if (e) e.stopPropagation();
-    soundSystem.playBark();
-    if (dogRunnerThor) {
-      dogRunnerThor.classList.remove('jump');
-      void dogRunnerThor.offsetWidth;
-      dogRunnerThor.classList.add('jump');
-    }
-    showToast('Thor 🐾: Au au! Estou com minha gravatinha de festa!');
-  }
-
-  function interactJade(e) {
-    if (e) e.stopPropagation();
-    soundSystem.playBark();
-    if (dogRunnerJade) {
-      dogRunnerJade.classList.remove('jump');
-      void dogRunnerJade.offsetWidth;
-      dogRunnerJade.classList.add('jump');
-    }
-    showToast('Jade 🎀: Au au! Vou dar muito carinho na família!');
-  }
-
-  if (dogRunnerThor) {
-    dogRunnerThor.addEventListener('click', interactThor);
-    dogRunnerThor.addEventListener('touchstart', interactThor, { passive: true });
-  }
-
-  if (dogRunnerJade) {
-    dogRunnerJade.addEventListener('click', interactJade);
-    dogRunnerJade.addEventListener('touchstart', interactJade, { passive: true });
   }
 
 });
