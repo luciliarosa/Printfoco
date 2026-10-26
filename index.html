@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#fff8ee">
+  <title>Natal da Família Reunida 🎄✨</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Efeito de Brilhos e Luzes Festivas no Canvas -->
+  <canvas id="snowCanvas" aria-hidden="true"></canvas>
+
+  <!-- Luzinhas Pisca-Pisca Festivas de Topo -->
+  <div class="fairy-lights" id="fairyLights">
+    <span class="light red"></span>
+    <span class="light gold"></span>
+    <span class="light green"></span>
+    <span class="light gold"></span>
+    <span class="light red"></span>
+    <span class="light green"></span>
+    <span class="light gold"></span>
+    <span class="light red"></span>
+  </div>
+
+  <!-- Botões de Controle Flutuantes (Som e Brilhos) -->
+  <header class="top-controls">
+    <button id="toggleSnowBtn" class="control-btn" title="Ligar/Desligar Brilhos de Natal" aria-label="Ligar/Desligar Brilhos">
+      <span class="icon">✨</span>
+      <span class="control-text">Brilhos</span>
+    </button>
+    <button id="musicBtn" class="control-btn" title="Música de Natal" aria-label="Música de Natal">
+      <span class="icon" id="musicIcon">🔔</span>
+      <span class="control-text" id="musicText">Melodia</span>
+    </button>
+  </header>
+
+  <main class="main-container">
+
+    <!-- FASE 1: O ENVELOPE / SIMULADOR DE ABERTURA -->
+    <section class="envelope-gate" id="envelopeGate">
+      <div class="gate-content">
+        <div class="seal-badge">
+          <span>🎄</span>
+          <span class="year-badge">Nosso Natal em Família</span>
+        </div>
+        <h1 class="gate-title">Você recebeu um convite especial</h1>
+        <p class="gate-subtitle">O momento de reunir quem mais amamos chegou! Abra a cartinha e veja todos os detalhes da nossa ceia.</p>
+
+        <!-- Envelope Interativo -->
+        <div class="envelope-wrapper" id="envelopeWrapper" role="button" tabindex="0" aria-label="Toque para abrir a correspondência">
+          <div class="envelope-3d">
+            <div class="envelope-flap"></div>
+            <div class="envelope-pocket"></div>
+            <div class="envelope-letter-preview">
+              <span class="stamp-icon">✨</span>
+              <p class="letter-preview-heading">Família Reunida</p>
+              <p class="letter-preview-sub">Celebração de Natal</p>
+            </div>
+            <div class="wax-seal">
+              <div class="seal-inner">
+                <span>FAMÍLIA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instrução única, limpa e bem posicionada -->
+        <div class="open-instruction-box">
+          <p class="envelope-tip">Toque no lacre ou clique no botão abaixo para abrir:</p>
+          <button id="openInviteBtn" class="btn-primary">
+            <span>Abrir Convite</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FASE 2: CONVITE COMPLETO & SIMULADOR NATALINO -->
+    <section class="invite-content hidden" id="inviteContent">
+      
+      <!-- Cabeçalho Aconchegante e Iluminado -->
+      <div class="hero-card light-card">
+        <div class="tag-festive">Amor • União • Celebração</div>
+        <h2 class="family-script">Natal da Família</h2>
+        <h1 class="host-names">Nossa Grande Confraternização</h1>
+        <p class="invitation-intro">
+          O Natal é de toda a nossa família! Este ano, a nossa comemoração e ceia de fim de ano será realizada com muito carinho na casa da <strong>Elaine e do Edson</strong>. Queremos todos reunidos para celebrar com abraços, risadas, comida boa e muito amor!
+        </p>
+
+        <!-- Contagem Regressiva -->
+        <div class="countdown-section">
+          <div class="countdown-label">Faltam para a nossa grande noite:</div>
+          <div class="countdown-timer" id="countdownTimer">
+            <div class="time-block">
+              <span class="time-num" id="days">--</span>
+              <span class="time-unit">Dias</span>
+            </div>
+            <div class="time-separator">:</div>
+            <div class="time-block">
+              <span class="time-num" id="hours">--</span>
+              <span class="time-unit">Horas</span>
+            </div>
+            <div class="time-separator">:</div>
+            <div class="time-block">
+              <span class="time-num" id="minutes">--</span>
+              <span class="time-unit">Min</span>
+            </div>
+            <div class="time-separator">:</div>
+            <div class="time-block">
+              <span class="time-num" id="seconds">--</span>
+              <span class="time-unit">Seg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informações Principais (Cards Clean em Tom Claro) -->
+      <div class="event-details-grid">
+        
+        <!-- Local Protegido (Sem endereço público exposto) -->
+        <article class="detail-card light-card">
+          <div class="card-icon-box pin-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="card-info">
+            <span class="info-tag">Local do Encontro</span>
+            <h3 class="info-title">Casa da Elaine e Edson</h3>
+            <p class="info-desc">
+              Um ambiente caloroso e preparado com muito carinho para acolher toda a nossa família.
+            </p>
+          </div>
+          <div class="card-actions">
+            <a href="#rsvpForm" class="btn-subtle" id="scrollAddressBtn" title="Solicitar localização no WhatsApp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Pedir Endereço na Confirmação</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Horário -->
+        <article class="detail-card light-card">
+          <div class="card-icon-box clock-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="card-info">
+            <span class="info-tag">Horário de Início</span>
+            <h3 class="info-title">A partir das 19:00</h3>
+            <p class="info-desc">Chegue no início da noite para brindar, confraternizar, petiscar e curtir cada momento antes da nossa ceia!</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-subtle" id="addToCalendarBtn" title="Salvar Lembrete no Calendário">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Adicionar à Agenda</span>
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- SIMULADOR INTERATIVO: A ÁRVORE DA FAMÍLIA -->
+      <section class="simulator-section light-card">
+        <div class="section-badge">✨ Simulador Interativo</div>
+        <h2 class="section-title">Monte seu Enfeite na Árvore da Família</h2>
+        <p class="section-subtitle">
+          Escolha um ornamento e toque na árvore para pendurar seus votos na celebração de todos nós!
+        </p>
+
+        <!-- Área da Árvore Interativa -->
+        <div class="tree-stage-container">
+          <div class="tree-canvas-wrapper" id="treeStage">
+            <div class="tree-svg-container">
+              <svg class="festive-tree" viewBox="0 0 300 380" fill="none">
+                <!-- Estrela com brilho solar -->
+                <polygon points="150,15 158,35 180,38 163,53 168,75 150,62 132,75 137,53 120,38 142,35" fill="#f59e0b" class="tree-star"/>
+                
+                <!-- Camadas da árvore com verde fresco de verão -->
+                <path d="M150 45 L105 110 L125 110 L85 175 L110 175 L65 245 L95 245 L45 320 L255 320 L205 245 L235 245 L190 175 L215 175 L175 110 L195 110 Z" fill="url(#treeGradient)" />
+                
+                <!-- Tronco -->
+                <rect x="135" y="320" width="30" height="45" rx="4" fill="#78350f"/>
+                <rect x="120" y="360" width="60" height="12" rx="6" fill="#451a03"/>
+
+                <!-- Cordões Dourados Iluminados -->
+                <path d="M110 135 Q150 160 190 135" stroke="rgba(254, 240, 138, 0.95)" stroke-width="2.8" stroke-dasharray="5 5" fill="none"/>
+                <path d="M90 205 Q150 235 210 205" stroke="rgba(254, 240, 138, 0.95)" stroke-width="2.8" stroke-dasharray="6 6" fill="none"/>
+                <path d="M70 280 Q150 315 230 280" stroke="rgba(254, 240, 138, 0.95)" stroke-width="3" stroke-dasharray="7 7" fill="none"/>
+
+                <defs>
+                  <linearGradient id="treeGradient" x1="150" y1="45" x2="150" y2="320" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#15803d"/>
+                    <stop offset="50%" stop-color="#166534"/>
+                    <stop offset="100%" stop-color="#14532d"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+
+              <!-- Camada de Enfeites Adicionados Interativamente -->
+              <div class="ornaments-layer" id="ornamentsLayer"></div>
+            </div>
+          </div>
+
+          <!-- Barra de Escolha de Enfeite -->
+          <div class="simulator-toolbar">
+            <span class="toolbar-label">Escolha seu ornamento:</span>
+            <div class="ornament-selectors">
+              <button class="ornament-choice active" data-type="red" aria-label="Bola Vermelha">
+                <span class="ornament-preview red-ball"></span>
+                <span>Amor</span>
+              </button>
+              <button class="ornament-choice" data-type="gold" aria-label="Bola Dourada">
+                <span class="ornament-preview gold-ball"></span>
+                <span>Prosperidade</span>
+              </button>
+              <button class="ornament-choice" data-type="silver" aria-label="Bolinha Prateada">
+                <span class="ornament-preview silver-ball"></span>
+                <span>Paz</span>
+              </button>
+              <button class="ornament-choice" data-type="bell" aria-label="Sininho">
+                <span class="ornament-preview bell-item">🔔</span>
+                <span>Alegria</span>
+              </button>
+              <button class="ornament-choice" data-type="gift" aria-label="Presentinho">
+                <span class="ornament-preview gift-item">🎁</span>
+                <span>União</span>
+              </button>
+            </div>
+
+            <!-- Contador e Botão Bonito e Estilizado de Limpar -->
+            <div class="simulator-bottom-bar">
+              <div class="counter-chip">
+                <span>🎄</span>
+                <span id="ornamentCounter">4</span> enfeites pendurados
+              </div>
+              <button id="resetTreeBtn" class="btn-clean-tree" title="Recomeçar decoração da árvore">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+                <span>Limpar Árvore</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEÇÃO DE MENSAGENS NATALINAS DA FAMÍLIA -->
+      <section class="messages-section light-card">
+        <div class="section-badge">💌 Mensagens de Natal</div>
+        <h2 class="section-title">Palavras para Toda a Família</h2>
+        <p class="section-subtitle">
+          Clique no botão para revelar uma mensagem de afeto e união familiar:
+        </p>
+
+        <div class="message-card" id="messageCard">
+          <div class="card-quote-mark">“</div>
+          <p class="message-text" id="quoteText">
+            O maior presente de todos não cabe em caixas: é o abraço apertado, o riso em volta da mesa e a certeza de que a nossa família é o nosso bem mais precioso.
+          </p>
+          <div class="message-author" id="quoteAuthor">— Família Reunida</div>
+        </div>
+
+        <div class="message-controls">
+          <button id="nextMessageBtn" class="btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            <span>Sortear Outra Mensagem</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- SEÇÃO DE CONFIRMAÇÃO DE PRESENÇA (WHATSAPP PROTEGIDO) -->
+      <section class="rsvp-section light-card" id="rsvpSection">
+        <div class="rsvp-content">
+          <span class="rsvp-icon">🥂</span>
+          <h2>Confirme sua Presença</h2>
+          <p>
+            Para organizarmos a nossa ceia com fartura e todo carinho, confirme quem vai participar conosco:
+          </p>
+
+          <form id="rsvpForm" class="rsvp-form" onsubmit="return false;">
+            <div class="input-group">
+              <label for="guestName">Seu Nome / Membros da Família:</label>
+              <input type="text" id="guestName" placeholder="Ex: Família Silva, Carlos e Ana" required autocomplete="off">
+            </div>
+
+            <!-- Opção de Solicitar Endereço com Checkbox Elegante -->
+            <label class="custom-checkbox-row" for="requestAddressCheck">
+              <input type="checkbox" id="requestAddressCheck">
+              <span class="checkbox-box">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span class="checkbox-text">
+                <strong>Preciso do endereço:</strong> enviar a localização no WhatsApp 📍
+              </span>
+            </label>
+
+            <div class="rsvp-actions">
+              <button type="button" id="confirmWhatsappBtn" class="btn-whatsapp">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.204 8.204 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.11l-.29-.17-3.03.8 1.07-2.95-.19-.3a8.163 8.163 0 0 1-1.25-4.31c0-4.54 3.7-8.24 8.24-8.24zm4.51 11.63c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.59.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/>
+                </svg>
+                <span>Confirmar Presença no WhatsApp</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Rodapé da Família (Sem endereço exposto) -->
+      <footer class="invite-footer">
+        <p class="footer-heart">O Natal é de todos nós! Feito com amor para a nossa família ❤️</p>
+        <p class="footer-sign">Casa da Elaine & Edson • Noite de Natal em Família</p>
+      </footer>
+
+    </section>
+  </main>
+
+  <!-- PISTA DE CORRIDA ANIMADA: THOR E JADE CORRENDO LIVRES PELO CONVITE -->
+  <div class="dogs-running-track" id="dogsRunningTrack" aria-label="Thor e Jade correndo pelo convite">
+    <div class="dogs-pack" id="dogsPack">
+      <!-- Thor -->
+      <div class="dog-runner" id="dogRunnerThor" title="Toque no Thor!">
+        <div class="runner-tag tag-thor">Thor 🐾</div>
+        <div class="runner-body">
+          <img src="assets/thor_face.jpg" alt="Rosto do Thor" class="runner-photo">
+          <span class="runner-hat">🎅</span>
+        </div>
+        <span class="runner-trail">🐾</span>
+      </div>
+
+      <!-- Jade -->
+      <div class="dog-runner" id="dogRunnerJade" title="Toque na Jade!">
+        <div class="runner-tag tag-jade">Jade 🎀</div>
+        <div class="runner-body">
+          <img src="assets/jade_face.jpg" alt="Rosto da Jade" class="runner-photo">
+          <span class="runner-hat">🎀</span>
+        </div>
+        <span class="runner-trail">🐾</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificação Flutuante / Toast Feedback -->
+  <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

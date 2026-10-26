@@ -1,0 +1,1592 @@
+/* ==========================================================
+   RESET & VARIÁVEIS - VIBE NATAL BRASILEIRO (TOM CLARO)
+   ========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Fundo Claro Solar & Iluminado */
+  --bg-gradient: radial-gradient(circle at 50% 0%, #fffbf2 0%, #fdf5e6 45%, #faf0db 100%);
+  --bg-surface: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-card-subtle: rgba(255, 253, 248, 0.96);
+  
+  /* Cores Festivas Brasileiras */
+  --gold: #d97706;
+  --gold-warm: #b45309;
+  --gold-light: #fef3c7;
+  --gold-tag: #fffbeb;
+  --ruby: #c81e2b;
+  --ruby-dark: #9f121d;
+  --green-tropical: #15803d;
+  --green-dark: #14532d;
+  
+  /* Tipografia & Contrastes */
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  
+  /* Bordas e Sombras Suaves */
+  --card-border: rgba(217, 119, 6, 0.22);
+  --card-border-hover: rgba(217, 119, 6, 0.45);
+  --card-shadow: 0 14px 34px -8px rgba(180, 83, 9, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 18px 40px -8px rgba(180, 83, 9, 0.18);
+  
+  --radius-xl: 22px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  --font-title: 'Cinzel', 'Playfair Display', 'Georgia', serif;
+  --font-script: 'Alex Brush', 'Brush Script MT', cursive;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================================
+   CANVAS DE BRILHOS & LUZES FESTIVAS
+   ========================================================== */
+#snowCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================
+   LUZES PISCA-PISCA FESTIVAS
+   ========================================================== */
+.fairy-lights {
+  position: fixed;
+  top: -4px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+  z-index: 40;
+  padding: 0 10px;
+}
+
+.fairy-lights .light {
+  width: 10px;
+  height: 16px;
+  border-radius: 50% 50% 45% 45%;
+  animation: glow 1.8s infinite alternate ease-in-out;
+  position: relative;
+}
+
+.fairy-lights .light::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 3px;
+  width: 4px;
+  height: 3px;
+  background: #64748b;
+  border-radius: 1px;
+}
+
+.fairy-lights .red {
+  background: #e11d48;
+  box-shadow: 0 0 10px rgba(225, 29, 72, 0.7);
+  animation-delay: 0.1s;
+}
+
+.fairy-lights .gold {
+  background: #f59e0b;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.75);
+  animation-delay: 0.5s;
+}
+
+.fairy-lights .green {
+  background: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.7);
+  animation-delay: 0.9s;
+}
+
+@keyframes glow {
+  0% { opacity: 0.4; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.1); }
+}
+
+/* ==========================================================
+   BOTÕES DE CONTROLE SUPERIOR
+   ========================================================== */
+.top-controls {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  gap: 8px;
+  z-index: 50;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  color: var(--text-primary);
+  padding: 7px 13px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.1);
+  transition: var(--transition);
+}
+
+.control-btn:hover {
+  background: #ffffff;
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(180, 83, 9, 0.18);
+}
+
+/* ==========================================================
+   CONTAINER PRINCIPAL
+   ========================================================== */
+.main-container {
+  width: 100%;
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 55px 16px 40px;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ==========================================================
+   FASE 1: ENVELOPE / SIMULADOR DE ABERTURA
+   ========================================================== */
+.envelope-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 80vh;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.gate-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--gold-tag);
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  border-radius: 20px;
+  color: var(--gold-warm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+
+.gate-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.65rem, 5.5vw, 2.3rem);
+  font-weight: 700;
+  color: var(--ruby-dark);
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.gate-subtitle {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  max-width: 440px;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* O Envelope Estilizado */
+.envelope-wrapper {
+  position: relative;
+  width: 290px;
+  height: 195px;
+  margin: 8px auto 0;
+  cursor: pointer;
+  perspective: 900px;
+  transition: transform 0.3s ease;
+}
+
+.envelope-wrapper:hover {
+  transform: translateY(-5px);
+}
+
+.envelope-wrapper:focus-visible {
+  outline: 2px solid var(--gold);
+  border-radius: 12px;
+}
+
+.envelope-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #be123c;
+  border-radius: 12px;
+  box-shadow: 0 18px 38px rgba(190, 18, 60, 0.25), 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Aba do envelope (topo triangular) */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 145px solid transparent;
+  border-right: 145px solid transparent;
+  border-top: 105px solid #9f1239;
+  transform-origin: top;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 4;
+}
+
+/* Bolso frontal */
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 145px solid #be123c;
+  border-right: 145px solid #be123c;
+  border-bottom: 100px solid #e11d48;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  z-index: 3;
+}
+
+/* Carta emergindo de dentro */
+.envelope-letter-preview {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  right: 20px;
+  height: 165px;
+  background: #fffdfa;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  color: var(--text-primary);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+  transition: transform 0.6s ease;
+  border: 1px dashed rgba(217, 119, 6, 0.4);
+}
+
+.envelope-letter-preview .stamp-icon {
+  font-size: 1.8rem;
+  margin-bottom: 2px;
+}
+
+.letter-preview-heading {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ruby-dark);
+}
+
+.letter-preview-sub {
+  font-size: 0.8rem;
+  color: var(--green-tropical);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Selo de Cera Dourado */
+.wax-seal {
+  position: absolute;
+  top: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 52px;
+  background: radial-gradient(circle, #fde68a 0%, #f59e0b 60%, #b45309 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.35), 0 0 10px rgba(245, 158, 11, 0.5);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fffbeb;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.seal-inner {
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 0.72rem;
+  color: #78350f;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* Efeito de abertura */
+.envelope-wrapper.opening .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-wrapper.opening .wax-seal {
+  transform: translateX(-50%) scale(0.6);
+  opacity: 0;
+}
+
+.envelope-wrapper.opening .envelope-letter-preview {
+  transform: translateY(-60px);
+}
+
+/* Bloco de Instrução Único (Sem sobreposição) */
+.open-instruction-box {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.envelope-tip {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ==========================================================
+   BOTÕES DE AÇÃO
+   ========================================================== */
+.btn-primary {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 700;
+  padding: 13px 34px;
+  border-radius: 35px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 22px rgba(225, 29, 72, 0.32);
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(225, 29, 72, 0.45);
+  background: linear-gradient(135deg, #f43f5e 0%, #9f1239 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================================
+   FASE 2: CONVITE COMPLETO & CARDS (TOM CLARO)
+   ========================================================== */
+.invite-content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Estilo dos Cartões Claros e Elegantes */
+.light-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  padding: 26px 22px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.light-card:hover {
+  border-color: var(--card-border-hover);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Cartão Hero (Cabeçalho da Celebração) */
+.hero-card {
+  text-align: center;
+  padding: 34px 22px 28px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(254, 249, 238, 0.95) 100%);
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background: radial-gradient(circle, var(--ruby) 0%, var(--gold) 60%, transparent 100%);
+}
+
+.tag-festive {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-tropical);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.family-script {
+  font-family: var(--font-script);
+  font-size: clamp(2.6rem, 8.5vw, 3.6rem);
+  font-weight: 400;
+  color: var(--ruby);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.host-names {
+  font-family: var(--font-title);
+  font-size: clamp(1.4rem, 5vw, 1.85rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
+}
+
+.invitation-intro {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin: 0 auto 22px;
+  line-height: 1.65;
+}
+
+.invitation-intro strong {
+  color: var(--ruby-dark);
+}
+
+/* Contagem Regressiva em Tom Claro */
+.countdown-section {
+  background: var(--gold-tag);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 16px 12px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.countdown-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--gold-warm);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 58px;
+  background: #ffffff;
+  padding: 8px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(217, 119, 6, 0.15);
+  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.06);
+}
+
+.time-num {
+  font-family: var(--font-title);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--ruby-dark);
+  line-height: 1.1;
+}
+
+.time-unit {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.time-separator {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* ==========================================================
+   GRID DE DETALHES (LOCAL, ENDEREÇO & HORÁRIO)
+   ========================================================== */
+.event-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .event-details-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.detail-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px 20px;
+  gap: 14px;
+}
+
+.card-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pin-icon {
+  color: #e11d48;
+  background: #ffe4e6;
+  border: 1px solid #fecdd3;
+}
+
+.clock-icon {
+  color: #0284c7;
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+}
+
+.info-tag {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-warm);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.info-title {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.info-address {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.info-address strong {
+  color: var(--ruby-dark);
+}
+
+.info-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.card-actions, .card-actions-row {
+  margin-top: 4px;
+}
+
+.card-actions-row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-subtle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  background: #ffffff;
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.card-actions .btn-subtle {
+  width: 100%;
+}
+
+.card-actions-row .btn-subtle {
+  flex: 1;
+}
+
+.btn-subtle:hover {
+  background: var(--gold-tag);
+  border-color: var(--gold);
+  color: var(--gold-warm);
+  transform: translateY(-1px);
+}
+
+.btn-maps {
+  color: var(--green-tropical);
+}
+
+.btn-maps:hover {
+  color: var(--green-dark);
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+/* ==========================================================
+   SIMULADOR INTERATIVO: ÁRVORE DA FAMÍLIA
+   ========================================================== */
+.simulator-section {
+  text-align: center;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  background: var(--gold-tag);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-warm);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.25rem, 4vw, 1.55rem);
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.section-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto 18px;
+}
+
+.tree-stage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.tree-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 380px;
+  background: radial-gradient(circle at center 35%, #fffdf7 0%, #fef5e7 65%, #fbe9cf 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: inset 0 0 25px rgba(217, 119, 6, 0.08), 0 6px 18px rgba(180, 83, 9, 0.06);
+}
+
+.tree-svg-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.festive-tree {
+  width: 90%;
+  height: 92%;
+  filter: drop-shadow(0 8px 12px rgba(20, 83, 45, 0.25));
+}
+
+.tree-star {
+  animation: pulseStar 2s infinite ease-in-out;
+  transform-origin: 150px 45px;
+}
+
+@keyframes pulseStar {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px #f59e0b); }
+  50% { transform: scale(1.12); filter: drop-shadow(0 0 14px #fbbf24); }
+}
+
+.ornaments-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.placed-ornament {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+}
+
+@keyframes popIn {
+  to { transform: translate(-50%, -50%) scale(1); }
+}
+
+.placed-ornament.shake {
+  animation: ornamentShake 0.4s ease-in-out;
+}
+
+@keyframes ornamentShake {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  25% { transform: translate(-50%, -50%) rotate(-15deg); }
+  75% { transform: translate(-50%, -50%) rotate(15deg); }
+}
+
+.placed-ornament .ball-shape {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.placed-ornament .ball-shape::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+}
+
+.placed-ornament .red-style {
+  background: radial-gradient(circle at 35% 35%, #ff4d5e 0%, #b31224 85%);
+  box-shadow: 0 0 8px rgba(225, 29, 72, 0.6);
+}
+
+.placed-ornament .gold-style {
+  background: radial-gradient(circle at 35% 35%, #ffeb7a 0%, #d97706 85%);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+
+.placed-ornament .silver-style {
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #94a3b8 85%);
+  box-shadow: 0 0 8px rgba(148, 163, 184, 0.5);
+}
+
+.placed-ornament .emoji-ornament {
+  font-size: 20px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Barra de Ferramentas do Simulador */
+.simulator-toolbar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.toolbar-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.ornament-selectors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ornament-choice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+  padding: 6px 13px;
+  border-radius: 20px;
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+  transition: var(--transition);
+}
+
+.ornament-choice:hover {
+  border-color: var(--gold);
+  background: var(--gold-tag);
+}
+
+.ornament-choice.active {
+  border-color: var(--gold);
+  background: var(--gold-tag);
+  color: var(--gold-warm);
+  box-shadow: 0 0 10px rgba(217, 119, 6, 0.2);
+}
+
+.ornament-preview {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.ornament-preview.red-ball { background: #e11d48; }
+.ornament-preview.gold-ball { background: #f59e0b; }
+.ornament-preview.silver-ball { background: #94a3b8; }
+.ornament-preview.bell-item,
+.ornament-preview.gift-item {
+  width: auto;
+  height: auto;
+  font-size: 13px;
+}
+
+/* Barra Inferior com Contador e Botão Limpar Bonito */
+.simulator-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 6px;
+  padding: 4px 6px;
+}
+
+.counter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.btn-clean-tree {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #be123c;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-clean-tree:hover {
+  background: #ffe4e6;
+  border-color: #fda4af;
+  color: #9f1239;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(225, 29, 72, 0.15);
+}
+
+/* ==========================================================
+   SEÇÃO DE MENSAGENS NATALINAS
+   ========================================================== */
+.messages-section {
+  text-align: center;
+}
+
+.message-card {
+  background: #ffffff;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  margin-bottom: 16px;
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 14px rgba(180, 83, 9, 0.05);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.card-quote-mark {
+  font-family: var(--font-title);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.45;
+  margin-bottom: -14px;
+}
+
+.message-text {
+  font-size: 0.98rem;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.6;
+  max-width: 480px;
+  margin-bottom: 10px;
+}
+
+.message-author {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ruby-dark);
+  letter-spacing: 0.04em;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  color: var(--gold-warm);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--gold-tag);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================
+   SEÇÃO RSVP (CONFIRMAÇÃO VIA WHATSAPP COM NÚMERO DEFINIDO)
+   ========================================================== */
+.rsvp-section {
+  text-align: center;
+}
+
+.rsvp-content {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.rsvp-icon {
+  font-size: 2.2rem;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.rsvp-section h2 {
+  font-family: var(--font-title);
+  font-size: 1.45rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.rsvp-section p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.input-group {
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 13px 16px;
+  background: #ffffff;
+  border: 1.5px solid rgba(217, 119, 6, 0.28);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.96rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.input-group input:focus {
+  border-color: var(--ruby);
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
+}
+
+/* ==========================================================
+   CHECKBOX PERSONALIZADO (SOLICITAR ENDEREÇO)
+   ========================================================== */
+.custom-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(217, 119, 6, 0.22);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  cursor: pointer;
+  user-select: none;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.custom-checkbox-row:hover {
+  background: var(--gold-tag);
+  border-color: var(--gold);
+}
+
+.custom-checkbox-row input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.checkbox-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.checkbox-box svg {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
+}
+
+.custom-checkbox-row input:checked ~ .checkbox-box {
+  background: var(--ruby);
+  border-color: var(--ruby);
+  box-shadow: 0 0 8px rgba(225, 29, 72, 0.35);
+}
+
+.custom-checkbox-row input:checked ~ .checkbox-box svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.custom-checkbox-row input:focus ~ .checkbox-box {
+  border-color: var(--ruby);
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
+}
+
+.checkbox-text {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.checkbox-text strong {
+  color: var(--text-primary);
+}
+
+.btn-whatsapp {
+  width: 100%;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: #fff;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 35px;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+  transition: var(--transition);
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(37, 211, 102, 0.42);
+}
+
+.whatsapp-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ==========================================================
+   RODAPÉ
+   ========================================================== */
+.invite-footer {
+  text-align: center;
+  padding: 22px 10px 85px;
+}
+
+.footer-heart {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.footer-sign {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ruby-dark);
+}
+
+/* ==========================================================
+   PISTA DE CORRIDA LIVRE: THOR & JADE POR TODO O CONVITE
+   ========================================================== */
+.dogs-running-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 85;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.dogs-running-track.visible {
+  opacity: 1;
+}
+
+.dogs-pack {
+  position: absolute;
+  top: 80vh;
+  left: -220px;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  animation: runAroundInvite 26s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  will-change: left, top, transform;
+}
+
+/* Cachorrinho individual */
+.dog-runner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: transform 0.25s ease;
+}
+
+.dog-runner:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 6px 14px rgba(217, 119, 6, 0.35));
+}
+
+/* Plaquinha com o nome sobre a cabeça bem visível (sempre legível da esquerda para a direita) */
+.runner-tag {
+  background: #ffffff;
+  border: 2px solid var(--gold);
+  padding: 3px 12px;
+  border-radius: 16px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  transform-origin: center center;
+  animation: unflipNametag 26s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Garante que o texto NUNCA fique ao contrário/espelhado quando o cachorrinho virar */
+@keyframes unflipNametag {
+  0%, 38% {
+    transform: scaleX(1);
+  }
+  39%, 74% {
+    transform: scaleX(-1);
+  }
+  75%, 100% {
+    transform: scaleX(1);
+  }
+}
+
+.tag-thor {
+  border-color: #0f172a;
+  color: #0f172a;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.tag-jade {
+  border-color: #e11d48;
+  color: #9f1239;
+  background: linear-gradient(180deg, #ffffff 0%, #fff1f2 100%);
+}
+
+/* Corpo com foto circular aumentada e corte do rosto perfeitamente centralizado */
+.runner-body {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  animation: runBounce 0.35s ease-in-out infinite alternate;
+}
+
+#dogRunnerJade .runner-body {
+  animation-delay: 0.16s; /* Ritmo alternado dos passos */
+}
+
+.runner-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center; /* Rosto 100% centralizado */
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(217, 119, 6, 0.3);
+  background: #ffffff;
+}
+
+.runner-hat {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  font-size: 1.35rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+.runner-trail {
+  position: absolute;
+  left: -14px;
+  bottom: 6px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  animation: pawFade 0.5s infinite ease-out;
+}
+
+/* ==========================================================
+   TRAJETO COMPLETO: CIMA, BAIXO E AMBOS OS LADOS DO CONVITE
+   ========================================================== */
+@keyframes runAroundInvite {
+  /* 1. Entra pela base esquerda correndo para a direita */
+  0% {
+    left: -220px;
+    top: 82vh;
+    transform: scaleX(1);
+  }
+  16% {
+    left: 45vw;
+    top: 80vh;
+    transform: scaleX(1);
+  }
+
+  /* 2. Sobe na diagonal em direção ao meio direito */
+  28% {
+    left: 78vw;
+    top: 52vh;
+    transform: scaleX(1);
+  }
+
+  /* 3. Sai pelo topo direito */
+  38% {
+    left: calc(100vw + 20px);
+    top: 24vh;
+    transform: scaleX(1);
+  }
+
+  /* 4. Vira a cabeça e o corpo para a esquerda */
+  39% {
+    left: calc(100vw + 20px);
+    top: 22vh;
+    transform: scaleX(-1);
+  }
+
+  /* 5. Corre pelo topo da direita para a esquerda */
+  50% {
+    left: 48vw;
+    top: 18vh;
+    transform: scaleX(-1);
+  }
+
+  /* 6. Desce pelo meio da tela em direção à esquerda */
+  64% {
+    left: 18vw;
+    top: 48vh;
+    transform: scaleX(-1);
+  }
+
+  /* 7. Sai pela esquerda no meio */
+  74% {
+    left: -220px;
+    top: 50vh;
+    transform: scaleX(-1);
+  }
+
+  /* 8. Vira de volta para a direita */
+  75% {
+    left: -220px;
+    top: 65vh;
+    transform: scaleX(1);
+  }
+
+  /* 9. Entra cruzando o terço inferior alegremente */
+  86% {
+    left: 40vw;
+    top: 72vh;
+    transform: scaleX(1);
+  }
+
+  /* 10. Sai pela direita e se prepara para o próximo ciclo */
+  97% {
+    left: calc(100vw + 30px);
+    top: 82vh;
+    transform: scaleX(1);
+  }
+  98% {
+    left: -220px;
+    top: 82vh;
+    transform: scaleX(1);
+  }
+  100% {
+    left: -220px;
+    top: 82vh;
+    transform: scaleX(1);
+  }
+}
+
+/* Pulinho rítmico de corrida */
+@keyframes runBounce {
+  0% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  100% {
+    transform: translateY(-11px) rotate(4deg);
+  }
+}
+
+@keyframes pawFade {
+  0% { opacity: 0.85; transform: scale(1) translateX(0); }
+  100% { opacity: 0; transform: scale(0.35) translateX(-10px); }
+}
+
+/* Pulo especial ao tocar no cachorro */
+.dog-runner.jump {
+  animation: happyJump 0.5s ease-out;
+}
+
+@keyframes happyJump {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.3) translateY(-24px); }
+}
+
+/* ==========================================================
+   TOAST FEEDBACK
+   ========================================================== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #ffffff;
+  border: 1px solid var(--gold);
+  color: var(--text-primary);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(180, 83, 9, 0.2);
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================
+   ANIMAÇÕES
+   ========================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================
+   RESPONSIVIDADE MOBILE
+   ========================================================== */
+@media (max-width: 480px) {
+  .main-container {
+    padding: 50px 14px 30px;
+  }
+
+  .envelope-wrapper {
+    width: 250px;
+    height: 175px;
+  }
+
+  .envelope-flap {
+    border-left-width: 125px;
+    border-right-width: 125px;
+    border-top-width: 90px;
+  }
+
+  .envelope-pocket {
+    border-left-width: 125px;
+    border-right-width: 125px;
+    border-bottom-width: 90px;
+  }
+
+  .envelope-letter-preview {
+    height: 145px;
+  }
+
+  .wax-seal {
+    top: 75px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .time-block {
+    min-width: 50px;
+    padding: 6px 4px;
+  }
+
+  .time-num {
+    font-size: 1.2rem;
+  }
+
+  .tree-canvas-wrapper {
+    height: 330px;
+  }
+
+  .ornament-selectors {
+    gap: 6px;
+  }
+
+  .ornament-choice {
+    padding: 5px 10px;
+    font-size: 0.76rem;
+  }
+
+  .card-actions-row {
+    flex-direction: column;
+  }
+}
