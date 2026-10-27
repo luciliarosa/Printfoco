@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import InteractiveInviteSection from '../components/InteractiveInviteSection';
 import { siteConfig } from '../data/content';
 import { useLanguage } from '../context/LanguageContext';
-import { Sparkles, MessageCircle, ExternalLink, ArrowRight } from 'lucide-react';
+import { Sparkles, MessageCircle, ExternalLink } from 'lucide-react';
 
 export default function InteractiveInvitePage() {
   const { t } = useLanguage();
@@ -32,56 +32,56 @@ export default function InteractiveInvitePage() {
   ];
 
   return (
-    <div className="pt-28 pb-24 bg-[#f4f1e8] min-h-screen">
+    <div className="pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-24 bg-[#faf8f5] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-[#8c7c60] mb-8 font-medium">
-          <Link to="/" className="hover:text-[#191919]">{t.nav.home}</Link>
+        <div className="flex items-center gap-2 text-xs text-[#9f825b] mb-6 sm:mb-8 font-medium">
+          <Link to="/" className="hover:text-[#1c1b1a]">{t.nav.home}</Link>
           <span>/</span>
-          <Link to="/convites" className="hover:text-[#191919]">{t.nav.invites}</Link>
+          <Link to="/convites" className="hover:text-[#1c1b1a]">{t.nav.invites}</Link>
           <span>/</span>
-          <span className="text-[#191919] font-bold">{t.interactivePage.breadcrumb}</span>
+          <span className="text-[#1c1b1a] font-bold">{t.interactivePage.breadcrumb}</span>
         </div>
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#ab9a7d] bg-[#ffffff] text-xs font-semibold uppercase tracking-wider text-[#8c7c60]">
-            <Sparkles className="w-3.5 h-3.5 text-[#ab9a7d]" />
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-3 sm:space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#c5a880] bg-[#ffffff] text-xs font-semibold uppercase tracking-wider text-[#9f825b]">
+            <Sparkles className="w-3.5 h-3.5 text-[#c5a880]" />
             <span>{t.interactivePage.badge}</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold font-serif-luxury text-[#191919]">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif-luxury text-[#1c1b1a]">
             {t.interactivePage.title}
           </h1>
-          <p className="text-lg text-[#555555] leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-[#555555] leading-relaxed">
             {t.interactivePage.subtitle}
           </p>
         </div>
 
         {/* Interactive Simulator Section */}
-        <div className="rounded-3xl bg-[#ffffff] border border-[#d9d6c1] shadow-xl overflow-hidden mb-16">
+        <div className="rounded-3xl bg-[#ffffff] border border-[#ebe6dc] shadow-md overflow-hidden mb-10 sm:mb-16">
           <InteractiveInviteSection />
         </div>
 
         {/* Como Funciona o Passo a Passo */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-[#ffffff] border border-[#d9d6c1] shadow-md mb-16">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs uppercase tracking-widest text-[#8c7c60] font-bold block mb-1">
+        <div className="p-5 sm:p-8 md:p-12 rounded-3xl bg-[#ffffff] border border-[#ebe6dc] shadow-sm mb-10 sm:mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+            <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#9f825b] font-bold block mb-1">
               Metodologia
             </span>
-            <h2 className="text-3xl font-bold font-serif-luxury text-[#191919]">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif-luxury text-[#1c1b1a]">
               {t.interactivePage.stepsTitle}
             </h2>
-            <p className="text-sm text-[#555555] mt-2">
+            <p className="text-xs sm:text-sm text-[#555555] mt-1 sm:mt-2">
               {t.interactivePage.stepsSubtitle}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {steps.map((st) => (
-              <div key={st.step} className="p-6 rounded-2xl bg-[#f4f1e8] border border-[#d9d6c1] relative">
-                <span className="block text-3xl font-bold font-serif-luxury text-[#ab9a7d] mb-2">{st.step}</span>
-                <h3 className="font-bold text-base text-[#191919] mb-2 font-serif-luxury">{st.title}</h3>
+              <div key={st.step} className="p-5 sm:p-6 rounded-2xl bg-[#faf8f5] border border-[#ebe6dc] relative">
+                <span className="block text-2xl sm:text-3xl font-bold font-serif-luxury text-[#c5a880] mb-2">{st.step}</span>
+                <h3 className="font-bold text-sm sm:text-base text-[#1c1b1a] mb-1.5 font-serif-luxury">{st.title}</h3>
                 <p className="text-xs text-[#555555] leading-relaxed">{st.desc}</p>
               </div>
             ))}
@@ -89,21 +89,21 @@ export default function InteractiveInvitePage() {
         </div>
 
         {/* CTA Box */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#ffffff] border-2 border-[#ab9a7d] shadow-md flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div className="p-5 sm:p-8 md:p-10 rounded-3xl bg-[#ffffff] border-2 border-[#c5a880] shadow-sm flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 text-center md:text-left">
           <div>
-            <h3 className="text-2xl font-bold font-serif-luxury text-[#191919] mb-1">
+            <h3 className="text-xl sm:text-2xl font-bold font-serif-luxury text-[#1c1b1a] mb-1">
               {t.interactivePage.demoCtaTitle}
             </h3>
-            <p className="text-sm text-[#555555]">
+            <p className="text-xs sm:text-sm text-[#555555]">
               {t.interactivePage.demoCtaSubtitle}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <a
               href="/projects/convites-virtuais/interativos/tema-natal/index.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider border-2 border-[#191919] text-[#191919] hover:bg-[#191919] hover:text-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider border border-[#1c1b1a] text-[#1c1b1a] hover:bg-[#1c1b1a] hover:text-white transition-colors text-center"
             >
               <span>{t.interactivePage.btnLiveDemo}</span>
               <ExternalLink className="w-4 h-4" />
@@ -112,7 +112,7 @@ export default function InteractiveInvitePage() {
               href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent(siteConfig.contact.whatsappInviteMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#191919] text-white hover:bg-[#ab9a7d] transition-colors shadow-md"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#1c1b1a] text-white hover:bg-[#c5a880] transition-colors shadow-sm text-center"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
               <span>{t.interactivePage.btnOrder}</span>

@@ -24,7 +24,7 @@ export default function App() {
     <LanguageProvider>
       <BrowserRouter>
         <ScrollToTop />
-        <div className="min-h-screen bg-[#f4f1e8] text-[#191919] relative flex flex-col justify-between selection:bg-[#ab9a7d] selection:text-white">
+        <div className="min-h-screen bg-[#faf8f5] text-[#1c1b1a] relative flex flex-col justify-between selection:bg-[#c5a880] selection:text-white">
           
           {/* Top Navbar with Submenus & Language Switcher */}
           <Navbar />

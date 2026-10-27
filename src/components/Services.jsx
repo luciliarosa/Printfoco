@@ -2,7 +2,7 @@ import React from 'react';
 import { siteConfig, inviteTypes } from '../data/content';
 import { 
   Sparkles, Smartphone, Film, Share2, 
-  ArrowRight, Check, MessageCircle, Layers 
+  ArrowRight, Check, MessageCircle 
 } from 'lucide-react';
 
 export default function Services() {
@@ -49,56 +49,56 @@ export default function Services() {
   ];
 
   return (
-    <section id="formatos-convites" className="py-24 relative overflow-hidden bg-[#ffffff] border-y border-[#d9d6c1]">
+    <section id="formatos-convites" className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden bg-[#ffffff] border-y border-[#ebe6dc]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ab9a7d] bg-[#f4f1e8] text-xs font-semibold uppercase tracking-[0.2em] text-[#8c7c60]">
-            <Sparkles className="w-3.5 h-3.5 text-[#ab9a7d]" />
+        <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4 mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#c5a880] bg-[#faf8f5] text-xs font-semibold uppercase tracking-[0.2em] text-[#9f825b]">
+            <Sparkles className="w-3.5 h-3.5 text-[#c5a880]" />
             <span>Nossas Especialidades</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif-luxury leading-tight text-[#191919]">
-            Serviços & <span className="text-[#ab9a7d] italic font-normal underline decoration-[#d9d6c1] underline-offset-4">Formatos Criativos</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif-luxury leading-tight text-[#1c1b1a]">
+            Serviços & <span className="text-[#c5a880] italic font-normal underline decoration-[#ebe6dc] underline-offset-4">Formatos Criativos</span>
           </h2>
 
-          <p className="text-[#555555] text-base sm:text-lg font-normal leading-relaxed">
+          <p className="text-[#555555] text-sm sm:text-base md:text-lg font-normal leading-relaxed">
             Do convite virtual completo à retrospectiva que emociona, tudo desenvolvido com sensibilidade, arte e dedicação.
           </p>
         </div>
 
         {/* 3 Main Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-20">
           {mainServices.map((service) => {
             const Icon = service.icon;
             return (
               <div
                 key={service.id}
-                className="rounded-3xl bg-[#f4f1e8] border border-[#d9d6c1] p-8 flex flex-col justify-between hover:border-[#ab9a7d] hover:bg-[#ffffff] transition-all duration-300 group hover:-translate-y-1 shadow-sm"
+                className="rounded-3xl bg-[#faf8f5] border border-[#ebe6dc] p-5 sm:p-7 md:p-8 flex flex-col justify-between hover:border-[#c5a880] hover:bg-[#ffffff] transition-all duration-300 group hover:-translate-y-0.5 shadow-xs"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-[#ffffff] border border-[#ab9a7d] flex items-center justify-center group-hover:scale-110 group-hover:bg-[#191919] group-hover:text-white transition-all shadow-sm">
-                      <Icon className="w-7 h-7 text-[#ab9a7d] group-hover:text-white transition-colors" />
+                  <div className="flex items-center justify-between mb-4 sm:mb-6">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] flex items-center justify-center group-hover:scale-105 group-hover:bg-[#1c1b1a] group-hover:text-white transition-all shadow-xs">
+                      <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-[#c5a880] group-hover:text-white transition-colors" />
                     </div>
-                    <span className="text-xs px-3 py-1 rounded-full bg-[#ffffff] border border-[#d9d6c1] text-[#8c7c60] font-bold">
+                    <span className="text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-full bg-[#ffffff] border border-[#ebe6dc] text-[#9f825b] font-bold">
                       {service.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-bold font-serif-luxury text-[#191919] mb-3 group-hover:text-[#ab9a7d] transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-bold font-serif-luxury text-[#1c1b1a] mb-2 sm:mb-3 group-hover:text-[#c5a880] transition-colors">
                     {service.title}
                   </h3>
 
-                  <p className="text-sm text-[#555555] leading-relaxed mb-6 font-normal">
+                  <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-4 sm:mb-6 font-normal">
                     {service.desc}
                   </p>
 
-                  <ul className="space-y-2.5 mb-6">
+                  <ul className="space-y-2 sm:space-y-2.5 mb-5 sm:mb-6">
                     {service.items.map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-xs text-[#2c2c2c] font-medium">
-                        <Check className="w-4 h-4 text-[#8c7c60] shrink-0" />
+                      <li key={i} className="flex items-start gap-2 text-xs text-[#2a2927] font-medium">
+                        <Check className="w-3.5 h-3.5 text-[#9f825b] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -107,7 +107,7 @@ export default function Services() {
 
                 <a
                   href={service.link}
-                  className="inline-flex items-center justify-between w-full pt-4 border-t border-[#d9d6c1] text-xs font-bold tracking-wider uppercase text-[#191919] group-hover:text-[#ab9a7d] transition-colors"
+                  className="inline-flex items-center justify-between w-full pt-3.5 sm:pt-4 border-t border-[#ebe6dc] text-xs font-bold tracking-wider uppercase text-[#1c1b1a] group-hover:text-[#c5a880] transition-colors"
                 >
                   <span>Conhecer Detalhes</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -118,13 +118,13 @@ export default function Services() {
         </div>
 
         {/* Deep Dive: 3 Formatos de Convites */}
-        <div className="rounded-3xl bg-[#f4f1e8] border border-[#d9d6c1] p-8 sm:p-12 relative overflow-hidden shadow-md">
+        <div className="rounded-3xl bg-[#faf8f5] border border-[#ebe6dc] p-5 sm:p-8 md:p-12 relative overflow-hidden shadow-xs">
           
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs uppercase tracking-widest text-[#8c7c60] font-bold block mb-2">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+            <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#9f825b] font-bold block mb-1 sm:mb-2">
               Flexibilidade para seu evento
             </span>
-            <h3 className="text-2xl sm:text-3xl font-bold font-serif-luxury text-[#191919]">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif-luxury text-[#1c1b1a]">
               Formatos de Convites Virtuais Printfoco
             </h3>
             <p className="text-xs sm:text-sm text-[#555555] mt-2">
@@ -132,37 +132,37 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {inviteTypes.map((type) => (
               <div
                 key={type.id}
-                className={`rounded-2xl p-7 transition-all relative flex flex-col justify-between ${
+                className={`rounded-2xl p-5 sm:p-7 transition-all relative flex flex-col justify-between ${
                   type.highlight
-                    ? 'bg-[#ffffff] border-2 border-[#ab9a7d] shadow-xl'
-                    : 'bg-[#ffffff] border border-[#d9d6c1] hover:border-[#ab9a7d]'
+                    ? 'bg-[#ffffff] border-2 border-[#c5a880] shadow-md'
+                    : 'bg-[#ffffff] border border-[#ebe6dc] hover:border-[#c5a880]'
                 }`}
               >
                 {type.badge && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#191919] text-[#f4f1e8] text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1c1b1a] text-[#faf8f5] text-[9.5px] sm:text-[10px] font-bold uppercase tracking-widest px-3.5 py-0.5 rounded-full shadow-xs">
                     {type.badge}
                   </div>
                 )}
 
                 <div>
-                  <span className="text-[11px] text-[#8c7c60] font-bold tracking-wider uppercase block mb-1">
+                  <span className="text-[10px] sm:text-[11px] text-[#9f825b] font-bold tracking-wider uppercase block mb-1">
                     {type.tag}
                   </span>
-                  <h4 className="text-xl font-bold font-serif-luxury text-[#191919] mb-3">
+                  <h4 className="text-lg sm:text-xl font-bold font-serif-luxury text-[#1c1b1a] mb-2 sm:mb-3">
                     {type.title}
                   </h4>
-                  <p className="text-xs text-[#555555] leading-relaxed mb-6 font-normal">
+                  <p className="text-xs text-[#555555] leading-relaxed mb-4 sm:mb-6 font-normal">
                     {type.description}
                   </p>
 
-                  <ul className="space-y-2.5 mb-6">
+                  <ul className="space-y-2 sm:space-y-2.5 mb-5 sm:mb-6">
                     {type.features.map((feat, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs text-[#2c2c2c] font-medium">
-                        <Check className="w-3.5 h-3.5 text-[#ab9a7d] mt-0.5 shrink-0" />
+                      <li key={i} className="flex items-start gap-2 text-xs text-[#2a2927] font-medium">
+                        <Check className="w-3.5 h-3.5 text-[#c5a880] mt-0.5 shrink-0" />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -173,10 +173,10 @@ export default function Services() {
                   href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent(`Olá! Gostaria de um orçamento para o ${type.title}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
+                  className={`w-full py-3 sm:py-3.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
                     type.highlight
-                      ? 'bg-[#191919] text-white hover:bg-[#ab9a7d] shadow-md'
-                      : 'bg-[#f4f1e8] text-[#191919] border border-[#d9d6c1] hover:bg-[#191919] hover:text-white'
+                      ? 'bg-[#1c1b1a] text-white hover:bg-[#c5a880] shadow-sm'
+                      : 'bg-[#faf8f5] text-[#1c1b1a] border border-[#ebe6dc] hover:bg-[#1c1b1a] hover:text-white'
                   }`}
                 >
                   <MessageCircle className="w-4 h-4" />

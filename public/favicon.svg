@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Fundo escuro nobre com cantos arredondados -->
+  <rect width="64" height="64" rx="16" fill="#1C1B1A" />
+  
+  <!-- 4 Cantoneiras de Enquadramento / Foco -->
+  <path d="M 14 24 V 17 C 14 15.343 15.343 14 17 14 H 24" stroke="#FAF8F5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 40 14 H 47 C 48.657 14 50 15.343 50 17 V 24" stroke="#FAF8F5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 14 40 V 47 C 14 48.657 15.343 50 17 50 H 24" stroke="#FAF8F5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 40 50 H 47 C 48.657 50 50 48.657 50 47 V 40" stroke="#FAF8F5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Faísca / Estrela Radiante em Champagne Dourado -->
+  <path d="M 32 19 C 32 26 26 32 19 32 C 26 32 32 38 32 45 C 32 38 38 32 45 32 C 38 32 32 26 32 19 Z" fill="#C5A880"/>
+  
+  <!-- Pontos de brilho de apoio -->
+  <circle cx="43" cy="21" r="2" fill="#C5A880" opacity="0.9" />
+  <circle cx="21" cy="43" r="2" fill="#C5A880" opacity="0.9" />
+</svg>

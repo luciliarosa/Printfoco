@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageToggle from './LanguageToggle';
+import BrandLogo from './BrandLogo';
 import { 
-  Camera, Sparkles, Menu, X, ChevronDown, 
-  Film, Image, Heart, Target, Share2, Smartphone 
+  Sparkles, Menu, X, ChevronDown, 
+  Film, Heart, Target, Share2, Smartphone 
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -58,26 +59,16 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#ffffff]/95 backdrop-blur-md border-b border-[#d9d6c1] py-3 shadow-md'
-          : 'bg-[#f4f1e8]/90 backdrop-blur-sm py-4 border-b border-[#d9d6c1]/60'
+          ? 'bg-[#ffffff]/95 backdrop-blur-md border-b border-[#ebe6dc] py-3 shadow-sm'
+          : 'bg-[#faf8f5]/90 backdrop-blur-sm py-4 border-b border-[#ebe6dc]/80'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full border border-[#ab9a7d] flex items-center justify-center bg-[#ffffff] group-hover:border-[#191919] transition-colors shadow-sm">
-              <Camera className="w-5 h-5 text-[#ab9a7d] group-hover:text-[#191919] group-hover:rotate-6 transition-all" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-brand tracking-widest text-xl sm:text-2xl font-bold text-[#191919]">
-                PRINT<span className="text-[#ab9a7d]">FOCO</span>
-              </span>
-              <span className="text-[10px] tracking-[0.25em] uppercase text-[#8c7c60] -mt-1 font-semibold">
-                Memórias & Design
-              </span>
-            </div>
+          {/* Logo Oficial com Símbolo de Foco e Estrela Radiante */}
+          <Link to="/" className="inline-flex">
+            <BrandLogo />
           </Link>
 
           {/* Desktop Navigation: Apenas Inicio, Sobre Nós, Serviços, Contato */}
@@ -87,7 +78,7 @@ export default function Navbar() {
             <Link
               to="/"
               className={`text-xs tracking-wider uppercase font-semibold transition-all py-1.5 px-2.5 rounded-lg ${
-                isActive('/') ? 'text-[#191919] border-b-2 border-[#ab9a7d]' : 'text-[#444444] hover:text-[#191919]'
+                isActive('/') ? 'text-[#1c1b1a] border-b-2 border-[#c5a880]' : 'text-[#555555] hover:text-[#1c1b1a]'
               }`}
             >
               {t.nav.home}
@@ -102,22 +93,22 @@ export default function Navbar() {
               <button
                 className={`text-xs tracking-wider uppercase font-semibold transition-all py-1.5 px-2.5 rounded-lg flex items-center gap-1.5 ${
                   isAboutActive()
-                    ? 'text-[#191919] border-b-2 border-[#ab9a7d]'
-                    : 'text-[#444444] hover:text-[#191919]'
+                    ? 'text-[#1c1b1a] border-b-2 border-[#c5a880]'
+                    : 'text-[#555555] hover:text-[#1c1b1a]'
                 }`}
               >
                 <span>{t.nav.about}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-[#8c7c60] transition-transform ${aboutDropdownOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#9f825b] transition-transform ${aboutDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {aboutDropdownOpen && (
                 <div className="absolute top-full left-0 w-64 pt-2 z-50 animate-fadeIn">
-                  <div className="bg-[#ffffff] border border-[#d9d6c1] rounded-2xl shadow-xl p-2 space-y-1">
+                  <div className="bg-[#ffffff] border border-[#ebe6dc] rounded-2xl shadow-xl p-2 space-y-1">
                     <Link
                       to="/sobre"
-                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-[#f4f1e8] transition-colors text-xs font-semibold text-[#191919]"
+                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-[#faf8f5] transition-colors text-xs font-semibold text-[#1c1b1a]"
                     >
-                      <Heart className="w-4 h-4 text-[#ab9a7d]" />
+                      <Heart className="w-4 h-4 text-[#c5a880]" />
                       <div>
                         <span className="block">{t.nav.ourHistory}</span>
                         <span className="text-[10px] text-[#666666] font-normal">{t.nav.ourHistorySub}</span>
@@ -125,9 +116,9 @@ export default function Navbar() {
                     </Link>
                     <Link
                       to="/missao-visao-valores"
-                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-[#f4f1e8] transition-colors text-xs font-semibold text-[#191919]"
+                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-[#faf8f5] transition-colors text-xs font-semibold text-[#1c1b1a]"
                     >
-                      <Target className="w-4 h-4 text-[#ab9a7d]" />
+                      <Target className="w-4 h-4 text-[#c5a880]" />
                       <div>
                         <span className="block">{t.nav.missionVisionValues}</span>
                         <span className="text-[10px] text-[#666666] font-normal">{t.nav.missionVisionValuesSub}</span>
@@ -147,30 +138,30 @@ export default function Navbar() {
               <button
                 className={`text-xs tracking-wider uppercase font-semibold transition-all py-1.5 px-3 rounded-full flex items-center gap-1.5 ${
                   isServicesActive()
-                    ? 'bg-[#ab9a7d]/20 text-[#191919] border border-[#ab9a7d]'
-                    : 'text-[#444444] hover:text-[#191919] bg-[#ffffff] border border-[#d9d6c1]'
+                    ? 'bg-[#c5a880]/15 text-[#1c1b1a] border border-[#c5a880]'
+                    : 'text-[#555555] hover:text-[#1c1b1a] bg-[#ffffff] border border-[#ebe6dc]'
                 }`}
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#ab9a7d]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#c5a880]" />
                 <span>{t.nav.services}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-[#8c7c60] transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#9f825b] transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {servicesDropdownOpen && (
                 <div className="absolute top-full left-0 w-84 pt-2 z-50 animate-fadeIn">
-                  <div className="bg-[#ffffff] border border-[#d9d6c1] rounded-2xl shadow-xl p-2.5 space-y-2">
+                  <div className="bg-[#ffffff] border border-[#ebe6dc] rounded-2xl shadow-xl p-2.5 space-y-2">
                     
                     {/* 1. Convite Virtual (Imagem, Vídeos ou Interativo) */}
-                    <div className="p-2.5 rounded-xl bg-[#f4f1e8]/50 border border-[#d9d6c1] hover:border-[#ab9a7d] transition-all">
+                    <div className="p-2.5 rounded-xl bg-[#faf8f5] border border-[#ebe6dc] hover:border-[#c5a880] transition-all">
                       <Link
                         to="/convites"
                         className="flex items-start gap-3 group"
                       >
-                        <div className="w-8 h-8 rounded-lg bg-[#ffffff] border border-[#d9d6c1] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                          <Smartphone className="w-4 h-4 text-[#8c7c60]" />
+                        <div className="w-8 h-8 rounded-lg bg-[#ffffff] border border-[#ebe6dc] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                          <Smartphone className="w-4 h-4 text-[#c5a880]" />
                         </div>
                         <div>
-                          <span className="block text-xs font-bold text-[#191919] group-hover:text-[#ab9a7d] transition-colors">
+                          <span className="block text-xs font-bold text-[#1c1b1a] group-hover:text-[#c5a880] transition-colors">
                             {t.nav.virtualInviteGroup}
                           </span>
                           <span className="text-[10px] text-[#666666] leading-tight block mt-0.5">
@@ -180,22 +171,22 @@ export default function Navbar() {
                       </Link>
 
                       {/* Sub-atalhos para os 3 formatos */}
-                      <div className="grid grid-cols-3 gap-1.5 mt-2 pt-2 border-t border-[#d9d6c1]/60 text-[10px]">
+                      <div className="grid grid-cols-3 gap-1.5 mt-2 pt-2 border-t border-[#ebe6dc] text-[10px]">
                         <Link
                           to="/convites/interativo"
-                          className="px-1.5 py-1 rounded bg-[#ffffff] border border-[#d9d6c1] text-center font-bold text-[#191919] hover:border-[#ab9a7d] transition-colors"
+                          className="px-1.5 py-1 rounded bg-[#ffffff] border border-[#ebe6dc] text-center font-bold text-[#9e3a4b] hover:border-[#c5a880] transition-colors"
                         >
                           Interativo ★
                         </Link>
                         <Link
                           to="/convites/video"
-                          className="px-1.5 py-1 rounded bg-[#ffffff] border border-[#d9d6c1] text-center font-medium text-[#444444] hover:border-[#ab9a7d] transition-colors"
+                          className="px-1.5 py-1 rounded bg-[#ffffff] border border-[#ebe6dc] text-center font-medium text-[#555555] hover:border-[#c5a880] transition-colors"
                         >
                           Vídeos
                         </Link>
                         <Link
                           to="/convites/imagem"
-                          className="px-1.5 py-1 rounded bg-[#ffffff] border border-[#d9d6c1] text-center font-medium text-[#444444] hover:border-[#ab9a7d] transition-colors"
+                          className="px-1.5 py-1 rounded bg-[#ffffff] border border-[#ebe6dc] text-center font-medium text-[#555555] hover:border-[#c5a880] transition-colors"
                         >
                           Imagem
                         </Link>
@@ -205,13 +196,13 @@ export default function Navbar() {
                     {/* 2. Retrospectivas */}
                     <Link
                       to="/retrospectivas"
-                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#f4f1e8] transition-colors group"
+                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#faf8f5] transition-colors group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-[#ffffff] border border-[#d9d6c1] flex items-center justify-center shrink-0 shadow-xs">
-                        <Film className="w-4 h-4 text-[#ab9a7d]" />
+                      <div className="w-8 h-8 rounded-lg bg-[#ffffff] border border-[#ebe6dc] flex items-center justify-center shrink-0 shadow-xs">
+                        <Film className="w-4 h-4 text-[#c5a880]" />
                       </div>
                       <div>
-                        <span className="block text-xs font-bold text-[#191919] group-hover:text-[#ab9a7d] transition-colors">
+                        <span className="block text-xs font-bold text-[#1c1b1a] group-hover:text-[#c5a880] transition-colors">
                           {t.nav.retrospectives}
                         </span>
                         <span className="text-[10px] text-[#666666] block">
@@ -223,13 +214,13 @@ export default function Navbar() {
                     {/* 3. Design de Conteúdo para Redes Sociais */}
                     <Link
                       to="/posts-redes-sociais"
-                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#f4f1e8] transition-colors group"
+                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#faf8f5] transition-colors group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-[#ffffff] border border-[#d9d6c1] flex items-center justify-center shrink-0 shadow-xs">
-                        <Share2 className="w-4 h-4 text-[#ab9a7d]" />
+                      <div className="w-8 h-8 rounded-lg bg-[#ffffff] border border-[#ebe6dc] flex items-center justify-center shrink-0 shadow-xs">
+                        <Share2 className="w-4 h-4 text-[#c5a880]" />
                       </div>
                       <div>
-                        <span className="block text-xs font-bold text-[#191919] group-hover:text-[#ab9a7d] transition-colors">
+                        <span className="block text-xs font-bold text-[#1c1b1a] group-hover:text-[#c5a880] transition-colors">
                           {t.nav.socialMedia}
                         </span>
                         <span className="text-[10px] text-[#666666] block">
@@ -247,7 +238,7 @@ export default function Navbar() {
             <Link
               to="/contato"
               className={`text-xs tracking-wider uppercase font-semibold transition-all py-1.5 px-2.5 rounded-lg ${
-                isActive('/contato') ? 'text-[#191919] border-b-2 border-[#ab9a7d]' : 'text-[#444444] hover:text-[#191919]'
+                isActive('/contato') ? 'text-[#1c1b1a] border-b-2 border-[#c5a880]' : 'text-[#555555] hover:text-[#1c1b1a]'
               }`}
             >
               {t.nav.contact}
@@ -255,17 +246,17 @@ export default function Navbar() {
 
           </nav>
 
-          {/* Right Tools: Apenas Seletor de Idioma (Botão WhatsApp no topo removido conforme solicitado) */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Right Tools: Apenas Seletor de Idioma no Desktop (>= lg) */}
+          <div className="hidden lg:flex items-center gap-3">
             <LanguageToggle />
           </div>
 
-          {/* Mobile Right Controls */}
+          {/* Mobile / Tablet Right Controls (< lg) */}
           <div className="lg:hidden flex items-center gap-2">
             <LanguageToggle />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-[#191919] hover:bg-[#d9d6c1]/40 transition-colors"
+              className="p-2 rounded-lg text-[#1c1b1a] hover:bg-[#ebe6dc]/60 transition-colors"
               aria-label={t.nav.openMenu}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -275,26 +266,26 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown: Apenas Inicio, Sobre Nós, Serviços, Contato */}
+      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#ffffff] border-b border-[#d9d6c1] px-5 py-6 shadow-xl animate-fadeIn max-h-[85vh] overflow-y-auto">
+        <div className="lg:hidden bg-[#ffffff] border-b border-[#ebe6dc] px-5 py-6 shadow-xl animate-fadeIn max-h-[85vh] overflow-y-auto">
           <nav className="flex flex-col gap-2">
             
             {/* 1. Início */}
             <Link
               to="/"
               className={`py-2 px-3 rounded-xl text-sm font-semibold ${
-                isActive('/') ? 'bg-[#f4f1e8] text-[#191919] font-bold' : 'text-[#333333]'
+                isActive('/') ? 'bg-[#faf8f5] text-[#1c1b1a] font-bold' : 'text-[#333333]'
               }`}
             >
               {t.nav.home}
             </Link>
 
             {/* 2. Sobre Nós Accordion */}
-            <div className="border border-[#d9d6c1]/60 rounded-xl overflow-hidden">
+            <div className="border border-[#ebe6dc] rounded-xl overflow-hidden">
               <button
                 onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
-                className="w-full py-2.5 px-3 flex items-center justify-between text-sm font-semibold text-[#191919] bg-[#f4f1e8]/50"
+                className="w-full py-2.5 px-3 flex items-center justify-between text-sm font-semibold text-[#1c1b1a] bg-[#faf8f5]"
               >
                 <span>{t.nav.about}</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${mobileAboutOpen ? 'rotate-180' : ''}`} />
@@ -303,13 +294,13 @@ export default function Navbar() {
                 <div className="bg-[#ffffff] p-2 space-y-1">
                   <Link
                     to="/sobre"
-                    className="block py-2 px-3 rounded-lg text-xs font-medium text-[#444444] hover:bg-[#f4f1e8]"
+                    className="block py-2 px-3 rounded-lg text-xs font-medium text-[#444444] hover:bg-[#faf8f5]"
                   >
                     • {t.nav.ourHistory}
                   </Link>
                   <Link
                     to="/missao-visao-valores"
-                    className="block py-2 px-3 rounded-lg text-xs font-medium text-[#444444] hover:bg-[#f4f1e8]"
+                    className="block py-2 px-3 rounded-lg text-xs font-medium text-[#444444] hover:bg-[#faf8f5]"
                   >
                     • {t.nav.missionVisionValues}
                   </Link>
@@ -318,13 +309,13 @@ export default function Navbar() {
             </div>
 
             {/* 3. Serviços Accordion com os 3 Tipos */}
-            <div className="border border-[#ab9a7d] rounded-xl overflow-hidden bg-[#f4f1e8]/30">
+            <div className="border border-[#c5a880] rounded-xl overflow-hidden bg-[#faf8f5]/40">
               <button
                 onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className="w-full py-2.5 px-3 flex items-center justify-between text-sm font-bold text-[#191919] bg-[#f4f1e8]"
+                className="w-full py-2.5 px-3 flex items-center justify-between text-sm font-bold text-[#1c1b1a] bg-[#faf8f5]"
               >
                 <div className="flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#ab9a7d]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#c5a880]" />
                   <span>{t.nav.services}</span>
                 </div>
                 <ChevronDown className={`w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
@@ -333,21 +324,21 @@ export default function Navbar() {
                 <div className="bg-[#ffffff] p-2.5 space-y-2">
                   
                   {/* Tipo 1: Convite Virtual */}
-                  <div className="p-2 rounded-lg bg-[#f4f1e8]/50 border border-[#d9d6c1]/70">
+                  <div className="p-2 rounded-lg bg-[#faf8f5] border border-[#ebe6dc]">
                     <Link
                       to="/convites"
-                      className="block text-xs font-bold text-[#191919] mb-1"
+                      className="block text-xs font-bold text-[#1c1b1a] mb-1"
                     >
                       {t.nav.virtualInviteGroup}
                     </Link>
                     <div className="flex flex-col gap-1 pl-2 text-[11px] text-[#555555]">
-                      <Link to="/convites/interativo" className="hover:text-[#191919] font-semibold text-[#8c7c60]">
+                      <Link to="/convites/interativo" className="hover:text-[#1c1b1a] font-semibold text-[#9e3a4b]">
                         ★ {t.nav.interactiveInvite}
                       </Link>
-                      <Link to="/convites/video" className="hover:text-[#191919]">
+                      <Link to="/convites/video" className="hover:text-[#1c1b1a]">
                         • {t.nav.videoInvite}
                       </Link>
-                      <Link to="/convites/imagem" className="hover:text-[#191919]">
+                      <Link to="/convites/imagem" className="hover:text-[#1c1b1a]">
                         • {t.nav.imageInvite}
                       </Link>
                     </div>
@@ -356,7 +347,7 @@ export default function Navbar() {
                   {/* Tipo 2: Retrospectivas */}
                   <Link
                     to="/retrospectivas"
-                    className="block py-2 px-3 rounded-lg text-xs font-bold text-[#191919] hover:bg-[#f4f1e8]"
+                    className="block py-2 px-3 rounded-lg text-xs font-bold text-[#1c1b1a] hover:bg-[#faf8f5]"
                   >
                     {t.nav.retrospectives}
                   </Link>
@@ -364,7 +355,7 @@ export default function Navbar() {
                   {/* Tipo 3: Design de Conteúdo para Redes Sociais */}
                   <Link
                     to="/posts-redes-sociais"
-                    className="block py-2 px-3 rounded-lg text-xs font-bold text-[#191919] hover:bg-[#f4f1e8]"
+                    className="block py-2 px-3 rounded-lg text-xs font-bold text-[#1c1b1a] hover:bg-[#faf8f5]"
                   >
                     {t.nav.socialMedia}
                   </Link>
@@ -377,7 +368,7 @@ export default function Navbar() {
             <Link
               to="/contato"
               className={`py-2 px-3 rounded-xl text-sm font-semibold ${
-                isActive('/contato') ? 'bg-[#f4f1e8] text-[#191919] font-bold' : 'text-[#333333]'
+                isActive('/contato') ? 'bg-[#faf8f5] text-[#1c1b1a] font-bold' : 'text-[#333333]'
               }`}
             >
               {t.nav.contact}
@@ -385,7 +376,7 @@ export default function Navbar() {
 
             <Link
               to="/politica-de-privacidade"
-              className="py-1 px-3 text-xs text-[#8c7c60] hover:text-[#191919]"
+              className="py-1 px-3 text-xs text-[#9f825b] hover:text-[#1c1b1a]"
             >
               {t.nav.privacy}
             </Link>

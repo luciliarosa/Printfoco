@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { socialMediaBenefits, socialMediaFormats, siteConfig } from '../data/content';
 import { 
   Share2, TrendingUp, Users, Eye, ArrowUpRight, 
-  Palette, Sparkles, MessageCircle, Image, Video, Layers 
+  Palette, MessageCircle, Image, Video, Layers 
 } from 'lucide-react';
 
 export default function SocialMediaPage() {
@@ -11,44 +11,44 @@ export default function SocialMediaPage() {
   const formatIcons = [Image, Video, Layers, Palette];
 
   return (
-    <div className="pt-28 pb-24 bg-[#f4f1e8] min-h-screen">
+    <div className="pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-24 bg-[#faf8f5] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-[#8c7c60] mb-8 font-medium">
-          <Link to="/" className="hover:text-[#191919]">Início</Link>
+        <div className="flex items-center gap-2 text-xs text-[#9f825b] mb-6 sm:mb-8 font-medium">
+          <Link to="/" className="hover:text-[#1c1b1a]">Início</Link>
           <span>/</span>
-          <span className="text-[#191919] font-bold">Posts para Redes Sociais</span>
+          <span className="text-[#1c1b1a] font-bold">Posts para Redes Sociais</span>
         </div>
 
         {/* Header */}
-        <div className="max-w-3xl mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#ab9a7d] bg-[#ffffff] text-xs font-semibold uppercase tracking-wider text-[#8c7c60]">
-            <Share2 className="w-3.5 h-3.5 text-[#ab9a7d]" />
+        <div className="max-w-3xl mb-10 sm:mb-16 space-y-3 sm:space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#c5a880] bg-[#ffffff] text-xs font-semibold uppercase tracking-wider text-[#9f825b]">
+            <Share2 className="w-3.5 h-3.5 text-[#c5a880]" />
             <span>Design Estratégico para Redes</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold font-serif-luxury text-[#191919]">
-            Posts para <span className="text-[#ab9a7d] italic font-normal">Redes Sociais</span>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif-luxury text-[#1c1b1a]">
+            Posts para <span className="text-[#c5a880] italic font-normal">Redes Sociais</span>
           </h1>
-          <p className="text-lg text-[#555555] leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-[#555555] leading-relaxed">
             Criamos conteúdos visuais impactantes (artes estáticas, vídeos curtos/reels, stories dinâmicos e carrosséis) desenvolvidos estrategicamente para aumentar seu engajamento, tráfego e visibilidade.
           </p>
         </div>
 
         {/* 4 Formatos de Criação */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10 sm:mb-16">
           {socialMediaFormats.map((item, i) => {
             const Icon = formatIcons[i % formatIcons.length];
             return (
               <div
                 key={i}
-                className="rounded-3xl bg-[#ffffff] border border-[#d9d6c1] p-6 hover:border-[#ab9a7d] transition-all group shadow-sm flex flex-col justify-between"
+                className="rounded-3xl bg-[#ffffff] border border-[#ebe6dc] p-5 sm:p-6 hover:border-[#c5a880] transition-all group shadow-xs flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-[#f4f1e8] border border-[#ab9a7d] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Icon className="w-6 h-6 text-[#ab9a7d]" />
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#faf8f5] border border-[#ebe6dc] flex items-center justify-center mb-3.5 sm:mb-4 group-hover:scale-105 transition-transform">
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#c5a880]" />
                   </div>
-                  <h3 className="font-bold text-[#191919] text-base mb-2 group-hover:text-[#ab9a7d] transition-colors">
+                  <h3 className="font-bold text-[#1c1b1a] text-sm sm:text-base mb-1.5 sm:mb-2 group-hover:text-[#c5a880] transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-xs text-[#555555] leading-relaxed">
@@ -61,32 +61,32 @@ export default function SocialMediaPage() {
         </div>
 
         {/* Benefits Grid */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-[#ffffff] border border-[#d9d6c1] shadow-md mb-16">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs uppercase tracking-widest text-[#8c7c60] font-bold block mb-1">
+        <div className="p-5 sm:p-8 md:p-12 rounded-3xl bg-[#ffffff] border border-[#ebe6dc] shadow-sm mb-10 sm:mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
+            <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#9f825b] font-bold block mb-1">
               Resultados Práticos
             </span>
-            <h2 className="text-3xl font-bold font-serif-luxury text-[#191919]">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif-luxury text-[#1c1b1a]">
               Quais os Benefícios para Sua Marca?
             </h2>
-            <p className="text-sm text-[#555555] mt-2">
+            <p className="text-xs sm:text-sm text-[#555555] mt-1 sm:mt-2">
               Investir em design profissional e constante gera retornos tangíveis:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
             {socialMediaBenefits.map((benefit, i) => {
               const Icon = benefitIcons[i % benefitIcons.length];
               return (
                 <div
                   key={i}
-                  className="rounded-2xl bg-[#f4f1e8] border border-[#d9d6c1] p-5 hover:border-[#ab9a7d] transition-all group flex flex-col justify-between"
+                  className="rounded-2xl bg-[#faf8f5] border border-[#ebe6dc] p-4 sm:p-5 hover:border-[#c5a880] transition-all group flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-9 h-9 rounded-xl bg-[#ffffff] border border-[#d9d6c1] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                      <Icon className="w-4 h-4 text-[#8c7c60]" />
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#ffffff] border border-[#ebe6dc] flex items-center justify-center mb-2.5 sm:mb-3 group-hover:scale-105 transition-transform">
+                      <Icon className="w-4 h-4 text-[#9f825b]" />
                     </div>
-                    <h3 className="font-bold text-[#191919] text-xs mb-1.5 group-hover:text-[#ab9a7d] transition-colors">
+                    <h3 className="font-bold text-[#1c1b1a] text-xs mb-1 group-hover:text-[#c5a880] transition-colors">
                       {benefit.title}
                     </h3>
                     <p className="text-[11px] text-[#666666] leading-relaxed">
@@ -99,24 +99,25 @@ export default function SocialMediaPage() {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#ffffff] border-2 border-[#ab9a7d] shadow-md flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <div>
-            <h3 className="text-2xl font-bold font-serif-luxury text-[#191919] mb-1">
-              Deseja um pacote mensal de publicações?
+        {/* CTA Box */}
+        <div className="p-5 sm:p-8 md:p-10 rounded-3xl bg-[#ffffff] border-2 border-[#c5a880] shadow-sm flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 text-center md:text-left">
+          <div className="space-y-1.5 sm:space-y-2">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-serif-luxury text-[#1c1b1a]">
+              Pronto para elevar a identidade visual da sua página?
             </h3>
-            <p className="text-sm text-[#555555]">
-              Montamos cronogramas personalizados com artes e vídeos para alimentar suas redes sociais com consistência.
+            <p className="text-xs sm:text-sm text-[#555555] max-w-xl">
+              Solicite um pacote personalizado de artes e vídeos ou peça posts avulsos de acordo com a sua necessidade.
             </p>
           </div>
+
           <a
-            href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent("Olá! Gostaria de um orçamento para pacote de posts e vídeos para redes sociais.")}`}
+            href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent("Olá! Gostaria de um orçamento para posts e vídeos para redes sociais.")}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 px-8 py-4 rounded-full font-bold text-xs tracking-wider uppercase bg-[#191919] text-white hover:bg-[#ab9a7d] shadow-md flex items-center gap-2 transition-all"
+            className="w-full md:w-auto shrink-0 px-7 py-3.5 sm:py-4 rounded-full font-bold text-xs tracking-wider uppercase bg-[#1c1b1a] text-white hover:bg-[#c5a880] shadow-md flex items-center justify-center gap-2 transition-all text-center"
           >
             <MessageCircle className="w-4 h-4 fill-white" />
-            <span>Consultar Pacotes no WhatsApp</span>
+            <span>Fazer Orçamento de Posts</span>
           </a>
         </div>
 
