@@ -1,10 +1,10 @@
-# Printfoco • Website Oficial Institucional & Comercial 🌐
+# Printfoco • Website Oficial Institucional & Comercial
 
 Website oficial da **Printfoco**, desenvolvido em **React 19 + React Router 7 + Vite + Tailwind CSS**, com suporte nativo **Bilingue (Português / Inglês)**, arquitetura multi-páginas e estética clara, executiva e refinada.
 
 ---
 
-## 🎨 Identidade Visual & Diretrizes Estéticas
+## Identidade Visual & Diretrizes Estéticas
 
 - **`#f4f1e8`** • Creme Claro (Plano de fundo principal suave)
 - **`#ffffff`** • Branco Puro (Containers, cartões e superfícies)
@@ -14,7 +14,7 @@ Website oficial da **Printfoco**, desenvolvido em **React 19 + React Router 7 + 
 
 ---
 
-## 🌐 Suporte Bilingue Integrado (PT | EN)
+## Suporte Bilingue Integrado (PT | EN)
 
 A interface conta com um alternador de idioma no cabeçalho:
 - **Português (PT):** Conteúdo corporativo em português brasileiro.
@@ -23,7 +23,7 @@ A interface conta com um alternador de idioma no cabeçalho:
 
 ---
 
-## 🧭 Mapa de Navegação Oficial
+## Mapa de Navegação Oficial
 
 1. **Início (`/`):** Apresentação executiva da Printfoco, hero clean, os 3 serviços principais, destaque tecnológico do convite interativo e CTAs diretos.
 2. **Sobre Nós ▾**
@@ -41,7 +41,7 @@ A interface conta com um alternador de idioma no cabeçalho:
 
 ---
 
-## 📂 Organização Interna de Projetos (`Printfoco/projects/`)
+## Organização Interna de Projetos (`Printfoco/projects/`)
 
 Para desenvolvimento interno e versionamento de templates, os projetos da empresa ficam organizados em:
 
@@ -69,13 +69,13 @@ projects/
 
 ---
 
-## 🔒 Privacidade do Contato WhatsApp
+## Privacidade do Contato WhatsApp
 
 O número de telefone nunca é renderizado em texto na interface. Toda a navegação exibe botões elegantes como *"Atendimento via WhatsApp"* ou *"Chat on WhatsApp"*, com o acionamento direto do chat oficial ao clicar.
 
 ---
 
-## 🚀 Execução do Projeto
+## Execução do Projeto
 
 ```bash
 # Iniciar o servidor local
