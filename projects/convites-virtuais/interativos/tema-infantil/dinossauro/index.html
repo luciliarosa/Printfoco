@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#f4f8f4">
+  <title>1º Aninho do Theo • Dino Park Aventura 🦕🌿 | Printfoco</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Efeito de Folhagens e Pegadas no Canvas -->
+  <canvas id="dinoCanvas" aria-hidden="true"></canvas>
+
+  <!-- Controles Superiores Flutuantes -->
+  <header class="top-controls">
+    <button id="toggleLeavesBtn" class="control-btn" title="Folhagens Tropicais" aria-label="Ligar/Desligar Folhas">
+      <span class="icon">🌿</span>
+      <span class="control-text">Selva</span>
+    </button>
+    <button id="musicBtn" class="control-btn" title="Música Safari" aria-label="Música Dino Safari">
+      <span class="icon" id="musicIcon">🦕</span>
+      <span class="control-text" id="musicText">Safari</span>
+    </button>
+  </header>
+
+  <main class="main-container">
+
+    <!-- FASE 1: O PASSAPORTE DE EXPEDIÇÃO JURÁSSICA -->
+    <section class="envelope-gate" id="envelopeGate">
+      <div class="gate-content">
+        <div class="seal-badge">
+          <span>🦕</span>
+          <span class="year-badge">Expedição Jurássica • 1º Aninho</span>
+        </div>
+        <h1 class="gate-title">Você foi convocado para uma Expedição Jurássica!</h1>
+        <p class="gate-subtitle">O pequeno explorador Theo vai comemorar seu primeiro aninho no Dino Park! Abra seu passaporte de aventureiro.</p>
+
+        <!-- Passaporte / Envelope Interativo -->
+        <div class="envelope-wrapper" id="envelopeWrapper" role="button" tabindex="0" aria-label="Toque para abrir a correspondência">
+          <div class="envelope-3d">
+            <div class="envelope-flap"></div>
+            <div class="envelope-pocket"></div>
+            <div class="envelope-letter-preview">
+              <span class="stamp-icon">🦖</span>
+              <p class="letter-preview-heading">Dino Theo</p>
+              <p class="letter-preview-sub">Passaporte Jurássico</p>
+            </div>
+            <div class="wax-seal">
+              <div class="seal-inner">
+                <span>DINO</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="open-instruction-box">
+          <p class="envelope-tip">Toque no carimbo jurássico ou clique abaixo para abrir:</p>
+          <button id="openInviteBtn" class="btn-primary">
+            <span>Abrir Passaporte de Aventura</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FASE 2: CONVITE COMPLETO & INTERATIVO -->
+    <section class="invite-content hidden" id="inviteContent">
+      
+      <!-- Cabeçalho Safari Dino -->
+      <div class="hero-card">
+        <div class="tag-dino">Expedição Safari • Primeiro Aninho</div>
+        <h2 class="dino-script">Dino Park do Theo</h2>
+        <h1 class="hero-title">Uma Aventura Jurássica Inesquecível!</h1>
+        <p class="invitation-intro">
+          A Equipe de Paleontólogos <strong>Papai & Mamãe</strong> convida todos os aventureiros, exploradores e dinossauros mirins para comemorar o 1º aninho do nosso explorador <strong>Theo</strong>!
+        </p>
+
+        <!-- Contagem Regressiva -->
+        <div class="countdown-section">
+          <div class="countdown-label">Faltam para a nossa grande expedição:</div>
+          <div class="countdown-timer" id="countdownTimer">
+            <div class="time-block">
+              <span class="time-num" id="days">--</span>
+              <span class="time-unit">Dias</span>
+            </div>
+            <div class="time-separator">:</div>
+            <div class="time-block">
+              <span class="time-num" id="hours">--</span>
+              <span class="time-unit">Horas</span>
+            </div>
+            <div class="time-separator">:</div>
+            <div class="time-block">
+              <span class="time-num" id="minutes">--</span>
+              <span class="time-unit">Min</span>
+            </div>
+            <div class="time-separator">:</div>
+            <div class="time-block">
+              <span class="time-num" id="seconds">--</span>
+              <span class="time-unit">Seg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recurso Interativo: Caverna dos Rugidos Fofos -->
+      <div class="card dino-roar-card">
+        <div class="card-icon">🐾</div>
+        <h3 class="card-title">Caverna dos Dinos Amigáveis</h3>
+        <p class="card-desc">Clique nos dinossauros da floresta para ouvir seus rugidos e sons de aventura:</p>
+        
+        <div class="dino-buttons-grid">
+          <button type="button" class="btn-dino-sound" data-dino="trex">
+            <span class="dino-avatar">🦖</span>
+            <span class="dino-name">T-Rex Baby</span>
+            <span class="dino-sound-tag">Roar! ♪</span>
+          </button>
+          <button type="button" class="btn-dino-sound" data-dino="bronto">
+            <span class="dino-avatar">🦕</span>
+            <span class="dino-name">Braquio Fofo</span>
+            <span class="dino-sound-tag">Whuuu! ♪</span>
+          </button>
+          <button type="button" class="btn-dino-sound" data-dino="tricera">
+            <span class="dino-avatar">🦏</span>
+            <span class="dino-name">Triceratops</span>
+            <span class="dino-sound-tag">Pip-pip! ♪</span>
+          </button>
+        </div>
+        <div id="dinoFeedback" class="wish-text hidden">"Você encontrou um dinossauro amigo na expedição!" 🌴</div>
+      </div>
+
+      <!-- Detalhes de Data & Horário -->
+      <div class="card details-card">
+        <div class="card-icon">🏕️</div>
+        <h3 class="card-title">Ponto de Encontro da Expedição</h3>
+        
+        <div class="detail-row">
+          <span class="detail-icon">📅</span>
+          <div>
+            <strong>Data da Aventura:</strong>
+            <p>Domingo, 12 de Novembro de 2026</p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-icon">⏰</span>
+          <div>
+            <strong>Horário da Expedição:</strong>
+            <p>Das 15:00 às 19:30 (Embarque às 15:00)</p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-icon">📍</span>
+          <div>
+            <strong>Base dos Exploradores:</strong>
+            <p>Chácara Vale dos Dinossauros • Espaço Aventura Kids</p>
+            <p class="address-sub">Estrada das Palmeiras, 1500 - Recanto Verde</p>
+          </div>
+        </div>
+
+        <div class="action-buttons-grid">
+          <a href="https://maps.google.com/?q=Chacara+Vale+dos+Dinossauros" target="_blank" rel="noopener noreferrer" class="btn-map google">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Google Maps</span>
+          </a>
+          <a href="https://waze.com/ul?q=Chacara+Vale+dos+Dinossauros" target="_blank" rel="noopener noreferrer" class="btn-map waze">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.6 12a.6.6 0 0 0 .8 0c.6-.5 7.6-6.6 7.6-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Waze Rota</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Formulário RSVP -->
+      <div class="card rsvp-card">
+        <div class="card-icon">🧭</div>
+        <h3 class="card-title">Confirmação de Presença dos Exploradores</h3>
+        <p class="card-desc">Confirme a presença da sua equipe até <strong>05 de Novembro</strong> para organizarmos os kits de exploradores mirins:</p>
+
+        <form id="rsvpForm" class="rsvp-form">
+          <div class="form-group">
+            <label for="guestName">Nome da Família Exploradora:</label>
+            <input type="text" id="guestName" placeholder="Ex: Família Oliveira" required>
+          </div>
+
+          <div class="form-group">
+            <label for="explorersCount">Total de Exploradores (Adultos + Crianças):</label>
+            <select id="explorersCount">
+              <option value="1">1 Explorador</option>
+              <option value="2">2 Exploradores</option>
+              <option value="3" selected>3 Exploradores</option>
+              <option value="4">4 Exploradores</option>
+              <option value="5+">5 ou mais aventureiros</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Confirmar presença:</label>
+            <div class="radio-options">
+              <label class="radio-label">
+                <input type="radio" name="attending" value="sim" checked>
+                <span>🦖 Sim, contem conosco na expedição!</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="attending" value="nao">
+                <span>Infelizmente não poderemos explorar</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary full-width">
+            <span>Confirmar pelo WhatsApp</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+
+        <div id="rsvpSuccess" class="rsvp-success-box hidden">
+          <p>✓ Presença na expedição confirmada com sucesso! O Dino Theo aguarda você!</p>
+        </div>
+      </div>
+
+      <!-- Dicas de Presente & Chave Pix -->
+      <div class="card gifts-card">
+        <div class="card-icon">🎁</div>
+        <h3 class="card-title">Dicas para o Pequeno Explorador</h3>
+        <p class="card-desc">Sua presença é nossa maior alegria! Se desejar presentear o aventureiro Theo:</p>
+
+        <div class="sizes-box">
+          <div class="size-item">
+            <span class="size-label">👕 Roupas de Aventura:</span>
+            <strong class="size-val">Tam 1 a 2 anos</strong>
+          </div>
+          <div class="size-item">
+            <span class="size-label">👟 Calçados:</span>
+            <strong class="size-val">Nº 20 / 21</strong>
+          </div>
+          <div class="size-item">
+            <span class="size-label">📚 Brinquedos:</span>
+            <strong class="size-val">Livrinhos de animais ou dinos</strong>
+          </div>
+        </div>
+
+        <div class="pix-box">
+          <p class="pix-title">Ou contribua com a Poupança do Pequeno Explorador:</p>
+          <div class="pix-key-wrapper">
+            <span class="pix-key" id="pixKeyText">printfocovideo@gmail.com</span>
+            <button id="copyPixBtn" class="btn-copy-pix">
+              <span id="copyPixText">Copiar Pix</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé -->
+      <footer class="invite-footer">
+        <p class="dino-quote">"Grandes aventuras começam com pequenos passos jurássicos!"</p>
+        <p class="crafted-by">Convite Interativo desenvolvido com carinho por <strong>Printfoco</strong></p>
+      </footer>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

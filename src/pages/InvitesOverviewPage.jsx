@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { inviteTypes } from '../data/content';
-import { Sparkles, Check, ArrowRight, Smartphone, Film, Image } from 'lucide-react';
+import InteractiveInviteSection from '../components/InteractiveInviteSection';
+import { Sparkles, Check, ArrowRight, Smartphone, Film, Image, Eye } from 'lucide-react';
 
 export default function InvitesOverviewPage() {
   const iconMap = {
@@ -22,7 +23,7 @@ export default function InvitesOverviewPage() {
         </div>
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 space-y-3 sm:space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#c5a880] bg-[#ffffff] text-xs font-semibold uppercase tracking-wider text-[#9f825b]">
             <Sparkles className="w-3.5 h-3.5 text-[#c5a880]" />
             <span>Catálogo Completo</span>
@@ -33,10 +34,21 @@ export default function InvitesOverviewPage() {
           <p className="text-sm sm:text-base md:text-lg text-[#555555] leading-relaxed">
             A Printfoco oferece três formatos distintos para atender a cada estilo de comemoração, do prático e tradicional à moderna experiência web interativa.
           </p>
+
+          {/* Quick jump to interactive showcase */}
+          <div className="pt-2">
+            <a
+              href="#modelos-interativos"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#ffffff] border border-[#c5a880] text-xs font-bold text-[#1c1b1a] hover:bg-[#1c1b1a] hover:text-white transition-all shadow-xs"
+            >
+              <Eye className="w-4 h-4 text-[#c5a880]" />
+              <span>Ver Demonstrações & Modelos Interativos (Natal, Princesas, Dinossauro) ↓</span>
+            </a>
+          </div>
         </div>
 
         {/* Formatos Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-20">
           {inviteTypes.map((type) => {
             const Icon = iconMap[type.id] || Smartphone;
             return (
@@ -96,6 +108,11 @@ export default function InvitesOverviewPage() {
               </div>
             );
           })}
+        </div>
+
+        {/* Section: Live Interactive Models Showcase */}
+        <div id="modelos-interativos" className="rounded-3xl bg-[#ffffff] border border-[#ebe6dc] shadow-md overflow-hidden">
+          <InteractiveInviteSection />
         </div>
 
       </div>

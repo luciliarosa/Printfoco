@@ -1,356 +1,376 @@
-import React, { useState, useEffect } from 'react';
-import { siteConfig } from '../data/content';
+import React, { useState } from 'react';
+import { siteConfig, interactiveTemplates } from '../data/content';
 import { useLanguage } from '../context/LanguageContext';
 import { 
-  CheckCircle2, MapPin, Sparkles, ExternalLink, Play, Pause, Clock, ShieldCheck 
+  Sparkles, ExternalLink, RotateCcw, Smartphone, Laptop, 
+  Crown, TreePine, Footprints, CheckCircle2, MapPin, Clock, ShieldCheck
 } from 'lucide-react';
 
 export default function InteractiveInviteSection() {
   const { t } = useLanguage();
-  const [isPlayingMusic, setIsPlayingMusic] = useState(false);
-  const [rsvpStatus, setRsvpStatus] = useState(null);
-  const [guestName, setGuestName] = useState('');
-  const [copiedPix, setCopiedPix] = useState(false);
-  const [activeTab, setActiveTab] = useState('convite');
+  
+  // Device & Theme State
+  const [device, setDevice] = useState('mobile'); // 'mobile' | 'desktop'
+  const [selectedThemeId, setSelectedThemeId] = useState('natal'); // 'natal' | 'princesas' | 'dinossauro'
+  const [iframeKey, setIframeKey] = useState(0); // For reloading the invitation envelope
 
-  const [timeLeft, setTimeLeft] = useState({ days: 12, hours: 8, minutes: 45, seconds: 20 });
+  // Current active template
+  const currentTheme = interactiveTemplates.find(tpl => tpl.id === selectedThemeId) || interactiveTemplates[0];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
-        if (prev.minutes > 0) return { ...prev, minutes: 59, seconds: 59 };
-        return prev;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleSimulateRSVP = (status) => {
-    if (!guestName.trim()) {
-      alert(t.simulator.rsvpPlaceholder || "Por favor, digite seu nome.");
-      return;
-    }
-    setRsvpStatus(status);
+  const iconForTheme = (id) => {
+    if (id === 'natal') return TreePine;
+    if (id === 'princesas') return Crown;
+    if (id === 'dinossauro') return Footprints;
+    return Sparkles;
   };
 
-  const copyPix = () => {
-    setCopiedPix(true);
-    setTimeout(() => setCopiedPix(false), 3000);
+  const handleReload = () => {
+    setIframeKey(prev => prev + 1);
   };
 
   return (
-    <section id="convite-interativo" className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden bg-gradient-to-b from-[#faf8f5] via-[#ffffff] to-[#faf8f5]">
-      {/* Background circles */}
-      <div className="absolute top-1/3 left-0 w-80 h-80 bg-[#ebe6dc]/50 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-96 h-96 bg-[#c5a880]/15 rounded-full blur-[130px] pointer-events-none" />
+    <section id="convite-interativo" className="py-8 sm:py-12 md:py-16 relative overflow-hidden bg-gradient-to-b from-[#faf8f5] via-[#ffffff] to-[#faf8f5]">
+      {/* Background ambient accents */}
+      <div className="absolute top-1/4 left-0 w-80 h-80 bg-[#ebe6dc]/40 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-10 right-0 w-96 h-96 bg-[#c5a880]/15 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4 mb-10 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4 mb-6 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#c5a880] bg-[#ffffff] text-xs font-semibold uppercase tracking-[0.2em] text-[#9f825b] shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#c5a880]" />
-            <span>{t.interactivePage.badge}</span>
+            <span>{t.interactiveShowcase?.badge || "Simulador com Convites Reais"}</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif-luxury leading-tight text-[#1c1b1a]">
-            {t.interactivePage.title}
+            {t.interactiveShowcase?.title || "Modelos Disponíveis & Experiência Ao Vivo"}
           </h2>
 
-          <p className="text-[#555555] text-sm sm:text-base md:text-lg font-normal leading-relaxed">
-            {t.interactivePage.subtitle}
+          <p className="text-[#555555] text-xs sm:text-sm md:text-base font-normal leading-relaxed">
+            {t.interactiveShowcase?.subtitle || "Veja os convites reais funcionando dentro do simulador! Toque para abrir o lacre do envelope, ouvir a música, interagir com os recursos e testar no celular ou no computador."}
           </p>
         </div>
 
-        {/* Grid: Simulator & Features */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* Controls Container: Device Switcher & Theme Selector */}
+        <div className="max-w-4xl mx-auto space-y-4 mb-6 sm:mb-10">
           
-          {/* Features Column */}
-          <div className="lg:col-span-6 space-y-5 sm:space-y-6 order-2 lg:order-1">
-            
-            <h3 className="text-xl sm:text-2xl font-bold font-serif-luxury text-[#1c1b1a]">
-              {t.interactivePage.stepsTitle}
-            </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] hover:border-[#c5a880] transition-all hover:bg-[#faf8f5] group shadow-xs">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#faf8f5] border border-[#ebe6dc] flex items-center justify-center mb-2.5 sm:mb-3 group-hover:scale-105 transition-transform">
-                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#9f825b]" />
-                </div>
-                <h4 className="font-bold text-[#1c1b1a] text-xs sm:text-sm mb-1">{t.home.featRSVP}</h4>
-                <p className="text-[11px] sm:text-xs text-[#555555] leading-relaxed">
-                  Confirmação direta de presença integrada ao WhatsApp, permitindo controle ágil da lista de convidados.
-                </p>
-              </div>
-
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] hover:border-[#c5a880] transition-all hover:bg-[#faf8f5] group shadow-xs">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#faf8f5] border border-[#ebe6dc] flex items-center justify-center mb-2.5 sm:mb-3 group-hover:scale-105 transition-transform">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[#9f825b]" />
-                </div>
-                <h4 className="font-bold text-[#1c1b1a] text-xs sm:text-sm mb-1">{t.home.featGPS}</h4>
-                <p className="text-[11px] sm:text-xs text-[#555555] leading-relaxed">
-                  Botões com abertura automática de rotas via Google Maps, Waze ou acionamento de corridas por aplicativo.
-                </p>
-              </div>
-
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] hover:border-[#c5a880] transition-all hover:bg-[#faf8f5] group shadow-xs">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#faf8f5] border border-[#ebe6dc] flex items-center justify-center mb-2.5 sm:mb-3 group-hover:scale-105 transition-transform">
-                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-[#9f825b]" />
-                </div>
-                <h4 className="font-bold text-[#1c1b1a] text-xs sm:text-sm mb-1">{t.home.featCountdown}</h4>
-                <p className="text-[11px] sm:text-xs text-[#555555] leading-relaxed">
-                  Contador ativo em tempo real aumentando a expectativa e o entusiasmo dos convidados até a data.
-                </p>
-              </div>
-
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] hover:border-[#c5a880] transition-all hover:bg-[#faf8f5] group shadow-xs">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#faf8f5] border border-[#ebe6dc] flex items-center justify-center mb-2.5 sm:mb-3 group-hover:scale-105 transition-transform">
-                  <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#9f825b]" />
-                </div>
-                <h4 className="font-bold text-[#1c1b1a] text-xs sm:text-sm mb-1">{t.home.featPix}</h4>
-                <p className="text-[11px] sm:text-xs text-[#555555] leading-relaxed">
-                  Módulo de lista de presentes com chave Pix copia-e-cola segura e elegante para celebrações.
-                </p>
-              </div>
-
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-              <a
-                href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent(siteConfig.contact.whatsappInviteMessage)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase bg-[#1c1b1a] text-[#faf8f5] hover:bg-[#c5a880] hover:text-white transition-all shadow-md text-center"
+          {/* Device Switcher (Mobile vs Computer) */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#9f825b]">
+              Modo de Visualização:
+            </span>
+            <div className="inline-flex p-1.5 rounded-2xl bg-[#ebe6dc]/60 border border-[#ebe6dc] w-full sm:w-auto shadow-xs">
+              <button
+                type="button"
+                onClick={() => setDevice('mobile')}
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 py-2 px-5 rounded-xl text-xs font-bold transition-all ${
+                  device === 'mobile'
+                    ? 'bg-[#1c1b1a] text-white shadow-sm'
+                    : 'text-[#555555] hover:text-[#1c1b1a]'
+                }`}
               >
-                <span>{t.interactivePage.btnOrder}</span>
-              </a>
+                <Smartphone className="w-4 h-4 text-[#c5a880]" />
+                <span>Simulador de Celular (Mobile)</span>
+              </button>
 
-              <a
-                href="/projects/convites-virtuais/interativos/tema-natal/index.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-xs tracking-wider text-[#1c1b1a] border border-[#ebe6dc] hover:border-[#1c1b1a] bg-[#ffffff] transition-all shadow-xs text-center"
+              <button
+                type="button"
+                onClick={() => setDevice('desktop')}
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 py-2 px-5 rounded-xl text-xs font-bold transition-all ${
+                  device === 'desktop'
+                    ? 'bg-[#1c1b1a] text-white shadow-sm'
+                    : 'text-[#555555] hover:text-[#1c1b1a]'
+                }`}
               >
-                <span>{t.interactivePage.btnLiveDemo}</span>
-                <ExternalLink className="w-3.5 h-3.5 text-[#c5a880]" />
-              </a>
+                <Laptop className="w-4 h-4 text-[#c5a880]" />
+                <span>Simulador de Computador (Desktop)</span>
+              </button>
             </div>
-
           </div>
 
-          {/* Interactive Live Smartphone Simulator */}
-          <div className="lg:col-span-6 flex justify-center order-1 lg:order-2 w-full">
-            
-            <div className="relative w-full max-w-[300px] sm:max-w-[340px]">
-              
-              {/* Outer Subtle Shadow */}
-              <div className="absolute -inset-3 sm:-inset-4 bg-gradient-to-tr from-[#ebe6dc] via-transparent to-[#c5a880]/20 rounded-[44px] blur-xl opacity-60" />
+          {/* Theme Selector Tabs */}
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#9f825b]">
+              Selecione o Convite Real para Testar:
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full">
+              {interactiveTemplates.map((tpl) => {
+                const IconComponent = iconForTheme(tpl.id);
+                const isSelected = selectedThemeId === tpl.id;
+                return (
+                  <button
+                    key={tpl.id}
+                    type="button"
+                    onClick={() => {
+                      setSelectedThemeId(tpl.id);
+                      setIframeKey(prev => prev + 1);
+                    }}
+                    className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all flex items-center gap-3 ${
+                      isSelected
+                        ? 'bg-[#ffffff] border-2 border-[#1c1b1a] shadow-md ring-2 ring-[#c5a880]/30'
+                        : 'bg-[#ffffff]/80 border-[#ebe6dc] hover:border-[#c5a880] hover:bg-[#faf8f5]'
+                    }`}
+                  >
+                    <div 
+                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ 
+                        backgroundColor: isSelected ? tpl.accentColor : '#faf8f5',
+                        color: isSelected ? '#ffffff' : tpl.accentColor,
+                        border: '1px solid #ebe6dc'
+                      }}
+                    >
+                      <IconComponent className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-[#1c1b1a] truncate font-serif-luxury">
+                          {tpl.name}
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-[#666666] truncate mt-0.5">
+                        {tpl.subtitle}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-              {/* Smartphone Frame */}
-              <div className="relative bg-[#ffffff] border-[3px] sm:border-4 border-[#1c1b1a] rounded-[38px] sm:rounded-[44px] shadow-2xl p-2.5 sm:p-3 overflow-hidden">
+          {/* Theme Highlight Banner & Action Buttons */}
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2.5 text-[#2a2927]">
+              <Sparkles className="w-4 h-4 text-[#c5a880] shrink-0" />
+              <span>
+                {selectedThemeId === 'natal' && (
+                  <>
+                    <strong>Tema Natal em Família:</strong> Inclui envelope com lacre, Ceia Compartilhada (prato + bebida) e <strong>Árvore Interativa com bolinhas dos cachorrinhos Thor e Jade</strong>!
+                  </>
+                )}
+                {selectedThemeId === 'princesas' && (
+                  <>
+                    <strong>Tema 1 Ano Princesas:</strong> Lacre real com coroa, valsa mágica, varinha de condão com chuva de estrelas, RSVP e guia de mimos da Princesa Helena!
+                  </>
+                )}
+                {selectedThemeId === 'dinossauro' && (
+                  <>
+                    <strong>Tema 1 Ano Dinossauro:</strong> Passaporte jurássico, sons e rugidos de dinos fofos, folhagens tropicais, contagem e confirmação da expedição do Theo!
+                  </>
+                )}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              {/* Reload Button */}
+              <button
+                type="button"
+                onClick={handleReload}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#faf8f5] text-[#1c1b1a] hover:bg-[#ebe6dc] transition-colors font-bold text-[11px] border border-[#ebe6dc]"
+                title="Recarregar e fechar o envelope para abrir novamente"
+              >
+                <RotateCcw className="w-3.5 h-3.5 text-[#c5a880]" />
+                <span>Reiniciar Envelope</span>
+              </button>
+
+              {/* Fullscreen Button */}
+              {currentTheme.liveUrl && (
+                <a
+                  href={currentTheme.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1c1b1a] text-white hover:bg-[#c5a880] transition-colors font-bold text-[11px] shadow-xs"
+                >
+                  <span>Abrir em Tela Cheia</span>
+                  <ExternalLink className="w-3 h-3 text-[#c5a880]" />
+                </a>
+              )}
+            </div>
+          </div>
+
+        </div>
+
+        {/* ======================================================== */}
+        {/* SIMULATOR VIEWPORT WITH REAL EMBEDDED INVITATION (IFRAME) */}
+        {/* ======================================================== */}
+
+        {device === 'mobile' ? (
+          /* ======================================= */
+          /* REAL INVITATION IN MOBILE PHONE FRAME   */
+          /* ======================================= */
+          <div className="flex justify-center items-center py-2 sm:py-4">
+            <div className="relative w-full max-w-[340px] sm:max-w-[375px]">
+              
+              {/* Outer Glow with Theme Color */}
+              <div 
+                className="absolute -inset-4 rounded-[50px] blur-2xl opacity-35 transition-all duration-500"
+                style={{ backgroundColor: currentTheme.accentColor }}
+              />
+
+              {/* Smartphone Outer Casing */}
+              <div className="relative bg-[#1c1b1a] p-2.5 sm:p-3 rounded-[46px] shadow-2xl border-[4px] border-[#2b2a29]">
                 
-                {/* Speaker notch */}
-                <div className="absolute top-3.5 sm:top-4 left-1/2 -translate-x-1/2 w-24 sm:w-28 h-3.5 sm:h-4 bg-[#1c1b1a] rounded-full flex items-center justify-center gap-2 z-30">
-                  <div className="w-8 sm:w-10 h-1 bg-[#444444] rounded-full" />
-                  <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#c5a880]" />
+                {/* Dynamic Island / Speaker Pill */}
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-[#111111] rounded-full flex items-center justify-center gap-2 z-30 pointer-events-none">
+                  <div className="w-8 h-1 bg-[#2a2927] rounded-full" />
+                  <div className="w-2 h-2 rounded-full bg-[#1c1b1a] border border-[#3a3938]" />
                 </div>
 
-                {/* Screen Content */}
-                <div className="relative bg-[#faf8f5] rounded-[30px] sm:rounded-[34px] overflow-hidden min-h-[480px] sm:min-h-[560px] text-[#1c1b1a] flex flex-col justify-between border border-[#ebe6dc]">
-                  
-                  {/* Simulator Top Bar / Status */}
-                  <div className="pt-7 sm:pt-8 pb-2.5 sm:pb-3 px-3 sm:px-4 bg-[#ffffff] border-b border-[#ebe6dc] flex items-center justify-between text-[10px] sm:text-[11px] text-[#666666]">
-                    <span className="flex items-center gap-1 font-bold text-[#1c1b1a]">
-                      <Sparkles className="w-3 h-3 text-[#c5a880]" /> {t.simulator.demoBadge}
-                    </span>
-                    <button 
-                      onClick={() => setIsPlayingMusic(!isPlayingMusic)}
-                      className="flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-[#c5a880]/15 text-[#1c1b1a] hover:bg-[#c5a880] hover:text-white transition-all text-[9.5px] sm:text-[10px] font-semibold"
-                    >
-                      {isPlayingMusic ? <Pause className="w-2.5 h-2.5" /> : <Play className="w-2.5 h-2.5" />}
-                      <span>{isPlayingMusic ? t.simulator.playingMusic : t.simulator.playMusic}</span>
-                    </button>
-                  </div>
+                {/* Smartphone Screen Viewport with Real Iframe */}
+                <div className="relative bg-[#ffffff] rounded-[36px] overflow-hidden shadow-inner border border-[#333333]">
+                  <iframe
+                    key={`mobile-${currentTheme.id}-${iframeKey}`}
+                    src={currentTheme.liveUrl}
+                    title={currentTheme.name}
+                    className="w-full h-[600px] sm:h-[660px] border-0 rounded-[36px] bg-[#ffffff]"
+                    allow="autoplay"
+                  />
+                </div>
 
-                  {/* Simulator Main Body */}
-                  <div className="p-3 sm:p-4 space-y-3 sm:space-y-4 overflow-y-auto max-h-[400px] sm:max-h-[460px] scrollbar-thin text-left">
-                    
-                    {/* Event Banner */}
-                    <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-[#ffffff] border border-[#ebe6dc]">
-                      <img
-                        src="/images/c63feeaeadb95346e55b91e717a22044.jpg"
-                        alt="Aniversário Especial"
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          e.target.src = "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=600&q=80";
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#1c1b1a]/90 via-[#1c1b1a]/30 to-transparent" />
-                      <div className="absolute bottom-2 left-2.5 right-2.5 text-center text-white">
-                        <h4 className="text-sm sm:text-base font-serif-luxury font-bold leading-tight">{t.simulator.eventTitle}</h4>
-                        <p className="text-[10px] sm:text-[11px] text-[#faf8f5]">{t.simulator.eventDate}</p>
-                      </div>
-                    </div>
-
-                    {/* Countdown */}
-                    <div className="p-2 sm:p-2.5 rounded-xl bg-[#ffffff] border border-[#ebe6dc] text-center shadow-xs">
-                      <span className="text-[9px] sm:text-[10px] text-[#9f825b] uppercase tracking-wider block mb-1 font-semibold">
-                        {t.simulator.countdownTitle}
-                      </span>
-                      <div className="grid grid-cols-4 gap-1 text-center">
-                        <div className="bg-[#faf8f5] p-1 rounded-lg border border-[#ebe6dc]">
-                          <span className="block text-xs sm:text-sm font-bold text-[#1c1b1a] font-mono">{timeLeft.days}</span>
-                          <span className="text-[7.5px] sm:text-[8px] text-[#666666]">{t.simulator.days}</span>
-                        </div>
-                        <div className="bg-[#faf8f5] p-1 rounded-lg border border-[#ebe6dc]">
-                          <span className="block text-xs sm:text-sm font-bold text-[#1c1b1a] font-mono">{timeLeft.hours}</span>
-                          <span className="text-[7.5px] sm:text-[8px] text-[#666666]">{t.simulator.hours}</span>
-                        </div>
-                        <div className="bg-[#faf8f5] p-1 rounded-lg border border-[#ebe6dc]">
-                          <span className="block text-xs sm:text-sm font-bold text-[#1c1b1a] font-mono">{timeLeft.minutes}</span>
-                          <span className="text-[7.5px] sm:text-[8px] text-[#666666]">{t.simulator.min}</span>
-                        </div>
-                        <div className="bg-[#faf8f5] p-1 rounded-lg border border-[#ebe6dc]">
-                          <span className="block text-xs sm:text-sm font-bold text-[#1c1b1a] font-mono">{timeLeft.seconds}</span>
-                          <span className="text-[7.5px] sm:text-[8px] text-[#666666]">{t.simulator.sec}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Navigation Tabs in Simulator */}
-                    <div className="flex rounded-lg bg-[#ffffff] p-1 text-[10px] sm:text-[11px] border border-[#ebe6dc] shadow-xs">
-                      <button
-                        onClick={() => setActiveTab('convite')}
-                        className={`flex-1 py-1 rounded-md transition-all font-semibold ${
-                          activeTab === 'convite' ? 'bg-[#1c1b1a] text-white' : 'text-[#666666]'
-                        }`}
-                      >
-                        {t.simulator.tabRSVP}
-                      </button>
-                      <button
-                        onClick={() => setActiveTab('local')}
-                        className={`flex-1 py-1 rounded-md transition-all font-semibold ${
-                          activeTab === 'local' ? 'bg-[#1c1b1a] text-white' : 'text-[#666666]'
-                        }`}
-                      >
-                        {t.simulator.tabMap}
-                      </button>
-                      <button
-                        onClick={() => setActiveTab('presentes')}
-                        className={`flex-1 py-1 rounded-md transition-all font-semibold ${
-                          activeTab === 'presentes' ? 'bg-[#1c1b1a] text-white' : 'text-[#666666]'
-                        }`}
-                      >
-                        {t.simulator.tabGifts}
-                      </button>
-                    </div>
-
-                    {/* Tab 1: RSVP Form */}
-                    {activeTab === 'convite' && (
-                      <div className="p-3 rounded-xl bg-[#ffffff] border border-[#ebe6dc] space-y-2.5 animate-fadeIn">
-                        <span className="text-xs font-bold text-[#1c1b1a] block font-serif-luxury">
-                          {t.simulator.rsvpHeading}
-                        </span>
-                        
-                        {rsvpStatus ? (
-                          <div className="p-2.5 bg-emerald-50 text-emerald-800 rounded-lg text-xs border border-emerald-200 text-center font-medium">
-                            ✓ {rsvpStatus === 'sim' ? t.simulator.rsvpConfirmed : t.simulator.rsvpDeclined}
-                            <button 
-                              onClick={() => setRsvpStatus(null)} 
-                              className="block text-[10px] underline mt-1 text-emerald-600 mx-auto"
-                            >
-                              {t.simulator.rsvpChange}
-                            </button>
-                          </div>
-                        ) : (
-                          <div className="space-y-2">
-                            <input
-                              type="text"
-                              placeholder={t.simulator.rsvpPlaceholder}
-                              value={guestName}
-                              onChange={(e) => setGuestName(e.target.value)}
-                              className="w-full text-xs px-2.5 py-1.5 rounded-lg border border-[#ebe6dc] focus:outline-hidden focus:border-[#c5a880] bg-[#faf8f5]"
-                            />
-                            <div className="grid grid-cols-2 gap-1.5">
-                              <button
-                                onClick={() => handleSimulateRSVP('sim')}
-                                className="w-full py-1.5 rounded-lg bg-emerald-600 text-white text-[10.5px] font-bold hover:bg-emerald-700 transition-colors"
-                              >
-                                {t.simulator.rsvpYes}
-                              </button>
-                              <button
-                                onClick={() => handleSimulateRSVP('nao')}
-                                className="w-full py-1.5 rounded-lg bg-[#ebe6dc] text-[#666666] text-[10.5px] font-medium hover:bg-[#d9d6c1] transition-colors"
-                              >
-                                {t.simulator.rsvpNo}
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Tab 2: Map & Location */}
-                    {activeTab === 'local' && (
-                      <div className="p-3 rounded-xl bg-[#ffffff] border border-[#ebe6dc] space-y-2 animate-fadeIn">
-                        <span className="text-xs font-bold text-[#1c1b1a] block font-serif-luxury">{t.simulator.mapHeading}</span>
-                        <p className="text-[11px] text-[#666666] leading-tight">
-                          {t.simulator.mapAddress}
-                        </p>
-                        <div className="pt-1 flex gap-1.5">
-                          <button
-                            onClick={() => alert("Simulação: Abrindo rota no Google Maps")}
-                            className="flex-1 py-1.5 rounded-lg bg-[#faf8f5] text-[#1c1b1a] text-[10px] font-semibold border border-[#ebe6dc] hover:border-[#c5a880]"
-                          >
-                            {t.simulator.openGoogleMaps}
-                          </button>
-                          <button
-                            onClick={() => alert("Simulação: Abrindo rota no Waze")}
-                            className="flex-1 py-1.5 rounded-lg bg-[#faf8f5] text-[#1c1b1a] text-[10px] font-semibold border border-[#ebe6dc] hover:border-[#c5a880]"
-                          >
-                            {t.simulator.openWaze}
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Tab 3: Gifts / Pix */}
-                    {activeTab === 'presentes' && (
-                      <div className="p-3 rounded-xl bg-[#ffffff] border border-[#ebe6dc] space-y-2 animate-fadeIn text-center">
-                        <span className="text-xs font-bold text-[#1c1b1a] block font-serif-luxury">{t.simulator.giftHeading}</span>
-                        <p className="text-[11px] text-[#666666]">
-                          {t.simulator.giftDesc}
-                        </p>
-                        <div className="p-2 rounded-lg bg-[#faf8f5] border border-dashed border-[#c5a880] text-[10px] font-mono select-all">
-                          {siteConfig.contact.email}
-                        </div>
-                        <button
-                          onClick={copyPix}
-                          className="w-full py-1.5 rounded-lg bg-[#1c1b1a] text-white text-[10.5px] font-bold hover:bg-[#c5a880] transition-colors"
-                        >
-                          {copiedPix ? `✓ ${t.simulator.pixCopied}` : t.simulator.copyPix}
-                        </button>
-                      </div>
-                    )}
-
-                  </div>
-
-                  {/* Simulator Bottom Bar */}
-                  <div className="p-2.5 bg-[#ffffff] border-t border-[#ebe6dc] text-center">
-                    <span className="text-[9.5px] text-[#9f825b] font-medium">
-                      {t.simulator.footerNote}
-                    </span>
-                  </div>
-
+                {/* Home Indicator Bar */}
+                <div className="pt-2 pb-1 flex justify-center">
+                  <div className="w-28 h-1 bg-[#555555] rounded-full" />
                 </div>
 
               </div>
 
             </div>
+          </div>
+        ) : (
+          /* ======================================= */
+          /* REAL INVITATION IN DESKTOP BROWSER FRAME */
+          /* ======================================= */
+          <div className="py-2 sm:py-4">
+            <div className="max-w-[960px] mx-auto">
+              
+              {/* Computer Outer Shell */}
+              <div className="relative rounded-2xl sm:rounded-3xl border-2 sm:border-[3px] border-[#1c1b1a] bg-[#1c1b1a] shadow-2xl overflow-hidden p-2 sm:p-2.5">
+                
+                {/* Browser Top Window Bar */}
+                <div className="bg-[#242322] px-3 sm:px-4 py-2 sm:py-2.5 rounded-t-xl sm:rounded-t-2xl flex items-center justify-between text-xs text-[#888888] border-b border-[#333333]">
+                  
+                  {/* Traffic Light Dots & Tab Preview */}
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#ff5f56] inline-block" />
+                    <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#ffbd2e] inline-block" />
+                    <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#27c93f] inline-block" />
+                    
+                    {/* Active Tab */}
+                    <div className="ml-3 sm:ml-4 hidden sm:flex items-center gap-2 px-3 py-1 bg-[#ffffff] text-[#1c1b1a] rounded-t-lg text-[11px] font-semibold">
+                      <Sparkles className="w-3 h-3 text-[#c5a880]" />
+                      <span className="max-w-[200px] truncate">{currentTheme.name}</span>
+                    </div>
+                  </div>
 
+                  {/* Browser Address Bar with URL */}
+                  <div className="flex-1 max-w-sm sm:max-w-md mx-2 sm:mx-4 bg-[#1c1b1a] px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono text-[#c5a880] flex items-center justify-center gap-1.5 border border-[#333333]">
+                    <span className="text-emerald-400 text-xs">🔒</span>
+                    <span className="truncate">https://printfoco.com.br/convite/{currentTheme.id}</span>
+                  </div>
+
+                  {/* Reload button in browser bar */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleReload}
+                      className="text-[#9f825b] hover:text-white p-1 rounded-sm transition-colors"
+                      title="Recarregar"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                    </button>
+                    <span className="hidden md:inline-block text-[10px] text-[#9f825b]">
+                      Desktop
+                    </span>
+                  </div>
+                </div>
+
+                {/* Desktop Viewport Screen with Real Iframe */}
+                <div className="bg-[#ffffff] rounded-b-xl sm:rounded-b-2xl overflow-hidden shadow-inner">
+                  <iframe
+                    key={`desktop-${currentTheme.id}-${iframeKey}`}
+                    src={currentTheme.liveUrl}
+                    title={currentTheme.name}
+                    className="w-full h-[620px] sm:h-[700px] border-0 bg-[#ffffff]"
+                    allow="autoplay"
+                  />
+                </div>
+
+                {/* Laptop Base Stand / Chin Notch */}
+                <div className="h-3 sm:h-4 bg-gradient-to-b from-[#2a2927] to-[#111111] rounded-b-xl flex items-center justify-center mt-1">
+                  <div className="w-16 sm:w-20 h-1 sm:h-1.5 bg-[#444444] rounded-full" />
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {/* ======================================================== */}
+        {/* HIGHLIGHTED FEATURES / BENEFITS GRID                    */}
+        {/* ======================================================== */}
+        <div className="mt-10 sm:mt-14 pt-8 sm:pt-10 border-t border-[#ebe6dc]">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <span className="text-[11px] uppercase tracking-widest text-[#9f825b] font-bold block mb-1">
+              Recursos Avançados
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold font-serif-luxury text-[#1c1b1a]">
+              Por Que Escolher um Convite Virtual Interativo?
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] hover:border-[#c5a880] transition-all shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-[#faf8f5] border border-[#ebe6dc] flex items-center justify-center mb-3">
+                <CheckCircle2 className="w-5 h-5 text-[#9f825b]" />
+              </div>
+              <h4 className="font-bold text-[#1c1b1a] text-xs sm:text-sm mb-1">RSVP no WhatsApp</h4>
+              <p className="text-[11px] sm:text-xs text-[#555555] leading-relaxed">
+                Confirmação direta e instantânea no WhatsApp dos anfitriões, com controle de número de convidados.
+              </p>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] hover:border-[#c5a880] transition-all shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-[#faf8f5] border border-[#ebe6dc] flex items-center justify-center mb-3">
+                <MapPin className="w-5 h-5 text-[#9f825b]" />
+              </div>
+              <h4 className="font-bold text-[#1c1b1a] text-xs sm:text-sm mb-1">GPS & Rotas Integradas</h4>
+              <p className="text-[11px] sm:text-xs text-[#555555] leading-relaxed">
+                Botões de 1 clique que abrem a rota exata no Google Maps e Waze para nenhum convidado se perder.
+              </p>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] hover:border-[#c5a880] transition-all shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-[#faf8f5] border border-[#ebe6dc] flex items-center justify-center mb-3">
+                <Clock className="w-5 h-5 text-[#9f825b]" />
+              </div>
+              <h4 className="font-bold text-[#1c1b1a] text-xs sm:text-sm mb-1">Cronômetro Regressivo</h4>
+              <p className="text-[11px] sm:text-xs text-[#555555] leading-relaxed">
+                Contador dinâmico em segundos que aumenta a expectativa e engaja seus convidados até a grande data.
+              </p>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] hover:border-[#c5a880] transition-all shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-[#faf8f5] border border-[#ebe6dc] flex items-center justify-center mb-3">
+                <ShieldCheck className="w-5 h-5 text-[#9f825b]" />
+              </div>
+              <h4 className="font-bold text-[#1c1b1a] text-xs sm:text-sm mb-1">Mimos & Pix Rápido</h4>
+              <p className="text-[11px] sm:text-xs text-[#555555] leading-relaxed">
+                Guia de tamanhos e chave Pix elegante com botão de cópia rápida para presentes ou contribuições.
+              </p>
+            </div>
+          </div>
+
+          {/* WhatsApp CTA Action */}
+          <div className="mt-8 sm:mt-10 text-center">
+            <a
+              href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent(siteConfig.contact.whatsappInviteMessage)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-xs tracking-wider uppercase bg-[#1c1b1a] text-[#faf8f5] hover:bg-[#c5a880] hover:text-white transition-all shadow-md"
+            >
+              <span>{t.interactivePage.btnOrder || "Pedir Meu Convite Interativo Personalizado"}</span>
+            </a>
           </div>
 
         </div>

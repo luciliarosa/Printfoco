@@ -106,6 +106,76 @@ export const inviteTypes = [
   }
 ];
 
+export const interactiveTemplates = [
+  {
+    id: "natal",
+    name: "Tema Natal em Família",
+    subtitle: "Ceia Compartilhada & Bolinhas dos Pets",
+    category: "Celebração de Fim de Ano",
+    badge: "Disponível ao Vivo",
+    icon: "TreePine",
+    accentColor: "#9E3A4B",
+    bannerImage: "https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&w=1200&q=80",
+    eventTitle: "Ceia de Natal da Família",
+    hosts: "Família Elaine & Edson",
+    eventDate: "24 de Dezembro de 2026 • 20:00",
+    location: "Residência da Família • Bairro Jardim das Flores, 340",
+    mapsQuery: "Jardim das Flores, São Paulo",
+    musicTitle: "Noite Feliz & Jingle Bells Instrumental ♪",
+    specialNotice: "Cada convidado deve levar 1 prato (doce ou salgado) e 1 bebida para compartilhar nossa ceia!",
+    hasPotluck: true,
+    liveUrl: "/projects/convites-virtuais/interativos/tema-natal/index.html",
+    petFeature: "Árvore de Natal com bolinhas personalizadas dos pets Thor & Jade",
+    registryTitle: "Mimos de Natal & Amigo Secreto",
+    registryDesc: "Sua presença e seu carinho são nosso maior presente! Se desejar contribuir com o amigo secreto da família:"
+  },
+  {
+    id: "princesas",
+    name: "1º Ano • Reino das Princesas",
+    subtitle: "O Primeiro Reinado Encantado",
+    category: "Aniversário Infantil 1 Ano",
+    badge: "Tema em Destaque",
+    icon: "Crown",
+    accentColor: "#C5A880",
+    bannerImage: "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=1200&q=80",
+    eventTitle: "1º Aninho da Princesa Helena",
+    hosts: "Mamãe Camila & Papai Rodrigo",
+    eventDate: "18 de Outubro de 2026 • 16:00",
+    location: "Buffet Castelo dos Sonhos • Salão Real Encantado",
+    mapsQuery: "Buffet Castelo dos Sonhos",
+    musicTitle: "Valsa dos Contos de Fadas Encantados ♪",
+    specialNotice: "Venha celebrar o primeiro aninho da nossa princesa em um reino de alegria e encanto!",
+    hasPotluck: false,
+    liveUrl: "/projects/convites-virtuais/interativos/tema-infantil/princesas/index.html",
+    petFeature: null,
+    guestType: "adultsAndKids",
+    registryTitle: "Guia de Mimos da Princesa",
+    registryDesc: "Roupas: Tam 12 a 18 meses | Calçados: Nº 19 | Se preferir presentear com Pix para o cofrinho real:"
+  },
+  {
+    id: "dinossauro",
+    name: "1º Ano • Dino Aventura Baby",
+    subtitle: "Expedição Jurássica do Primeiro Aninho",
+    category: "Aniversário Infantil 1 Ano",
+    badge: "Tema em Destaque",
+    icon: "Footprints",
+    accentColor: "#3B6B4C",
+    bannerImage: "https://images.unsplash.com/photo-1569769332685-ef8b2ad59e3f?auto=format&fit=crop&w=1200&q=80",
+    eventTitle: "1º Aninho do Theo • Dino Park",
+    hosts: "Equipe de Exploradores Papai & Mamãe",
+    eventDate: "12 de Novembro de 2026 • 15:00",
+    location: "Chácara Vale dos Dinossauros • Espaço Aventura Kids",
+    mapsQuery: "Chácara Vale dos Dinossauros",
+    musicTitle: "Trilha Sonora Safari Jurássico Baby ♪",
+    specialNotice: "Preparem seus chapéus de exploradores para uma expedição cheia de diversão e rugidos de alegria!",
+    hasPotluck: false,
+    liveUrl: "/projects/convites-virtuais/interativos/tema-infantil/dinossauro/index.html",
+    petFeature: null,
+    registryTitle: "Dicas de Presente para o Pequeno Explorador",
+    registryDesc: "Roupas: Tam 1 a 2 anos | Livros e brinquedos didáticos | Ou contribuição Pix para o explorador:"
+  }
+];
+
 export const retrospectivesList = [
   {
     title: "Aniversário Infantil",
@@ -183,11 +253,12 @@ export const projectsCatalog = [
   },
   {
     id: "convite-infantil",
-    title: "Convite Interativo • Tema Infantil",
+    title: "Convite Interativo • Temas Infantis (Princesas & Dinossauro)",
     category: "Convites Virtuais / Interativos",
     folder: "projects/convites-virtuais/interativos/tema-infantil",
-    description: "Template web responsivo para celebrações infantis com controle de confirmação para adultos e crianças, mapas do local da festa e paleta customizável.",
-    badge: "Projeto Estruturado"
+    liveUrl: "/projects/convites-virtuais/interativos/tema-infantil/index.html",
+    description: "Projetos web interativos e responsivos de 1º aninho nos temas Reino das Princesas e Dino Park Aventura, com RSVP, mapas, contagem regressiva e efeitos mágicos.",
+    badge: "Disponível para Teste Online"
   },
   {
     id: "convite-video-aniversario",

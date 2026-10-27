@@ -137,6 +137,25 @@ export const translations = {
       btnOrder: "Pedir Meu Convite Interativo"
     },
 
+    // Interactive Showcase & Device Switcher
+    interactiveShowcase: {
+      badge: "Simulador Interativo Multi-Dispositivo",
+      title: "Modelos Disponíveis & Experiência Ao Vivo",
+      subtitle: "Alterne entre os modos Celular e Computador para testar a experiência real de navegação, contagem regressiva, confirmação de presença (RSVP), mapa e lista de presentes.",
+      deviceMobile: "📱 Visualizar no Celular",
+      deviceDesktop: "💻 Visualizar no Computador",
+      selectModel: "Escolha um Modelo para Testar:",
+      natalPetTip: "Dica: Veja a árvore interativa com as bolinhas dos pets Thor e Jade!",
+      openFullPage: "Abrir Demonstração Completa em Nova Aba",
+      potluckPrompt: "Contribuição na Ceia:",
+      potluckSweet: "Prato Doce",
+      potluckSalty: "Prato Salgado",
+      potluckDrink: "Bebida",
+      adultsCount: "Adultos:",
+      kidsCount: "Crianças:",
+      explorersCount: "Nº de Exploradores:"
+    },
+
     // Simulator Texts
     simulator: {
       demoBadge: "Printfoco Convites",
@@ -354,6 +373,25 @@ export const translations = {
       demoCtaSubtitle: "Explore the live interactive Christmas demonstration or commission a custom theme for your event.",
       btnLiveDemo: "View Live Demo",
       btnOrder: "Order My Interactive Invite"
+    },
+
+    // Interactive Showcase & Device Switcher
+    interactiveShowcase: {
+      badge: "Multi-Device Interactive Simulator",
+      title: "Available Templates & Live Experience",
+      subtitle: "Switch between Mobile and Computer simulator modes to experience the responsive layout, live countdown, WhatsApp RSVP, interactive map, and gift registry.",
+      deviceMobile: "📱 Mobile Phone Simulator",
+      deviceDesktop: "💻 Computer / Desktop Simulator",
+      selectModel: "Choose a Template to Test:",
+      natalPetTip: "Tip: Check out the Christmas tree with Thor & Jade pet ornaments!",
+      openFullPage: "Open Full Live Demo in New Window",
+      potluckPrompt: "Dinner Contribution:",
+      potluckSweet: "Sweet Dish",
+      potluckSalty: "Savory Dish",
+      potluckDrink: "Drink",
+      adultsCount: "Adults:",
+      kidsCount: "Children:",
+      explorersCount: "No. of Explorers:"
     },
 
     // Simulator Texts
