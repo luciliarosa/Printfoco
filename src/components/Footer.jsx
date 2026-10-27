@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../data/content';
 import { useLanguage } from '../context/LanguageContext';
-import { Camera, Mail, ShieldCheck } from 'lucide-react';
+import { Camera, Mail, ShieldCheck, Clock, MessageCircle, Sparkles, Film, Share2 } from 'lucide-react';
 import { InstagramIcon, FacebookIcon } from './BrandIcons';
 
 export default function Footer() {
@@ -12,107 +12,221 @@ export default function Footer() {
   return (
     <footer className="bg-[#ffffff] border-t border-[#d9d6c1] pt-16 pb-8 text-[#555555] text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#d9d6c1]">
+        
+        {/* Main Grid: 4 colunas perfeitamente organizadas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-[#d9d6c1]">
           
-          {/* Brand Info */}
-          <div className="md:col-span-5 space-y-4">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full border border-[#ab9a7d] flex items-center justify-center bg-[#f4f1e8]">
-                <Camera className="w-4 h-4 text-[#8c7c60]" />
+          {/* Coluna 1: Marca & Identidade (lg:col-span-4) */}
+          <div className="lg:col-span-4 space-y-4">
+            <Link to="/" className="flex items-center gap-3 group inline-flex">
+              <div className="w-10 h-10 rounded-full border border-[#ab9a7d] flex items-center justify-center bg-[#f4f1e8] group-hover:border-[#191919] transition-colors shadow-xs">
+                <Camera className="w-5 h-5 text-[#8c7c60] group-hover:text-[#191919] transition-colors" />
               </div>
-              <span className="font-brand tracking-widest text-xl font-bold text-[#191919]">
-                PRINT<span className="text-[#ab9a7d]">FOCO</span>
-              </span>
+              <div className="flex flex-col">
+                <span className="font-brand tracking-widest text-xl font-bold text-[#191919]">
+                  PRINT<span className="text-[#ab9a7d]">FOCO</span>
+                </span>
+                <span className="text-[10px] tracking-[0.25em] uppercase text-[#8c7c60] -mt-1 font-semibold">
+                  Memórias & Design
+                </span>
+              </div>
             </Link>
             
-            <p className="text-xs leading-relaxed max-w-sm text-[#555555]">
+            <p className="text-xs leading-relaxed text-[#555555] max-w-sm">
               {t.footer.desc}
             </p>
 
-            <div className="flex items-center gap-3 pt-2">
-              <a
-                href={siteConfig.contact.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#f4f1e8] border border-[#d9d6c1] flex items-center justify-center text-[#191919] hover:bg-[#ab9a7d] hover:text-white transition-colors"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="w-4 h-4" />
-              </a>
-              <a
-                href={siteConfig.contact.facebookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#f4f1e8] border border-[#d9d6c1] flex items-center justify-center text-[#191919] hover:bg-[#ab9a7d] hover:text-white transition-colors"
-                aria-label="Facebook"
-              >
-                <FacebookIcon className="w-4 h-4" />
-              </a>
+            {/* Redes Sociais */}
+            <div className="pt-1">
+              <span className="text-[11px] font-bold text-[#191919] block mb-2 uppercase tracking-wider">
+                Canais Oficiais
+              </span>
+              <div className="flex items-center gap-2.5">
+                <a
+                  href={siteConfig.contact.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f4f1e8] border border-[#d9d6c1] text-[#191919] hover:bg-[#ab9a7d] hover:text-white transition-all text-[11px] font-semibold"
+                  aria-label="Instagram da Printfoco"
+                >
+                  <InstagramIcon className="w-3.5 h-3.5" />
+                  <span>@{siteConfig.contact.instagram}</span>
+                </a>
+                <a
+                  href={siteConfig.contact.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-[#f4f1e8] border border-[#d9d6c1] flex items-center justify-center text-[#191919] hover:bg-[#ab9a7d] hover:text-white transition-all"
+                  aria-label="Facebook da Printfoco"
+                >
+                  <FacebookIcon className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Quick Links (Sem "Projetos") */}
-          <div className="md:col-span-3 space-y-3">
-            <h4 className="text-[#191919] font-bold uppercase tracking-wider text-xs font-serif-luxury">
+          {/* Coluna 2: Institucional (lg:col-span-2) */}
+          <div className="lg:col-span-2 space-y-3">
+            <h4 className="text-[#191919] font-bold uppercase tracking-wider text-xs pb-1.5 border-b border-[#ab9a7d]/30 inline-block font-serif-luxury">
               {t.footer.navTitle}
             </h4>
-            <ul className="space-y-2">
-              <li><Link to="/" className="hover:text-[#191919] transition-colors">{t.nav.home}</Link></li>
-              <li><Link to="/sobre" className="hover:text-[#191919] transition-colors">{t.nav.ourHistory}</Link></li>
-              <li><Link to="/missao-visao-valores" className="hover:text-[#191919] transition-colors">{t.nav.missionVisionValues}</Link></li>
-              <li><Link to="/convites/interativo" className="hover:text-[#ab9a7d] font-bold text-[#191919] transition-colors">{t.nav.interactiveInvite}</Link></li>
-              <li><Link to="/convites" className="hover:text-[#191919] transition-colors">{t.nav.allFormats}</Link></li>
-              <li><Link to="/retrospectivas" className="hover:text-[#191919] transition-colors">{t.nav.retrospectives}</Link></li>
-              <li><Link to="/posts-redes-sociais" className="hover:text-[#191919] transition-colors">{t.nav.socialMedia}</Link></li>
-              <li><Link to="/contato" className="hover:text-[#191919] transition-colors">{t.nav.contact}</Link></li>
+            <ul className="space-y-2 pt-1">
+              <li>
+                <Link to="/" className="text-[#555555] hover:text-[#191919] hover:translate-x-0.5 inline-block transition-all">
+                  {t.nav.home}
+                </Link>
+              </li>
+              <li>
+                <Link to="/sobre" className="text-[#555555] hover:text-[#191919] hover:translate-x-0.5 inline-block transition-all">
+                  {t.nav.ourHistory}
+                </Link>
+              </li>
+              <li>
+                <Link to="/missao-visao-valores" className="text-[#555555] hover:text-[#191919] hover:translate-x-0.5 inline-block transition-all">
+                  {t.nav.missionVisionValues}
+                </Link>
+              </li>
+              <li>
+                <Link to="/contato" className="text-[#555555] hover:text-[#191919] hover:translate-x-0.5 inline-block transition-all font-semibold">
+                  {t.nav.contact}
+                </Link>
+              </li>
+              <li>
+                <Link to="/politica-de-privacidade" className="text-[#8c7c60] hover:text-[#191919] hover:translate-x-0.5 inline-block transition-all text-[11px]">
+                  {t.nav.privacy}
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Contact Details (Sem expor o número em texto) */}
-          <div className="md:col-span-4 space-y-3">
-            <h4 className="text-[#191919] font-bold uppercase tracking-wider text-xs font-serif-luxury">
+          {/* Coluna 3: Nossos Serviços (lg:col-span-3) */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="text-[#191919] font-bold uppercase tracking-wider text-xs pb-1.5 border-b border-[#ab9a7d]/30 inline-block font-serif-luxury">
+              {t.footer.servicesTitle}
+            </h4>
+            <ul className="space-y-2.5 pt-1">
+              
+              {/* 1. Convite Virtual com formatos */}
+              <li className="space-y-1">
+                <Link 
+                  to="/convites" 
+                  className="font-bold text-[#191919] hover:text-[#ab9a7d] transition-colors flex items-center gap-1.5"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#ab9a7d]" />
+                  <span>Convites Virtuais</span>
+                </Link>
+                <div className="pl-5 flex flex-col gap-1 text-[11px] text-[#666666]">
+                  <Link to="/convites/interativo" className="hover:text-[#191919] font-semibold text-[#8c7c60]">
+                    ★ Convite Interativo Web
+                  </Link>
+                  <Link to="/convites/video" className="hover:text-[#191919]">
+                    • Convite em Vídeo Animado
+                  </Link>
+                  <Link to="/convites/imagem" className="hover:text-[#191919]">
+                    • Convite em Imagem Digital
+                  </Link>
+                </div>
+              </li>
+
+              {/* 2. Retrospectivas */}
+              <li>
+                <Link 
+                  to="/retrospectivas" 
+                  className="font-bold text-[#191919] hover:text-[#ab9a7d] transition-colors flex items-center gap-1.5"
+                >
+                  <Film className="w-3.5 h-3.5 text-[#ab9a7d]" />
+                  <span>Retrospectivas</span>
+                </Link>
+                <span className="text-[11px] text-[#666666] block pl-5">
+                  Edição com trilha e fotos
+                </span>
+              </li>
+
+              {/* 3. Design de Conteúdo para Redes Sociais */}
+              <li>
+                <Link 
+                  to="/posts-redes-sociais" 
+                  className="font-bold text-[#191919] hover:text-[#ab9a7d] transition-colors flex items-center gap-1.5"
+                >
+                  <Share2 className="w-3.5 h-3.5 text-[#ab9a7d]" />
+                  <span>Design para Redes Sociais</span>
+                </Link>
+                <span className="text-[11px] text-[#666666] block pl-5">
+                  Posts, reels, stories e carrosséis
+                </span>
+              </li>
+
+            </ul>
+          </div>
+
+          {/* Coluna 4: Atendimento & Segurança (lg:col-span-3) */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="text-[#191919] font-bold uppercase tracking-wider text-xs pb-1.5 border-b border-[#ab9a7d]/30 inline-block font-serif-luxury">
               {t.footer.contactTitle}
             </h4>
-            <div className="space-y-2.5 text-xs">
-              <p className="flex items-center gap-2">
-                <span className="font-bold text-[#191919]">{t.footer.whatsappLabel}</span>
-                <a 
-                  href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-[#8c7c60] hover:text-[#191919] font-semibold underline"
-                >
-                  {t.footer.whatsappText}
-                </a>
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="font-bold text-[#191919]">{t.footer.emailLabel}</span>
-                <a href={`mailto:${siteConfig.contact.email}`} className="text-[#555555] hover:text-[#191919] underline">
-                  {siteConfig.contact.email}
-                </a>
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="font-bold text-[#191919]">Instagram:</span>
-                <span className="text-[#555555]">@{siteConfig.contact.instagram}</span>
-              </p>
-              <div className="pt-2">
+            <div className="space-y-3 pt-1">
+              
+              {/* WhatsApp Seguro (sem expor o telefone em texto plano) */}
+              <a 
+                href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#f4f1e8] hover:bg-[#ab9a7d]/20 border border-[#d9d6c1] transition-all group"
+                title="Iniciar conversa no WhatsApp"
+              >
+                <div className="w-7 h-7 rounded-full bg-[#191919] text-white flex items-center justify-center shrink-0 group-hover:bg-[#ab9a7d] transition-colors">
+                  <MessageCircle className="w-4 h-4 fill-current" />
+                </div>
+                <div>
+                  <span className="block font-bold text-[#191919] text-[11px]">
+                    {t.footer.whatsappText}
+                  </span>
+                  <span className="text-[10px] text-[#8c7c60]">
+                    Clique para iniciar conversa
+                  </span>
+                </div>
+              </a>
+
+              {/* E-mail */}
+              <div className="flex items-start gap-2 text-xs">
+                <Mail className="w-4 h-4 text-[#8c7c60] shrink-0 mt-0.5" />
+                <div>
+                  <span className="block font-bold text-[#191919]">{t.footer.emailLabel}</span>
+                  <a href={`mailto:${siteConfig.contact.email}`} className="text-[#555555] hover:text-[#191919] underline text-[11px]">
+                    {siteConfig.contact.email}
+                  </a>
+                </div>
+              </div>
+
+              {/* Horário */}
+              <div className="flex items-start gap-2 text-xs">
+                <Clock className="w-4 h-4 text-[#8c7c60] shrink-0 mt-0.5" />
+                <div>
+                  <span className="block font-bold text-[#191919]">{t.footer.hoursLabel}</span>
+                  <span className="text-[#666666] text-[11px]">{t.footer.hoursText}</span>
+                </div>
+              </div>
+
+              {/* LGPD & Segurança */}
+              <div className="pt-2 border-t border-[#d9d6c1]/60">
                 <Link
                   to="/politica-de-privacidade"
-                  className="inline-flex items-center gap-1.5 text-[11px] text-[#8c7c60] hover:text-[#191919] underline"
+                  className="inline-flex items-center gap-1.5 text-[11px] text-[#8c7c60] hover:text-[#191919] transition-colors font-medium"
                 >
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#ab9a7d]" />
-                  <span>{t.nav.privacy}</span>
+                  <ShieldCheck className="w-4 h-4 text-[#ab9a7d]" />
+                  <span>Proteção de Dados & LGPD</span>
                 </Link>
               </div>
+
             </div>
           </div>
 
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar: Direitos autorais e Tagline */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-[11px] text-[#666666]">
           <p>© {currentYear} Printfoco. {t.footer.rights}</p>
-          <p className="text-[#8c7c60]">
+          <p className="text-[#8c7c60] font-medium">
             {t.footer.tagline}
           </p>
         </div>

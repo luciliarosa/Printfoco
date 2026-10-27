@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { siteConfig } from '../data/content';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageToggle from './LanguageToggle';
 import { 
-  Camera, Sparkles, MessageCircle, Menu, X, ChevronDown, 
-  Smartphone, Film, Image, Heart, Target 
+  Camera, Sparkles, Menu, X, ChevronDown, 
+  Film, Image, Heart, Target, Share2, Smartphone 
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -15,11 +14,11 @@ export default function Navbar() {
   
   // Desktop dropdown states
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
-  const [invitesDropdownOpen, setInvitesDropdownOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
 
   // Mobile submenu accordions
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
-  const [mobileInvitesOpen, setMobileInvitesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   const location = useLocation();
 
@@ -35,10 +34,25 @@ export default function Navbar() {
   useEffect(() => {
     setMobileMenuOpen(false);
     setAboutDropdownOpen(false);
-    setInvitesDropdownOpen(false);
+    setServicesDropdownOpen(false);
   }, [location.pathname]);
 
   const isActive = (path) => location.pathname === path;
+
+  const isServicesActive = () => {
+    return (
+      location.pathname.startsWith('/convites') ||
+      location.pathname.startsWith('/retrospectivas') ||
+      location.pathname.startsWith('/posts-redes-sociais')
+    );
+  };
+
+  const isAboutActive = () => {
+    return (
+      location.pathname.startsWith('/sobre') ||
+      location.pathname.startsWith('/missao')
+    );
+  };
 
   return (
     <header
@@ -66,13 +80,13 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation with Submenus (Sem "Projetos") */}
-          <nav className="hidden lg:flex items-center gap-5">
+          {/* Desktop Navigation: Apenas Inicio, Sobre Nós, Serviços, Contato */}
+          <nav className="hidden lg:flex items-center gap-6">
             
             {/* 1. Início */}
             <Link
               to="/"
-              className={`text-xs tracking-wider uppercase font-semibold transition-all py-1 px-2 rounded-lg ${
+              className={`text-xs tracking-wider uppercase font-semibold transition-all py-1.5 px-2.5 rounded-lg ${
                 isActive('/') ? 'text-[#191919] border-b-2 border-[#ab9a7d]' : 'text-[#444444] hover:text-[#191919]'
               }`}
             >
@@ -86,14 +100,14 @@ export default function Navbar() {
               onMouseLeave={() => setAboutDropdownOpen(false)}
             >
               <button
-                className={`text-xs tracking-wider uppercase font-semibold transition-all py-1 px-2 rounded-lg flex items-center gap-1 ${
-                  location.pathname.startsWith('/sobre') || location.pathname.startsWith('/missao')
+                className={`text-xs tracking-wider uppercase font-semibold transition-all py-1.5 px-2.5 rounded-lg flex items-center gap-1.5 ${
+                  isAboutActive()
                     ? 'text-[#191919] border-b-2 border-[#ab9a7d]'
                     : 'text-[#444444] hover:text-[#191919]'
                 }`}
               >
                 <span>{t.nav.about}</span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#8c7c60]" />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#8c7c60] transition-transform ${aboutDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {aboutDropdownOpen && (
@@ -124,99 +138,115 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* 3. Convites Virtuais Dropdown */}
+            {/* 3. Serviços Dropdown (3 Tipos Especializados) */}
             <div 
               className="relative"
-              onMouseEnter={() => setInvitesDropdownOpen(true)}
-              onMouseLeave={() => setInvitesDropdownOpen(false)}
+              onMouseEnter={() => setServicesDropdownOpen(true)}
+              onMouseLeave={() => setServicesDropdownOpen(false)}
             >
               <button
-                className={`text-xs tracking-wider uppercase font-semibold transition-all py-1 px-2.5 rounded-full flex items-center gap-1.5 ${
-                  location.pathname.startsWith('/convites')
+                className={`text-xs tracking-wider uppercase font-semibold transition-all py-1.5 px-3 rounded-full flex items-center gap-1.5 ${
+                  isServicesActive()
                     ? 'bg-[#ab9a7d]/20 text-[#191919] border border-[#ab9a7d]'
                     : 'text-[#444444] hover:text-[#191919] bg-[#ffffff] border border-[#d9d6c1]'
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#ab9a7d]" />
-                <span>{t.nav.invites}</span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#8c7c60]" />
+                <span>{t.nav.services}</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-[#8c7c60] transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              {invitesDropdownOpen && (
-                <div className="absolute top-full left-0 w-72 pt-2 z-50 animate-fadeIn">
-                  <div className="bg-[#ffffff] border border-[#d9d6c1] rounded-2xl shadow-xl p-2 space-y-1">
-                    <Link
-                      to="/convites/interativo"
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#f4f1e8]/60 hover:bg-[#f4f1e8] transition-colors text-xs font-bold text-[#191919] border border-[#d9d6c1]"
-                    >
-                      <Smartphone className="w-4 h-4 text-[#8c7c60]" />
-                      <div>
-                        <div className="flex items-center gap-1.5">
-                          <span>{t.nav.interactiveInvite}</span>
-                          <span className="text-[9px] bg-[#191919] text-white px-1.5 py-0.5 rounded-full font-bold">
-                            {t.nav.interactiveInviteBadge}
-                          </span>
-                        </div>
-                        <span className="text-[10px] text-[#666666] font-normal">{t.nav.interactiveInviteSub}</span>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/convites/video"
-                      className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-[#f4f1e8] transition-colors text-xs font-semibold text-[#191919]"
-                    >
-                      <Film className="w-4 h-4 text-[#ab9a7d]" />
-                      <div>
-                        <span>{t.nav.videoInvite}</span>
-                        <span className="text-[10px] text-[#666666] block font-normal">{t.nav.videoInviteSub}</span>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/convites/imagem"
-                      className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-[#f4f1e8] transition-colors text-xs font-semibold text-[#191919]"
-                    >
-                      <Image className="w-4 h-4 text-[#ab9a7d]" />
-                      <div>
-                        <span>{t.nav.imageInvite}</span>
-                        <span className="text-[10px] text-[#666666] block font-normal">{t.nav.imageInviteSub}</span>
-                      </div>
-                    </Link>
-                    <div className="pt-1 border-t border-[#d9d6c1]">
+              {servicesDropdownOpen && (
+                <div className="absolute top-full left-0 w-84 pt-2 z-50 animate-fadeIn">
+                  <div className="bg-[#ffffff] border border-[#d9d6c1] rounded-2xl shadow-xl p-2.5 space-y-2">
+                    
+                    {/* 1. Convite Virtual (Imagem, Vídeos ou Interativo) */}
+                    <div className="p-2.5 rounded-xl bg-[#f4f1e8]/50 border border-[#d9d6c1] hover:border-[#ab9a7d] transition-all">
                       <Link
                         to="/convites"
-                        className="block text-center text-[11px] font-bold text-[#8c7c60] hover:text-[#191919] py-1"
+                        className="flex items-start gap-3 group"
                       >
-                        {t.nav.allFormats} &rarr;
+                        <div className="w-8 h-8 rounded-lg bg-[#ffffff] border border-[#d9d6c1] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                          <Smartphone className="w-4 h-4 text-[#8c7c60]" />
+                        </div>
+                        <div>
+                          <span className="block text-xs font-bold text-[#191919] group-hover:text-[#ab9a7d] transition-colors">
+                            {t.nav.virtualInviteGroup}
+                          </span>
+                          <span className="text-[10px] text-[#666666] leading-tight block mt-0.5">
+                            Interativo web com RSVP/GPS, vídeos animados e imagem digital.
+                          </span>
+                        </div>
                       </Link>
+
+                      {/* Sub-atalhos para os 3 formatos */}
+                      <div className="grid grid-cols-3 gap-1.5 mt-2 pt-2 border-t border-[#d9d6c1]/60 text-[10px]">
+                        <Link
+                          to="/convites/interativo"
+                          className="px-1.5 py-1 rounded bg-[#ffffff] border border-[#d9d6c1] text-center font-bold text-[#191919] hover:border-[#ab9a7d] transition-colors"
+                        >
+                          Interativo ★
+                        </Link>
+                        <Link
+                          to="/convites/video"
+                          className="px-1.5 py-1 rounded bg-[#ffffff] border border-[#d9d6c1] text-center font-medium text-[#444444] hover:border-[#ab9a7d] transition-colors"
+                        >
+                          Vídeos
+                        </Link>
+                        <Link
+                          to="/convites/imagem"
+                          className="px-1.5 py-1 rounded bg-[#ffffff] border border-[#d9d6c1] text-center font-medium text-[#444444] hover:border-[#ab9a7d] transition-colors"
+                        >
+                          Imagem
+                        </Link>
+                      </div>
                     </div>
+
+                    {/* 2. Retrospectivas */}
+                    <Link
+                      to="/retrospectivas"
+                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#f4f1e8] transition-colors group"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-[#ffffff] border border-[#d9d6c1] flex items-center justify-center shrink-0 shadow-xs">
+                        <Film className="w-4 h-4 text-[#ab9a7d]" />
+                      </div>
+                      <div>
+                        <span className="block text-xs font-bold text-[#191919] group-hover:text-[#ab9a7d] transition-colors">
+                          {t.nav.retrospectives}
+                        </span>
+                        <span className="text-[10px] text-[#666666] block">
+                          {t.nav.retrospectivesSub}
+                        </span>
+                      </div>
+                    </Link>
+
+                    {/* 3. Design de Conteúdo para Redes Sociais */}
+                    <Link
+                      to="/posts-redes-sociais"
+                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#f4f1e8] transition-colors group"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-[#ffffff] border border-[#d9d6c1] flex items-center justify-center shrink-0 shadow-xs">
+                        <Share2 className="w-4 h-4 text-[#ab9a7d]" />
+                      </div>
+                      <div>
+                        <span className="block text-xs font-bold text-[#191919] group-hover:text-[#ab9a7d] transition-colors">
+                          {t.nav.socialMedia}
+                        </span>
+                        <span className="text-[10px] text-[#666666] block">
+                          {t.nav.socialMediaSub}
+                        </span>
+                      </div>
+                    </Link>
+
                   </div>
                 </div>
               )}
             </div>
 
-            {/* 4. Retrospectivas */}
-            <Link
-              to="/retrospectivas"
-              className={`text-xs tracking-wider uppercase font-semibold transition-all py-1 px-2 rounded-lg ${
-                isActive('/retrospectivas') ? 'text-[#191919] border-b-2 border-[#ab9a7d]' : 'text-[#444444] hover:text-[#191919]'
-              }`}
-            >
-              {t.nav.retrospectives}
-            </Link>
-
-            {/* 5. Posts para Redes */}
-            <Link
-              to="/posts-redes-sociais"
-              className={`text-xs tracking-wider uppercase font-semibold transition-all py-1 px-2 rounded-lg ${
-                isActive('/posts-redes-sociais') ? 'text-[#191919] border-b-2 border-[#ab9a7d]' : 'text-[#444444] hover:text-[#191919]'
-              }`}
-            >
-              {t.nav.socialMedia}
-            </Link>
-
-            {/* 6. Contato */}
+            {/* 4. Contato */}
             <Link
               to="/contato"
-              className={`text-xs tracking-wider uppercase font-semibold transition-all py-1 px-2 rounded-lg ${
+              className={`text-xs tracking-wider uppercase font-semibold transition-all py-1.5 px-2.5 rounded-lg ${
                 isActive('/contato') ? 'text-[#191919] border-b-2 border-[#ab9a7d]' : 'text-[#444444] hover:text-[#191919]'
               }`}
             >
@@ -225,21 +255,9 @@ export default function Navbar() {
 
           </nav>
 
-          {/* Right Tools: Language Toggle & CTA */}
+          {/* Right Tools: Apenas Seletor de Idioma (Botão WhatsApp no topo removido conforme solicitado) */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Language Switcher */}
             <LanguageToggle />
-
-            {/* WhatsApp CTA (sem número em texto) */}
-            <a
-              href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase bg-[#191919] text-[#f4f1e8] hover:bg-[#ab9a7d] hover:text-white transition-all shadow-md transform hover:-translate-y-0.5 active:translate-y-0"
-            >
-              <MessageCircle className="w-4 h-4 fill-current" />
-              <span>{t.nav.ctaWhatsApp}</span>
-            </a>
           </div>
 
           {/* Mobile Right Controls */}
@@ -257,11 +275,12 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown com Submenus (Sem "Projetos") */}
+      {/* Mobile Menu Dropdown: Apenas Inicio, Sobre Nós, Serviços, Contato */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#ffffff] border-b border-[#d9d6c1] px-5 py-6 shadow-xl animate-fadeIn max-h-[85vh] overflow-y-auto">
           <nav className="flex flex-col gap-2">
             
+            {/* 1. Início */}
             <Link
               to="/"
               className={`py-2 px-3 rounded-xl text-sm font-semibold ${
@@ -271,7 +290,7 @@ export default function Navbar() {
               {t.nav.home}
             </Link>
 
-            {/* Mobile Sobre Accordion */}
+            {/* 2. Sobre Nós Accordion */}
             <div className="border border-[#d9d6c1]/60 rounded-xl overflow-hidden">
               <button
                 onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
@@ -298,66 +317,63 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Mobile Convites Accordion */}
+            {/* 3. Serviços Accordion com os 3 Tipos */}
             <div className="border border-[#ab9a7d] rounded-xl overflow-hidden bg-[#f4f1e8]/30">
               <button
-                onClick={() => setMobileInvitesOpen(!mobileInvitesOpen)}
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                 className="w-full py-2.5 px-3 flex items-center justify-between text-sm font-bold text-[#191919] bg-[#f4f1e8]"
               >
                 <div className="flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#ab9a7d]" />
-                  <span>{t.nav.invites}</span>
+                  <span>{t.nav.services}</span>
                 </div>
-                <ChevronDown className={`w-4 h-4 transition-transform ${mobileInvitesOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
               </button>
-              {mobileInvitesOpen && (
-                <div className="bg-[#ffffff] p-2 space-y-1">
+              {mobileServicesOpen && (
+                <div className="bg-[#ffffff] p-2.5 space-y-2">
+                  
+                  {/* Tipo 1: Convite Virtual */}
+                  <div className="p-2 rounded-lg bg-[#f4f1e8]/50 border border-[#d9d6c1]/70">
+                    <Link
+                      to="/convites"
+                      className="block text-xs font-bold text-[#191919] mb-1"
+                    >
+                      {t.nav.virtualInviteGroup}
+                    </Link>
+                    <div className="flex flex-col gap-1 pl-2 text-[11px] text-[#555555]">
+                      <Link to="/convites/interativo" className="hover:text-[#191919] font-semibold text-[#8c7c60]">
+                        ★ {t.nav.interactiveInvite}
+                      </Link>
+                      <Link to="/convites/video" className="hover:text-[#191919]">
+                        • {t.nav.videoInvite}
+                      </Link>
+                      <Link to="/convites/imagem" className="hover:text-[#191919]">
+                        • {t.nav.imageInvite}
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Tipo 2: Retrospectivas */}
                   <Link
-                    to="/convites/interativo"
-                    className="block py-2 px-3 rounded-lg text-xs font-bold text-[#191919] bg-[#f4f1e8]/60"
+                    to="/retrospectivas"
+                    className="block py-2 px-3 rounded-lg text-xs font-bold text-[#191919] hover:bg-[#f4f1e8]"
                   >
-                    ★ {t.nav.interactiveInvite}
+                    {t.nav.retrospectives}
                   </Link>
+
+                  {/* Tipo 3: Design de Conteúdo para Redes Sociais */}
                   <Link
-                    to="/convites/video"
-                    className="block py-2 px-3 rounded-lg text-xs font-medium text-[#444444] hover:bg-[#f4f1e8]"
+                    to="/posts-redes-sociais"
+                    className="block py-2 px-3 rounded-lg text-xs font-bold text-[#191919] hover:bg-[#f4f1e8]"
                   >
-                    • {t.nav.videoInvite}
+                    {t.nav.socialMedia}
                   </Link>
-                  <Link
-                    to="/convites/imagem"
-                    className="block py-2 px-3 rounded-lg text-xs font-medium text-[#444444] hover:bg-[#f4f1e8]"
-                  >
-                    • {t.nav.imageInvite}
-                  </Link>
-                  <Link
-                    to="/convites"
-                    className="block py-1.5 px-3 text-[11px] font-bold text-[#8c7c60]"
-                  >
-                    {t.nav.allFormats}
-                  </Link>
+
                 </div>
               )}
             </div>
 
-            <Link
-              to="/retrospectivas"
-              className={`py-2 px-3 rounded-xl text-sm font-semibold ${
-                isActive('/retrospectivas') ? 'bg-[#f4f1e8] text-[#191919] font-bold' : 'text-[#333333]'
-              }`}
-            >
-              {t.nav.retrospectives}
-            </Link>
-
-            <Link
-              to="/posts-redes-sociais"
-              className={`py-2 px-3 rounded-xl text-sm font-semibold ${
-                isActive('/posts-redes-sociais') ? 'bg-[#f4f1e8] text-[#191919] font-bold' : 'text-[#333333]'
-              }`}
-            >
-              {t.nav.socialMedia}
-            </Link>
-
+            {/* 4. Contato */}
             <Link
               to="/contato"
               className={`py-2 px-3 rounded-xl text-sm font-semibold ${
@@ -373,18 +389,6 @@ export default function Navbar() {
             >
               {t.nav.privacy}
             </Link>
-
-            <div className="pt-3 border-t border-[#d9d6c1] mt-2">
-              <a
-                href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#191919] text-white shadow-md"
-              >
-                <MessageCircle className="w-4 h-4 fill-white" />
-                <span>{t.nav.ctaWhatsApp}</span>
-              </a>
-            </div>
 
           </nav>
         </div>

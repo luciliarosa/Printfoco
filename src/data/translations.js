@@ -8,7 +8,11 @@ export const translations = {
       ourHistorySub: "Fundada em 2017 por Lucilia Rosa",
       missionVisionValues: "Missão, Visão & Valores",
       missionVisionValuesSub: "Diretrizes e princípios",
-      invites: "Convites Virtuais",
+      services: "Serviços",
+      servicesSub: "Soluções visuais e audiovisuais sob medida",
+      virtualInviteGroup: "Convite Virtual (Imagem, Vídeos ou Interativo)",
+      virtualInviteGroupShort: "Convite Virtual",
+      virtualInviteGroupFormats: "Imagem, Vídeos ou Interativo",
       interactiveInvite: "Convite Interativo",
       interactiveInviteBadge: "Destaque",
       interactiveInviteSub: "Página web com RSVP e GPS",
@@ -18,10 +22,11 @@ export const translations = {
       imageInviteSub: "Arte digital em alta resolução",
       allFormats: "Ver Todos os Formatos",
       retrospectives: "Retrospectivas",
-      socialMedia: "Posts para Redes",
+      retrospectivesSub: "Produção audiovisual com trilha sonora",
+      socialMedia: "Design de Conteúdo para Redes Sociais",
+      socialMediaSub: "Posts, carrosséis, vídeos e stories",
       contact: "Contato",
       privacy: "Privacidade (LGPD)",
-      ctaWhatsApp: "Fale no WhatsApp",
       openMenu: "Abrir Menu"
     },
 
@@ -198,14 +203,18 @@ export const translations = {
 
     // Footer
     footer: {
-      desc: "Soluções em design digital e produções audiovisuais desde 2017. Especialistas em convites virtuais interativos, retrospectivas e comunicação visual para redes sociais.",
-      navTitle: "Navegação",
-      contactTitle: "Atendimento",
+      desc: "Desde 2017 desenvolvendo soluções elegantes em design digital, convites virtuais interativos, retrospectivas audiovisuais e comunicação estratégica para redes sociais.",
+      navTitle: "Institucional",
+      servicesTitle: "Nossos Serviços",
+      contactTitle: "Atendimento & Contato",
       whatsappLabel: "WhatsApp:",
-      whatsappText: "Atendimento via WhatsApp",
-      emailLabel: "E-mail:",
+      whatsappText: "Fale Conosco pelo WhatsApp",
+      emailLabel: "E-mail Oficial:",
+      instagramLabel: "Instagram:",
+      hoursLabel: "Horário:",
+      hoursText: "Segunda a Sexta • 09h às 18h",
       rights: "Todos os direitos reservados.",
-      tagline: "Design digital com precisão e sofisticação."
+      tagline: "Design digital com precisão, tecnologia e sofisticação."
     }
   },
 
@@ -218,20 +227,25 @@ export const translations = {
       ourHistorySub: "Founded in 2017 by Lucilia Rosa",
       missionVisionValues: "Mission, Vision & Values",
       missionVisionValuesSub: "Core guidelines & principles",
-      invites: "Digital Invitations",
+      services: "Services",
+      servicesSub: "Bespoke visual & audiovisual solutions",
+      virtualInviteGroup: "Virtual Invitation (Image, Video or Interactive)",
+      virtualInviteGroupShort: "Virtual Invitation",
+      virtualInviteGroupFormats: "Image, Video or Interactive",
       interactiveInvite: "Interactive Invite",
       interactiveInviteBadge: "Featured",
       interactiveInviteSub: "Web app with RSVP & GPS",
-      videoInvite: "Animated Video Invite",
+      videoInvite: "Video Invite",
       videoInviteSub: "Motion graphics & soundtrack",
-      imageInvite: "Digital Image Invite",
+      imageInvite: "Image Invite",
       imageInviteSub: "High-resolution graphic art",
       allFormats: "View All Formats",
       retrospectives: "Retrospectives",
-      socialMedia: "Social Media",
+      retrospectivesSub: "Audiovisual production with soundtrack",
+      socialMedia: "Social Media Content Design",
+      socialMediaSub: "Posts, carousels, videos and stories",
       contact: "Contact",
       privacy: "Privacy (GDPR/LGPD)",
-      ctaWhatsApp: "Chat on WhatsApp",
       openMenu: "Open Menu"
     },
 
@@ -408,14 +422,18 @@ export const translations = {
 
     // Footer
     footer: {
-      desc: "Digital design and audiovisual solutions since 2017. Specialized in interactive invitations, retrospectives, and visual communication for social media.",
-      navTitle: "Navigation",
-      contactTitle: "Customer Support",
+      desc: "Creating elegant digital design, interactive virtual invitations, audiovisual retrospectives, and strategic social media content since 2017.",
+      navTitle: "Institutional",
+      servicesTitle: "Our Services",
+      contactTitle: "Support & Contact",
       whatsappLabel: "WhatsApp:",
-      whatsappText: "Online WhatsApp Support",
-      emailLabel: "E-mail:",
+      whatsappText: "Direct WhatsApp Support",
+      emailLabel: "Official E-mail:",
+      instagramLabel: "Instagram:",
+      hoursLabel: "Hours:",
+      hoursText: "Monday to Friday • 9am to 6pm",
       rights: "All rights reserved.",
-      tagline: "Digital design engineered with precision and elegance."
+      tagline: "Digital design crafted with precision, technology, and sophistication."
     }
   }
 };
