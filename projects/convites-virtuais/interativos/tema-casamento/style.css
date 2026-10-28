@@ -1,0 +1,725 @@
+/* ==========================================================
+   TEMA CASAMENTO - RÚSTICO CHIC & CLÁSSICO BOTÂNICO
+   Design Romântico & Interativo • Printfoco
+   ========================================================== */
+
+:root {
+  --bg-primary: #fcfaf7;
+  --bg-card: #ffffff;
+  --text-dark: #242220;
+  --text-muted: #6e6761;
+  --gold-primary: #c5a880;
+  --gold-dark: #9f825b;
+  --olive-green: #556b4f;
+  --terracotta: #c26743;
+  --card-border: #ede7de;
+  --radius-card: 26px;
+  --shadow-card: 0 12px 32px rgba(159, 130, 91, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+  background-color: var(--bg-primary);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Canvas de Pétalas e Brilhos */
+#weddingCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Controles de Topo */
+.top-controls {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: 30px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-primary);
+}
+
+/* Container Principal */
+.main-container {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Envelope Gate */
+.envelope-gate {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 10px 20px;
+}
+
+.seal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f4efe6;
+  border: 1px solid var(--card-border);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+}
+
+.gate-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.gate-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 380px;
+  margin: 0 auto 30px;
+}
+
+/* 3D Envelope Nupcial */
+.envelope-wrapper {
+  perspective: 1000px;
+  width: 290px;
+  height: 190px;
+  margin: 0 auto 30px;
+  cursor: pointer;
+}
+
+.envelope-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f7f3ec, #ede4d6);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(159, 130, 91, 0.16);
+  border: 2px solid #ded4c5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.envelope-wrapper:hover .envelope-3d {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.envelope-letter-preview {
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px dashed var(--gold-primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.letter-preview-heading {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold-dark);
+  letter-spacing: 0.1em;
+}
+
+.letter-preview-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.wax-seal {
+  position: absolute;
+  bottom: -15px;
+  right: 25px;
+  width: 56px;
+  height: 56px;
+  background: radial-gradient(circle, #d9be98, #9f825b);
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(159, 130, 91, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #faeeda;
+}
+
+.seal-inner {
+  font-family: Georgia, serif;
+  font-size: 10px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.12em;
+}
+
+.envelope-tip {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* Botão Primário */
+.btn-primary {
+  background: linear-gradient(135deg, #1c1b1a, #36322e);
+  color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary));
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(159, 130, 91, 0.3);
+}
+
+.btn-primary.full-width {
+  width: 100%;
+}
+
+/* Convite Aberto */
+.invite-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cards */
+.card, .hero-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-card);
+  padding: 26px 22px;
+  position: relative;
+}
+
+.hero-card {
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff, #faf7f2);
+  border: 2px solid var(--gold-primary);
+}
+
+.tag-wedding {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--gold-dark);
+  background: #f4efe6;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.couple-names {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 34px;
+  font-weight: normal;
+  color: var(--text-dark);
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+
+.wedding-quote {
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold-dark);
+  margin-bottom: 20px;
+}
+
+/* Moldura para Foto / Vídeo dos Noivos */
+.media-placeholder-frame {
+  position: relative;
+  background: #faf6f0;
+  border: 1px dashed var(--gold-primary);
+  border-radius: 20px;
+  padding: 24px 18px;
+  margin: 0 auto 24px;
+  max-width: 440px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.frame-border-decor .decor-corner {
+  position: absolute;
+  color: var(--gold-primary);
+  font-size: 10px;
+}
+
+.decor-corner.tl { top: 8px; left: 10px; }
+.decor-corner.tr { top: 8px; right: 10px; }
+.decor-corner.bl { bottom: 8px; left: 10px; }
+.decor-corner.br { bottom: 8px; right: 10px; }
+
+.camera-icon-badge {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.placeholder-title {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold-dark);
+  margin-bottom: 4px;
+}
+
+.placeholder-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.placeholder-hint {
+  display: inline-block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--olive-green);
+  background: #edf3ec;
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+/* Contagem Regressiva */
+.countdown-section {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px 12px;
+  border: 1px solid var(--card-border);
+}
+
+.countdown-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  color: var(--gold-dark);
+  margin-bottom: 10px;
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.time-block {
+  background: #faf7f2;
+  border-radius: 12px;
+  padding: 8px 10px;
+  min-width: 52px;
+  border: 1px solid var(--card-border);
+}
+
+.time-num {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gold-dark);
+  font-family: monospace;
+}
+
+.time-unit {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.time-separator {
+  font-weight: 800;
+  color: var(--gold-primary);
+}
+
+/* Detalhes de Data & Local */
+.card-icon {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 13.5px;
+  text-align: left;
+}
+
+.detail-icon {
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.address-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.action-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.btn-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px;
+  border-radius: 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-map.google {
+  background: #ffffff;
+  color: var(--text-dark);
+  border: 1px solid var(--card-border);
+}
+
+.btn-map.waze {
+  background: #faf7f2;
+  color: var(--gold-dark);
+  border: 1px solid var(--card-border);
+}
+
+.btn-map:hover {
+  border-color: var(--gold-primary);
+}
+
+/* Guia de Traje */
+.dress-code-card {
+  text-align: center;
+}
+
+.dress-tip {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.color-pill {
+  background: #faf7f2;
+  border: 1px solid var(--card-border);
+  padding: 8px 4px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.color-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.color-name {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.white-dress-note {
+  display: block;
+  font-size: 11px;
+  color: var(--gold-dark);
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* RSVP Form */
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.form-group input, .form-group select {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: #faf7f2;
+  font-size: 13.5px;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--gold-primary);
+  background: #ffffff;
+}
+
+.radio-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rsvp-success-box {
+  margin-top: 14px;
+  padding: 14px;
+  background: #eef9f2;
+  border: 1px solid #c7ecd4;
+  border-radius: 12px;
+  color: #1b6336;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Presentes & Cotas */
+.honeymoon-cotas-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.cota-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #faf7f2;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+}
+
+.cota-item.highlight {
+  border-color: var(--gold-primary);
+  background: #fbf7ef;
+}
+
+.cota-emoji {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.cota-title {
+  flex: 1;
+  color: var(--text-dark);
+}
+
+.cota-price {
+  font-weight: 800;
+  color: var(--gold-dark);
+}
+
+.pix-box {
+  text-align: center;
+  border-top: 1px dashed var(--card-border);
+  padding-top: 14px;
+}
+
+.pix-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.pix-key-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: #faf7f2;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px dashed var(--gold-primary);
+}
+
+.pix-key {
+  font-size: 12px;
+  font-family: monospace;
+  color: var(--text-dark);
+}
+
+.btn-copy-pix {
+  background: var(--gold-dark);
+  color: #ffffff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-copy-pix:hover {
+  background: var(--gold-primary);
+}
+
+/* Rodapé */
+.invite-footer {
+  text-align: center;
+  padding: 20px 0 10px;
+}
+
+.couple-signature {
+  font-family: Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--gold-dark);
+  margin-bottom: 8px;
+}
+
+.watermark-printfoco {
+  margin-top: 12px;
+  padding-top: 10px;
+  display: inline-block;
+  opacity: 0.7;
+}
+
+.watermark-printfoco a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+}
+
+.watermark-printfoco a:hover {
+  color: var(--text-dark);
+  opacity: 1;
+}
+
+.watermark-printfoco .watermark-star {
+  color: var(--gold-primary);
+  font-size: 0.7rem;
+}

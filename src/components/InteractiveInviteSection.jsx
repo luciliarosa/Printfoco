@@ -3,7 +3,7 @@ import { siteConfig, interactiveTemplates } from '../data/content';
 import { useLanguage } from '../context/LanguageContext';
 import { 
   Sparkles, ExternalLink, RotateCcw, Smartphone, Laptop, 
-  Crown, TreePine, Footprints, CheckCircle2, MapPin, Clock, ShieldCheck
+  Crown, TreePine, Footprints, Heart, Baby, Beer, CheckCircle2, MapPin, Clock, ShieldCheck
 } from 'lucide-react';
 
 export default function InteractiveInviteSection() {
@@ -21,6 +21,9 @@ export default function InteractiveInviteSection() {
     if (id === 'natal') return TreePine;
     if (id === 'princesas') return Crown;
     if (id === 'dinossauro') return Footprints;
+    if (id === 'casamento') return Heart;
+    if (id === 'cha-revelacao') return Baby;
+    if (id === 'aniversario-adulto') return Beer;
     return Sparkles;
   };
 
@@ -94,7 +97,7 @@ export default function InteractiveInviteSection() {
             <span className="text-xs font-bold uppercase tracking-wider text-[#9f825b]">
               Selecione o Convite Real para Testar:
             </span>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 w-full">
               {interactiveTemplates.map((tpl) => {
                 const IconComponent = iconForTheme(tpl.id);
                 const isSelected = selectedThemeId === tpl.id;
@@ -156,6 +159,21 @@ export default function InteractiveInviteSection() {
                 {selectedThemeId === 'dinossauro' && (
                   <>
                     <strong>Tema 1 Ano Dinossauro:</strong> Passaporte jurássico, sons e rugidos de dinos fofos, folhagens tropicais, contagem e confirmação da expedição do Theo!
+                  </>
+                )}
+                {selectedThemeId === 'casamento' && (
+                  <>
+                    <strong>Tema Casamento Rústico Chic:</strong> Envelope com lacre botânico 3D, melodia clássica de Pachelbel, moldura de foto dos noivos, dress code e cotas Pix de lua de mel!
+                  </>
+                )}
+                {selectedThemeId === 'cha-revelacao' && (
+                  <>
+                    <strong>Tema Chá Revelação com Enquete:</strong> Caixa de surpresa 3D, enquete ao vivo Theo x Lívia com placar sincronizado com Planilha Google, confetes e canção de ninar!
+                  </>
+                )}
+                {selectedThemeId === 'aniversario-adulto' && (
+                  <>
+                    <strong>Tema Boteco 40 Anos:</strong> Estilo lousa, caneca de chopp interativa, batucada de samba, brinde com som de taças, cardápio de petiscos e playlist Spotify!
                   </>
                 )}
               </span>

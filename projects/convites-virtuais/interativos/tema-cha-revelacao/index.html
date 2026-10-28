@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#fdf7f9">
+  <title>Chá Revelação: Theo ou Lívia? 👶✨ | Printfoco</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Canvas para Chuva de Confetes Interativos (Azul / Rosa / Dourado) -->
+  <canvas id="babyCanvas" aria-hidden="true"></canvas>
+
+  <!-- Controles Superiores Flutuantes -->
+  <header class="top-controls">
+    <button id="confettiBtn" class="control-btn" title="Explosão de Confetes" aria-label="Soltar Confetes">
+      <span class="icon">🎉</span>
+      <span class="control-text">Confetes</span>
+    </button>
+    <button id="musicBtn" class="control-btn" title="Canção Suave de Ninar" aria-label="Música">
+      <span class="icon" id="musicIcon">🧸</span>
+      <span class="control-text" id="musicText">Melodia</span>
+    </button>
+  </header>
+
+  <main class="main-container">
+
+    <!-- FASE 1: O MISTÉRIO INICIAL (REVEAL GATE) -->
+    <section class="reveal-gate" id="revealGate">
+      <div class="gate-card">
+        <div class="badge-baby">
+          <span>🍼</span>
+          <span>Chá Revelação • Juliana & Rafael</span>
+        </div>
+
+        <h1 class="gate-title">É Menino ou Menina?</h1>
+        <p class="gate-subtitle">O segredo mais doce das nossas vidas está prestes a ser revelado! Toque na caixinha para descobrir o convite:</p>
+
+        <!-- Caixa de Surpresa Interativa -->
+        <div class="mystery-box-wrapper" id="mysteryBox" role="button" tabindex="0" aria-label="Toque para abrir a caixa mágica">
+          <div class="gift-box">
+            <div class="box-lid">
+              <div class="ribbon-bow">
+                <span class="bow-blue">🎀</span>
+                <span class="bow-pink">🎀</span>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="box-question">?</div>
+              <div class="box-sides">
+                <span class="side-tag boy">👦 Theo</span>
+                <span class="side-vs">OU</span>
+                <span class="side-tag girl">👧 Lívia</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button id="openRevealBtn" class="btn-reveal-main">
+          <span>Abrir Convite Interativo</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- FASE 2: O CONVITE COMPLETO COM ENQUETE AO VIVO -->
+    <section class="invite-content hidden" id="inviteContent">
+
+      <!-- Header Banner Fofo -->
+      <div class="hero-banner">
+        <div class="baby-badge-top">Um Amor Dividido em Duas Cores 💕</div>
+        <h1 class="hero-title">Theo ou Lívia?</h1>
+        <p class="hero-subtitle">Os papais Juliana & Rafael convidam você para descobrir com a gente se o nosso mundo será azul ou cor-de-rosa!</p>
+
+        <!-- Moldura Demonstrativa para Ultrassom ou Ensaio Gestante -->
+        <div class="media-placeholder-frame">
+          <div class="frame-clouds">
+            <span class="cloud-decor c1">☁️</span>
+            <span class="cloud-decor c2">⭐</span>
+            <span class="cloud-decor c3">☁️</span>
+          </div>
+          <div class="frame-content">
+            <div class="frame-icon-badge">👶 / 📸</div>
+            <h3 class="placeholder-title">Espaço para Ultrassom ou Ensaio dos Pais</h3>
+            <p class="placeholder-desc">
+              Aqui colocamos a foto mais recente da ultrassonografia do bebê ou uma linda foto do casal esperando a chegada do pequeno(a)!
+            </p>
+            <span class="placeholder-hint">Personalizado com a foto da sua família</span>
+          </div>
+        </div>
+
+        <!-- Contagem Regressiva para a Revelação -->
+        <div class="countdown-box">
+          <p class="countdown-title">Faltam para a grande revelação:</p>
+          <div class="countdown-timer">
+            <div class="time-pill">
+              <span class="time-val" id="days">--</span>
+              <span class="time-lbl">Dias</span>
+            </div>
+            <div class="time-pill">
+              <span class="time-val" id="hours">--</span>
+              <span class="time-lbl">Horas</span>
+            </div>
+            <div class="time-pill">
+              <span class="time-val" id="minutes">--</span>
+              <span class="time-lbl">Min</span>
+            </div>
+            <div class="time-pill">
+              <span class="time-val" id="seconds">--</span>
+              <span class="time-lbl">Seg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO ESPECIAL: ENQUETE INTERATIVA DO PALPITE (INTEGRADA A PLANILHA) -->
+      <div class="card poll-card" id="pollCard">
+        <div class="poll-header">
+          <span class="poll-icon">📊</span>
+          <div>
+            <h2 class="card-title">Enquete dos Convidados</h2>
+            <p class="card-desc">Qual é o seu palpite? Vote e ajude a compor o placar ao vivo!</p>
+          </div>
+        </div>
+
+        <!-- Placar e Barra de Porcentagem em Tempo Real -->
+        <div class="poll-scoreboard">
+          <div class="score-team boy">
+            <div class="team-label">
+              <span class="avatar">👦</span>
+              <strong>Time Theo</strong>
+            </div>
+            <div class="team-stats">
+              <span class="percentage" id="boyPercent">52%</span>
+              <span class="vote-count" id="boyVotes">(26 votos)</span>
+            </div>
+          </div>
+
+          <div class="score-team girl">
+            <div class="team-label">
+              <span class="avatar">👧</span>
+              <strong>Time Lívia</strong>
+            </div>
+            <div class="team-stats">
+              <span class="percentage" id="girlPercent">48%</span>
+              <span class="vote-count" id="girlVotes">(24 votos)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra Visual Dupla -->
+        <div class="poll-bar-track">
+          <div class="poll-bar-fill boy-fill" id="barBoyFill" style="width: 52%;"></div>
+          <div class="poll-bar-fill girl-fill" id="barGirlFill" style="width: 48%;"></div>
+        </div>
+
+        <!-- Formulário de Voto Rápido -->
+        <div class="poll-vote-actions" id="voteControls">
+          <p class="vote-instruction">Selecione seu time para computar o seu voto:</p>
+          
+          <div class="vote-buttons-grid">
+            <button class="btn-vote boy" id="btnVoteBoy">
+              <span class="btn-vote-icon">🧢</span>
+              <span class="btn-vote-text">Votar no <strong>Theo</strong></span>
+            </button>
+            <button class="btn-vote girl" id="btnVoteGirl">
+              <span class="btn-vote-icon">🌸</span>
+              <span class="btn-vote-text">Votar na <strong>Lívia</strong></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Feedback pós-voto -->
+        <div class="vote-success-banner hidden" id="voteSuccessBanner">
+          <div class="success-icon">✨</div>
+          <div class="success-text">
+            <strong>Palpite Registrado com Sucesso!</strong>
+            <p id="votedChoiceText">Você votou no Time Theo! Que venha com muita saúde!</p>
+          </div>
+        </div>
+
+        <!-- Nota explicativa sobre integração com Google Sheets -->
+        <div class="sheets-sync-notice">
+          <div class="sync-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="sync-text">
+            <strong>Integração com Planilha Google Automática</strong>
+            <p>Os palpites e mensagens dos convidados são salvos em tempo real na planilha dos papais, com gráfico automático para projetar no dia da festa!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalhes do Evento -->
+      <div class="card event-card">
+        <div class="card-icon-header">🎈</div>
+        <h3 class="card-title">Quando & Onde</h3>
+
+        <div class="event-grid">
+          <div class="event-item">
+            <span class="icon">📅</span>
+            <div>
+              <strong>Data:</strong>
+              <p>Domingo, 18 de Outubro de 2026</p>
+            </div>
+          </div>
+
+          <div class="event-item">
+            <span class="icon">⏰</span>
+            <div>
+              <strong>Horário:</strong>
+              <p>A partir das 15h00 (Revelação às 17h30)</p>
+            </div>
+          </div>
+
+          <div class="event-item">
+            <span class="icon">🏡</span>
+            <div>
+              <strong>Local:</strong>
+              <p>Espaço Estrela Mágica Kids</p>
+              <p class="address-muted">Rua das Acácias, 180 - Jardim Primavera</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-actions">
+          <a href="https://maps.google.com/?q=Espaco+Estrela+Magica" target="_blank" rel="noopener noreferrer" class="btn-map google">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Como Chegar (Maps)</span>
+          </a>
+          <a href="https://waze.com/ul?q=Espaco+Estrela+Magica" target="_blank" rel="noopener noreferrer" class="btn-map waze">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.6 12a.6.6 0 0 0 .8 0c.6-.5 7.6-6.6 7.6-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Abrir no Waze</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sugestão de Fralda / Presente -->
+      <div class="card gift-card">
+        <div class="card-icon-header">🎁</div>
+        <h3 class="card-title">Mimos & Sugestão de Fraldas</h3>
+        <p class="card-desc">Sua presença é o maior presente! Para nos ajudar no enxoval do bebê, criamos a sugestão:</p>
+
+        <div class="diaper-suggestion-box">
+          <div class="diaper-badge">
+            <span class="diaper-icon">🍼</span>
+            <span class="diaper-size">1 Pacote de Fraldas (Tamanho M ou G)</span>
+          </div>
+          <p class="diaper-extra">+ 1 mimo de higiene (lenço umedecido ou pomada para assaduras)</p>
+        </div>
+
+        <div class="dress-code-tip">
+          <span>👗 <strong>Dress Code Divertido:</strong> Venha com uma peça ou acessório azul ou rosa correspondente ao seu palpite!</span>
+        </div>
+      </div>
+
+      <!-- Confirmação de Presença RSVP -->
+      <div class="card rsvp-card">
+        <div class="card-icon-header">💌</div>
+        <h3 class="card-title">Confirme sua Presença</h3>
+        <p class="card-desc">Para organizarmos os docinhos e lembrancinhas com todo carinho, por favor confirme até <strong>10 de Outubro</strong>:</p>
+
+        <form id="rsvpForm" class="rsvp-form">
+          <div class="form-group">
+            <label for="guestName">Seu Nome e Família:</label>
+            <input type="text" id="guestName" placeholder="Ex: Camila, Marcos e Sofia" required>
+          </div>
+
+          <div class="form-group">
+            <label for="guestCount">Quantidade de Pessoas:</label>
+            <select id="guestCount">
+              <option value="1">1 Pessoa</option>
+              <option value="2" selected>2 Pessoas</option>
+              <option value="3">3 Pessoas</option>
+              <option value="4+">4 pessoas ou mais</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="guestGuess">Seu Palpite Oficial:</label>
+            <select id="guestGuess">
+              <option value="Theo (Menino)">👦 Theo (Menino)</option>
+              <option value="Lívia (Menina)">👧 Lívia (Menina)</option>
+              <option value="Ainda Indeciso(a)">🤔 Ainda não decidi, o coração tá dividido!</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Sua presença:</label>
+            <div class="radio-group">
+              <label class="radio-pill">
+                <input type="radio" name="presence" value="sim" checked>
+                <span>🎉 Com certeza estarei lá!</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="presence" value="nao">
+                <span>Infelizmente não poderei ir</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-rsvp-submit">
+            <span>Confirmar Presença no WhatsApp</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+
+        <div class="rsvp-feedback hidden" id="rsvpFeedback">
+          ✓ Presença confirmada! Os papais Juliana & Rafael aguardam você com alegria!
+        </div>
+      </div>
+
+      <!-- Rodapé com Marca d'Água Sutil -->
+      <footer class="invite-footer">
+        <p class="footer-love">Com muito carinho, Juliana, Rafael e nosso bebê a caminho! 💖</p>
+        <div class="watermark-printfoco">
+          <a href="https://www.printfoco.com.br" target="_blank" rel="noopener noreferrer">
+            <span class="watermark-star">✦</span> Convite desenvolvido por <strong>Printfoco</strong> • www.printfoco.com.br
+          </a>
+        </div>
+      </footer>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

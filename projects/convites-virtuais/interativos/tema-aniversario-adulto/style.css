@@ -1,0 +1,833 @@
+/* ========================================================
+   TEMA ANIVERSÁRIO ADULTO / BOTECO CHIC - PRINTFOCO
+   Estilo Lousa / Madeira Rústica, Âmbar & Chopp
+   ======================================================== */
+
+:root {
+  --color-beer-gold: #f59e0b;
+  --color-beer-dark: #b45309;
+  --color-foam: #fef3c7;
+  --color-neon-amber: #fbbf24;
+  --color-dark-chalk: #181514;
+  --color-card-bg: #221c1a;
+  --color-card-border: #3b2f2b;
+  --color-text-light: #f3f4f6;
+  --color-text-muted: #9ca3af;
+  --font-pub: 'Oswald', sans-serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-dark-chalk);
+  background-image: 
+    radial-gradient(circle at 50% 10%, rgba(245, 158, 11, 0.12) 0%, transparent 60%),
+    linear-gradient(rgba(24, 21, 20, 0.95), rgba(15, 13, 12, 0.98));
+  color: var(--color-text-light);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Canvas de Bolhas Douradas */
+#beerCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Header Flutuante */
+.top-controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.control-btn {
+  background: rgba(34, 28, 26, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-beer-dark);
+  padding: 8px 14px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-pub);
+  letter-spacing: 0.5px;
+  color: var(--color-beer-gold);
+  transition: all 0.25s ease;
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(50, 40, 36, 0.95);
+  border-color: var(--color-beer-gold);
+}
+
+.control-btn.playing {
+  background: linear-gradient(135deg, #b45309, #d97706);
+  color: #fff;
+  border-color: #f59e0b;
+}
+
+/* Container Principal */
+.main-container {
+  position: relative;
+  z-index: 10;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+/* ========================================================
+   FASE 1: PORTAL DE ENTRADA DO BOTECO
+   ======================================================== */
+.boteco-gate {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.chalkboard-door {
+  background: #1c1715;
+  border: 4px solid #3d2e26;
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(0, 0, 0, 0.8);
+  width: 100%;
+  text-align: center;
+}
+
+.chalk-border {
+  border: 2px dashed rgba(245, 158, 11, 0.4);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+}
+
+.pub-badge {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--color-beer-gold);
+  color: var(--color-beer-gold);
+  padding: 4px 16px;
+  border-radius: 999px;
+  font-family: var(--font-pub);
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.pub-est {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.gate-pub-title {
+  font-family: var(--font-pub);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 4px 0 8px;
+  text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+}
+
+.pub-subtitle-stamp {
+  display: inline-block;
+  background: #d97706;
+  color: #111;
+  font-family: var(--font-pub);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 4px 14px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.gate-desc {
+  font-size: 0.95rem;
+  color: #d1d5db;
+  max-width: 440px;
+  margin: 0 auto 24px;
+  line-height: 1.5;
+}
+
+/* Caneca de Chopp Interativa */
+.beer-mug-wrapper {
+  margin: 10px auto 14px;
+  width: 90px;
+  height: 120px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.beer-mug-wrapper:hover {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.mug {
+  width: 75px;
+  height: 110px;
+  border: 4px solid rgba(255, 255, 255, 0.7);
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mug-handle {
+  position: absolute;
+  right: -24px;
+  top: 25px;
+  width: 26px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.7);
+  border-left: none;
+  border-radius: 0 16px 16px 0;
+}
+
+.mug-beer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
+  background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%);
+  transition: height 0.5s ease;
+}
+
+.mug-foam {
+  position: absolute;
+  top: -12px;
+  left: -5%;
+  right: -5%;
+  height: 16px;
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.5);
+}
+
+.tap-hint {
+  font-size: 0.85rem;
+  color: var(--color-beer-gold);
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.btn-pub-enter {
+  width: 100%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #111;
+  border: none;
+  padding: 16px 24px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-pub);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-pub-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
+}
+
+/* ========================================================
+   FASE 2: CONVITE COMPLETO & CARDS
+   ======================================================== */
+.invite-content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.chalk-hero-card {
+  background: #1e1917;
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.pub-neon-tag {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--color-neon-amber);
+  color: var(--color-neon-amber);
+  font-family: var(--font-pub);
+  font-size: 0.85rem;
+  padding: 4px 14px;
+  border-radius: 999px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.pub-main-title {
+  font-family: var(--font-pub);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.pub-slogan {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #d1d5db;
+  max-width: 440px;
+  margin: 0 auto 20px;
+}
+
+/* Moldura para Foto do Aniversariante */
+.media-placeholder-frame {
+  margin: 18px 0 24px;
+  background: rgba(15, 13, 12, 0.7);
+  border: 2px dashed rgba(245, 158, 11, 0.5);
+  border-radius: var(--radius-md);
+  padding: 26px 18px;
+  position: relative;
+  text-align: center;
+  transition: transform 0.25s ease;
+}
+
+.media-placeholder-frame:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-beer-gold);
+}
+
+.frame-chalk-corners {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  right: 10px;
+  bottom: 6px;
+  pointer-events: none;
+}
+
+.chalk-corner {
+  position: absolute;
+  color: var(--color-beer-gold);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.chalk-corner.tl { top: 0; left: 0; }
+.chalk-corner.tr { top: 0; right: 0; }
+.chalk-corner.bl { bottom: 0; left: 0; }
+.chalk-corner.br { bottom: 0; right: 0; }
+
+.beer-icon-badge {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.placeholder-title {
+  font-family: var(--font-pub);
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.placeholder-desc {
+  font-size: 0.88rem;
+  color: #9ca3af;
+  max-width: 420px;
+  margin: 0 auto 8px;
+  line-height: 1.5;
+}
+
+.placeholder-hint {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--color-beer-gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Contagem Regressiva do Boteco */
+.countdown-pub {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.countdown-heading {
+  font-family: var(--font-pub);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: var(--color-beer-gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.time-block {
+  background: #111;
+  border: 1px solid #333;
+  padding: 8px 12px;
+  border-radius: 8px;
+  min-width: 58px;
+}
+
+.time-num {
+  font-family: var(--font-pub);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  display: block;
+}
+
+.time-txt {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 0.5px;
+}
+
+.time-sep {
+  font-size: 1.2rem;
+  color: var(--color-beer-gold);
+  font-weight: 700;
+}
+
+/* ========================================================
+   CARDS DE CONTEÚDO
+   ======================================================== */
+.card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-pub-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.card-icon {
+  font-size: 1.8rem;
+  background: rgba(245, 158, 11, 0.15);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.card-pub-title {
+  font-family: var(--font-pub);
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.card-pub-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Cardápio */
+.menu-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-group {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  border-left: 3px solid #555;
+}
+
+.menu-group.highlight {
+  border-left-color: var(--color-beer-gold);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.menu-group-title {
+  font-family: var(--font-pub);
+  font-size: 1.05rem;
+  color: var(--color-beer-gold);
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.menu-items-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: #d1d5db;
+}
+
+.menu-items-list li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.menu-items-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-beer-gold);
+}
+
+/* Spotify */
+.spotify-box {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.spotify-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.spotify-logo {
+  font-size: 1.5rem;
+}
+
+.spotify-info strong {
+  font-size: 0.95rem;
+  color: #fff;
+  display: block;
+}
+
+.spotify-info p {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+.btn-spotify {
+  background: #10b981;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-spotify:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+/* Localização */
+.event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.event-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.event-row .row-icon {
+  font-size: 1.3rem;
+  margin-top: 2px;
+}
+
+.event-row strong {
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.event-row p {
+  color: #d1d5db;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.address-sub {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.map-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-map {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-map.google {
+  background: #2a2220;
+  color: #fff;
+  border: 1px solid #443733;
+}
+
+.btn-map.google:hover {
+  background: #3b2f2b;
+}
+
+.btn-map.waze {
+  background: #1e3a5f;
+  color: #60a5fa;
+  border: 1px solid #2563eb;
+}
+
+.btn-map.waze:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* Formulário RSVP */
+.pub-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #443733;
+  background: #14100e;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--color-beer-gold);
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+.pub-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pub-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #191412;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #382c28;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+.pub-radio input[type="radio"] {
+  accent-color: var(--color-beer-gold);
+}
+
+.btn-pub-submit {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #111;
+  border: none;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-pub);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.3);
+  transition: all 0.25s ease;
+  margin-top: 6px;
+}
+
+.btn-pub-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.45);
+}
+
+.pub-feedback {
+  margin-top: 14px;
+  padding: 12px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid #10b981;
+  border-radius: var(--radius-sm);
+  color: #34d399;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Rodapé e Marca d'Água */
+.invite-footer {
+  text-align: center;
+  padding: 24px 0 10px;
+}
+
+.pub-sign {
+  font-family: var(--font-pub);
+  font-size: 1.05rem;
+  color: var(--color-beer-gold);
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.watermark-printfoco {
+  display: inline-block;
+  opacity: 0.65;
+  transition: opacity 0.25s ease;
+}
+
+.watermark-printfoco:hover {
+  opacity: 1;
+}
+
+.watermark-printfoco a {
+  text-decoration: none;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.watermark-printfoco strong {
+  color: var(--color-beer-gold);
+}
+
+.watermark-star {
+  color: var(--color-beer-gold);
+}
+
+/* Utilitários */
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .gate-pub-title {
+    font-size: 2.2rem;
+  }
+  .pub-main-title {
+    font-size: 2rem;
+  }
+}
