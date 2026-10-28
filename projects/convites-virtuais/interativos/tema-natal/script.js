@@ -484,26 +484,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextMessageBtn = document.getElementById('nextMessageBtn');
   const messageCard = document.getElementById('messageCard');
 
-  nextMessageBtn.addEventListener('click', () => {
-    messageCard.style.opacity = '0';
-    messageCard.style.transform = 'translateY(6px)';
+  if (nextMessageBtn && messageCard) {
+    nextMessageBtn.addEventListener('click', () => {
+      messageCard.style.opacity = '0';
+      messageCard.style.transform = 'translateY(6px)';
 
-    soundSystem.playChime();
+      soundSystem.playChime();
 
-    setTimeout(() => {
-      let nextIndex = Math.floor(Math.random() * holidayMessages.length);
-      while (nextIndex === currentMsgIndex && holidayMessages.length > 1) {
-        nextIndex = Math.floor(Math.random() * holidayMessages.length);
-      }
-      currentMsgIndex = nextIndex;
+      setTimeout(() => {
+        let nextIndex = Math.floor(Math.random() * holidayMessages.length);
+        while (nextIndex === currentMsgIndex && holidayMessages.length > 1) {
+          nextIndex = Math.floor(Math.random() * holidayMessages.length);
+        }
+        currentMsgIndex = nextIndex;
 
-      quoteText.textContent = holidayMessages[currentMsgIndex].text;
-      quoteAuthor.textContent = holidayMessages[currentMsgIndex].author;
+        if (quoteText) quoteText.textContent = holidayMessages[currentMsgIndex].text;
+        if (quoteAuthor) quoteAuthor.textContent = holidayMessages[currentMsgIndex].author;
 
-      messageCard.style.opacity = '1';
-      messageCard.style.transform = 'translateY(0)';
-    }, 250);
-  });
+        messageCard.style.opacity = '1';
+        messageCard.style.transform = 'translateY(0)';
+      }, 250);
+    });
+  }
 
 
   /* ==========================================================
@@ -549,12 +551,32 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================== */
   const confirmWhatsappBtn = document.getElementById('confirmWhatsappBtn');
   const guestDishInput = document.getElementById('guestDish');
+  const thinkingDishCheck = document.getElementById('thinkingDishCheck');
+
+  if (thinkingDishCheck && guestDishInput) {
+    thinkingDishCheck.addEventListener('change', () => {
+      if (thinkingDishCheck.checked) {
+        guestDishInput.disabled = true;
+        guestDishInput.style.opacity = '0.55';
+        guestDishInput.dataset.previousValue = guestDishInput.value;
+        guestDishInput.value = '';
+        guestDishInput.placeholder = 'Ainda vou pensar no prato e aviso depois!';
+        showToast('🥧 Entendido! Você pode avisar o prato mais perto da data.');
+      } else {
+        guestDishInput.disabled = false;
+        guestDishInput.style.opacity = '1';
+        guestDishInput.value = guestDishInput.dataset.previousValue || '';
+        guestDishInput.placeholder = 'Ex: Torta salgada + Refrigerante / Vinho';
+      }
+    });
+  }
 
   confirmWhatsappBtn.addEventListener('click', () => {
     const name = guestNameInput.value.trim();
     const dish = guestDishInput ? guestDishInput.value.trim() : '';
-    const targetPhone = "5511975855682"; // Número seguro enviado diretamente à API
+    const targetPhone = "5511997533188"; // Número seguro enviado diretamente à API
     const wantsAddress = requestAddressCheck.checked;
+    const isThinkingDish = thinkingDishCheck && thinkingDishCheck.checked;
 
     let messageText = "";
 
@@ -564,8 +586,10 @@ document.addEventListener('DOMContentLoaded', () => {
       messageText = `Olá! 🎄✨ Gostaria de confirmar nossa presença na ceia de Natal da família na casa da Elaine e do Edson! Nos vemos lá a partir das 19:00. ❤️🥂`;
     }
 
-    // Se a pessoa informou o prato e a bebida
-    if (dish) {
+    // Se a pessoa marcou que ainda vai pensar no prato ou se já informou
+    if (isThinkingDish) {
+      messageText += `\n\n🍽️ *Prato e Bebida:* Ainda vou pensar com carinho no que levar e aviso vocês depois, mas já confirmo com certeza nossa presença! ❤️`;
+    } else if (dish) {
       messageText += `\n\n🍽️ *Prato e Bebida que vamos levar:* ${dish}`;
     }
 
