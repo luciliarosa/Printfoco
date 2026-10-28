@@ -1,0 +1,726 @@
+/* ========================================================
+   TEMA INGRESSO VIP DE FESTIVAL / BALADA NEON - PRINTFOCO
+   Estilo Holográfico / 15 Anos Moderno / VIP Pass
+   ======================================================== */
+
+:root {
+  --neon-purple: #a855f7;
+  --neon-cyan: #06b6d4;
+  --neon-pink: #ec4899;
+  --dark-bg: #090514;
+  --card-bg: #130d24;
+  --card-border: #261945;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--dark-bg);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+#neonCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Header Flutuante */
+.top-controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.control-btn {
+  background: rgba(19, 13, 36, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--neon-purple);
+  padding: 8px 14px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.25);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  transition: all 0.25s ease;
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(168, 85, 247, 0.45);
+}
+
+.control-btn.active {
+  background: linear-gradient(135deg, #7e22ce, #a855f7);
+  color: #fff;
+}
+
+.main-container {
+  position: relative;
+  z-index: 10;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+/* ========================================================
+   FASE 1: INGRESSO HOLOGRÁFICO 3D (TICKET GATE)
+   ======================================================== */
+.ticket-gate {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.ticket-container {
+  width: 100%;
+  text-align: center;
+}
+
+.festival-tag {
+  display: inline-block;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid var(--neon-purple);
+  color: var(--neon-cyan);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 16px;
+  border-radius: 999px;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.gate-festival-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #fff 0%, var(--neon-cyan) 50%, var(--neon-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.gate-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 440px;
+  margin: 0 auto 24px;
+}
+
+/* Cartão 3D com Efeito Flip */
+.flip-card-wrapper {
+  margin: 10px auto 24px;
+  width: 290px;
+  height: 390px;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(168, 85, 247, 0.5);
+  overflow: hidden;
+}
+
+.card-front {
+  background: linear-gradient(145deg, #180f33 0%, #0d071c 100%);
+}
+
+.card-front::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent 40%, rgba(6, 182, 212, 0.15) 50%, transparent 60%);
+  pointer-events: none;
+  animation: holoSheen 4s infinite linear;
+}
+
+.ticket-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.neon-badge {
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--neon-cyan);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.pass-code {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--neon-pink);
+}
+
+.ticket-center {
+  margin: auto 0;
+}
+
+.event-year {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #cbd5e1;
+}
+
+.guest-pass-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fff;
+  margin: 6px 0;
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
+}
+
+.guest-pass-sub {
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.ticket-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-top: 14px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.m-lbl {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.m-val {
+  font-size: 0.85rem;
+  color: #fff;
+  font-weight: 800;
+}
+
+.flip-hint {
+  font-size: 0.7rem;
+  color: var(--neon-purple);
+  margin-top: 8px;
+}
+
+/* Verso */
+.card-back {
+  background: #140d2b;
+  transform: rotateY(180deg);
+  text-align: left;
+}
+
+.back-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+  padding-bottom: 10px;
+}
+
+.back-header h3 {
+  font-size: 1.1rem;
+  color: var(--neon-cyan);
+  letter-spacing: 1px;
+}
+
+.lineup-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: auto 0;
+  font-size: 0.85rem;
+}
+
+.lineup-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lineup-list .time {
+  background: rgba(168, 85, 247, 0.25);
+  color: var(--neon-pink);
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.btn-claim-wristband {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+  color: #fff;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.btn-claim-wristband:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(6, 182, 212, 0.5);
+}
+
+/* ========================================================
+   FASE 2: CONVITE COMPLETO & FESTIVAL
+   ======================================================== */
+.invite-content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-festival-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.wristband-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(6, 182, 212, 0.15);
+  border: 1px solid var(--neon-cyan);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  margin-bottom: 12px;
+}
+
+.wb-led {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+  animation: pulse 1.5s infinite;
+}
+
+.debutante-title {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.debutante-slogan {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  max-width: 440px;
+  margin: 0 auto 20px;
+}
+
+/* Moldura */
+.media-placeholder-frame {
+  margin: 18px 0 24px;
+  background: rgba(10, 5, 24, 0.7);
+  border: 2px dashed rgba(168, 85, 247, 0.4);
+  border-radius: var(--radius-md);
+  padding: 26px 18px;
+  position: relative;
+  text-align: center;
+  transition: transform 0.25s ease;
+}
+
+.media-placeholder-frame:hover {
+  border-color: var(--neon-cyan);
+  transform: translateY(-2px);
+}
+
+.camera-icon-badge {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.placeholder-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.placeholder-desc {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  max-width: 420px;
+  margin: 0 auto 8px;
+}
+
+.placeholder-hint {
+  display: inline-block;
+  background: rgba(168, 85, 247, 0.2);
+  color: var(--neon-purple);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+/* Contagem Regressiva */
+.countdown-festival {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.countdown-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.time-block {
+  background: #090514;
+  border: 1px solid var(--neon-purple);
+  padding: 8px 12px;
+  border-radius: 8px;
+  min-width: 58px;
+}
+
+.time-num {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  display: block;
+}
+
+.time-txt {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.time-sep {
+  color: var(--neon-pink);
+  font-weight: 800;
+}
+
+/* Cards */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.card-icon-header {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.card-desc {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+
+.venue-info {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 14px;
+  border-radius: var(--radius-md);
+  margin: 14px 0;
+}
+
+.venue-info strong {
+  font-size: 0.95rem;
+  color: #fff;
+  display: block;
+}
+
+.venue-info p {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin: 2px 0 6px;
+}
+
+.venue-note {
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+}
+
+.map-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-map {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-map.google {
+  background: #1e153b;
+  color: #fff;
+  border: 1px solid #372863;
+}
+
+.btn-map.google:hover { background: #291d52; }
+
+.btn-map.waze {
+  background: #0e3b5e;
+  color: #38bdf8;
+  border: 1px solid #0284c7;
+}
+
+.btn-map.waze:hover { background: #0284c7; color: #fff; }
+
+/* Formulário */
+.vip-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  background: #090514;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25);
+}
+
+.radio-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #0d071c;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+}
+
+.radio-pill input[type="radio"] {
+  accent-color: var(--neon-purple);
+}
+
+.btn-vip-submit {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+  color: #fff;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.35);
+  transition: all 0.25s;
+  margin-top: 4px;
+}
+
+.btn-vip-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(6, 182, 212, 0.45);
+}
+
+.vip-feedback {
+  margin-top: 14px;
+  padding: 12px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  color: #4ade80;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Rodapé */
+.invite-footer {
+  text-align: center;
+  padding: 24px 0 10px;
+}
+
+.footer-quote {
+  font-size: 0.95rem;
+  color: var(--neon-purple);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.watermark-printfoco {
+  display: inline-block;
+  opacity: 0.7;
+}
+
+.watermark-printfoco a {
+  text-decoration: none;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.watermark-star {
+  color: var(--neon-cyan);
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes holoSheen {
+  0% { transform: translateY(-30%) rotate(0deg); }
+  100% { transform: translateY(30%) rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

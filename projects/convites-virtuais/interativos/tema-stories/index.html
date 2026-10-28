@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <title>Story Convite • Luiza 18 Anos ✨📱 | Printfoco</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Container do Story em Formato Celular / Tela Cheia -->
+  <main class="story-viewport" id="storyViewport">
+
+    <!-- Barras de Progresso dos Stories no Topo -->
+    <header class="story-progress-bar">
+      <div class="progress-segment"><div class="progress-fill" id="fill-0"></div></div>
+      <div class="progress-segment"><div class="progress-fill" id="fill-1"></div></div>
+      <div class="progress-segment"><div class="progress-fill" id="fill-2"></div></div>
+      <div class="progress-segment"><div class="progress-fill" id="fill-3"></div></div>
+    </header>
+
+    <!-- Top Profile Header do Story -->
+    <div class="story-author-header">
+      <div class="author-info">
+        <div class="author-avatar">✨</div>
+        <div class="author-names">
+          <span class="author-username">luiza.official</span>
+          <span class="story-time">1h</span>
+        </div>
+      </div>
+      <div class="story-top-actions">
+        <button id="musicToggleBtn" class="btn-story-ctrl" title="Som">🎵</button>
+        <button id="pauseToggleBtn" class="btn-story-ctrl" title="Pausar">⏸️</button>
+      </div>
+    </div>
+
+    <!-- Zonas de Toque Esquerda / Direita para Navegar Stories -->
+    <div class="touch-zone left" id="touchLeft" title="Voltar Story"></div>
+    <div class="touch-zone right" id="touchRight" title="Avançar Story"></div>
+
+    <!-- STORY 1: ABERTURA & FOTO -->
+    <section class="story-slide active" id="slide-0">
+      <div class="story-inner-content">
+        <span class="story-tag">SAVE THE DATE • 18 ANOS</span>
+        <h1 class="story-heading">O meu momento chegou!</h1>
+        <p class="story-text">Vou comemorar meus 18 anos do jeito que sempre sonhei e você faz parte dessa história.</p>
+
+        <!-- Moldura de Foto Estilo Feed -->
+        <div class="story-media-frame">
+          <div class="frame-content">
+            <span class="cam-icon">📸</span>
+            <h3>Espaço para Foto da Aniversariante</h3>
+            <p>Aqui colocamos uma foto linda estilo ensaio profissional de 18 anos!</p>
+            <span class="badge-hint">Toque na direita para ver a data 👉</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY 2: DATA & CONTAGEM REGRESSIVA -->
+    <section class="story-slide" id="slide-1">
+      <div class="story-inner-content">
+        <span class="story-tag">QUANDO VAI ROLAR</span>
+        <h2 class="story-heading">Sábado, 19 de Dezembro</h2>
+        <p class="story-text">A partir das 21:00 horas (Open Bar & DJ Set)</p>
+
+        <div class="story-countdown">
+          <div class="c-unit">
+            <span class="c-val" id="days">--</span>
+            <span class="c-lbl">Dias</span>
+          </div>
+          <div class="c-sep">:</div>
+          <div class="c-unit">
+            <span class="c-val" id="hours">--</span>
+            <span class="c-lbl">Horas</span>
+          </div>
+          <div class="c-sep">:</div>
+          <div class="c-unit">
+            <span class="c-val" id="minutes">--</span>
+            <span class="c-lbl">Min</span>
+          </div>
+        </div>
+
+        <div class="sticker-box">
+          <span class="sticker-emoji">🎂</span>
+          <span>Contando os minutos para celebrar os 18!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY 3: LOCALIZAÇÃO & GPS -->
+    <section class="story-slide" id="slide-2">
+      <div class="story-inner-content">
+        <span class="story-tag">ONDE SERÁ</span>
+        <h2 class="story-heading">Mansão dos Jardins</h2>
+        <p class="story-text">Alameda das Orquídeas, 1200 - São Paulo</p>
+
+        <div class="story-map-box">
+          <div class="map-icon-circle">📍</div>
+          <strong>Estacionamento & Valet no Local</strong>
+          <p>Dress Code: Balada Chic (Brilho & Preto)</p>
+          <div class="story-map-btns">
+            <a href="https://maps.google.com/?q=Mansao+Jardins" target="_blank" rel="noopener noreferrer" class="btn-story-map">
+              <span>Google Maps</span>
+            </a>
+            <a href="https://waze.com/ul?q=Mansao+Jardins" target="_blank" rel="noopener noreferrer" class="btn-story-map waze">
+              <span>Waze</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY 4: ENQUETE NATIVA & CONFIRMAÇÃO RSVP -->
+    <section class="story-slide" id="slide-3">
+      <div class="story-inner-content">
+        <span class="story-tag">CONFIRMAÇÃO DE PRESENÇA</span>
+        <h2 class="story-heading">Posso contar com você?</h2>
+
+        <!-- Enquete Interativa Estilo Sticker do Instagram -->
+        <div class="insta-poll-sticker">
+          <div class="poll-question">Você vai colar na festa? 🔥</div>
+          <button class="poll-option-btn" id="btnPollYes">
+            <span>Com certeza! Presença confirmada!</span>
+            <span class="poll-pct" id="pctYes">88%</span>
+          </button>
+          <button class="poll-option-btn" id="btnPollNo">
+            <span>Infelizmente não vou conseguir</span>
+            <span class="poll-pct" id="pctNo">12%</span>
+          </button>
+        </div>
+
+        <!-- Formulário Rápido de Envio para WhatsApp -->
+        <form id="rsvpForm" class="story-rsvp-form">
+          <input type="text" id="guestName" placeholder="Digite seu nome completo" required>
+          <button type="submit" class="btn-send-rsvp">
+            <span>Mandar Mensagem no WhatsApp</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+
+        <div id="rsvpDone" class="story-done-msg hidden">
+          ✓ Resposta enviada! Nos vemos no dia 19!
+        </div>
+
+        <!-- Marca d'Água Sutil Printfoco -->
+        <div class="watermark-story">
+          <a href="https://www.printfoco.com.br" target="_blank" rel="noopener noreferrer">
+            ✦ Feito por <strong>Printfoco</strong> • www.printfoco.com.br
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

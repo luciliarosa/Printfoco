@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#121218">
+  <title>Raspadinha da Sorte • Secret Party Murilo 30 Anos 🎰✨ | Printfoco</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Canvas de Fagulhas Brilhantes -->
+  <canvas id="sparkleCanvas" aria-hidden="true"></canvas>
+
+  <!-- Controles Superiores Flutuantes -->
+  <header class="top-controls">
+    <button id="autoScratchBtn" class="control-btn" title="Raspar Automaticamente" aria-label="Raspar Tudo">
+      <span class="icon">✨</span>
+      <span class="control-text">Raspar Tudo</span>
+    </button>
+  </header>
+
+  <main class="main-container">
+
+    <!-- FASE 1: A RASPADINHA INTERATIVA (SCRATCH GATE) -->
+    <section class="scratch-gate" id="scratchGate">
+      <div class="scratch-card-box">
+        
+        <div class="gold-badge">✦ CARTÃO PREMIADO • CONVITE EXCLUSIVO ✦</div>
+        <h1 class="scratch-title">VOCÊ TIROU A SORTE GRANDE!</h1>
+        <p class="scratch-sub">Passe o dedo ou mouse sobre a área dourada abaixo para raspar e revelar o seu convite secreto:</p>
+
+        <!-- Container da Raspadinha -->
+        <div class="scratch-area-container">
+          
+          <!-- Conteúdo Escondido por Baixo da Tinta -->
+          <div class="scratch-secret-content">
+            <span class="secret-emoji">🎉</span>
+            <h2 class="secret-heading">MURILO 30 ANOS!</h2>
+            <p class="secret-desc">Acesso VIP Liberado para a Secret Party!</p>
+            <div class="secret-details">
+              <span>📅 05 DE DEZEMBRO</span>
+              <span>📍 LOCAL SECRETO</span>
+            </div>
+          </div>
+
+          <!-- Canvas Interativo de Raspagem (A tinta dourada removível) -->
+          <canvas id="scratchCanvas" width="340" height="240"></canvas>
+        </div>
+
+        <div class="scratch-instruction">
+          <span class="coin-icon">🪙</span>
+          <span>Raspe até 50% para destravar o convite completo automaticamente!</span>
+        </div>
+
+        <button id="btnContinue" class="btn-continue hidden">
+          <span>Abrir Detalhes da Festa Secreta</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- FASE 2: CONVITE COMPLETO & LOCAL SECRETO -->
+    <section class="invite-content hidden" id="inviteContent">
+
+      <!-- Header Festa Secreta -->
+      <div class="hero-secret-card">
+        <div class="tag-unlocked">🔓 CONVITE SECRETO DESTRAVADO</div>
+        <h1 class="host-title">Murilo Trintou! (30 Anos)</h1>
+        <p class="host-slogan">"Os 30 chegaram e a comemoração é para poucos e bons! Prepare-se para uma noite inesquecível de drinks, boa música e energia lá em cima."</p>
+
+        <!-- Moldura Demonstrativa para Fotos do Aniversariante -->
+        <div class="media-placeholder-frame">
+          <div class="frame-content">
+            <div class="camera-icon-badge">📸 / 🕶️</div>
+            <h3 class="placeholder-title">Espaço para Foto do Aniversariante</h3>
+            <p class="placeholder-desc">
+              Aqui colocamos a foto do aniversariante em clima misterioso/elegante, ou um ensaio especial dos 30 anos com estilo!
+            </p>
+            <span class="placeholder-hint">Personalizado com a foto do cliente</span>
+          </div>
+        </div>
+
+        <!-- Contagem Regressiva -->
+        <div class="countdown-secret">
+          <div class="countdown-title">A festa secreta começa em:</div>
+          <div class="countdown-grid">
+            <div class="time-block">
+              <span class="time-num" id="days">--</span>
+              <span class="time-txt">Dias</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-block">
+              <span class="time-num" id="hours">--</span>
+              <span class="time-txt">Horas</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-block">
+              <span class="time-num" id="minutes">--</span>
+              <span class="time-txt">Min</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-block">
+              <span class="time-num" id="seconds">--</span>
+              <span class="time-txt">Seg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Localização & Horário -->
+      <div class="card event-card">
+        <div class="card-icon-header">🍸</div>
+        <h3 class="card-title">Coordenadas da Secret Party</h3>
+
+        <div class="secret-info-box">
+          <div class="info-row">
+            <span class="icon">📅</span>
+            <div>
+              <strong>Data:</strong>
+              <p>Sábado, 05 de Dezembro de 2026</p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="icon">⏰</span>
+            <div>
+              <strong>Horário:</strong>
+              <p>A partir das 20h00 (Sem hora para acabar)</p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="icon">📍</span>
+            <div>
+              <strong>Local Revelado:</strong>
+              <p>Speakeasy Underground Club & Garden</p>
+              <p class="address-sub">Rua Oscar Freire, 850 - Entrada Secreta pelos fundos</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-actions-grid">
+          <a href="https://maps.google.com/?q=Oscar+Freire" target="_blank" rel="noopener noreferrer" class="btn-map google">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Google Maps</span>
+          </a>
+          <a href="https://waze.com/ul?q=Oscar+Freire" target="_blank" rel="noopener noreferrer" class="btn-map waze">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.6 12a.6.6 0 0 0 .8 0c.6-.5 7.6-6.6 7.6-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Waze Rota</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RSVP Confirmação Secreta -->
+      <div class="card rsvp-card">
+        <div class="card-icon-header">📩</div>
+        <h3 class="card-title">Confirme sua Entrada na Lista Secreta</h3>
+        <p class="card-desc">Capacidade exclusiva limitada! Confirme até <strong>25 de Novembro</strong>:</p>
+
+        <form id="rsvpForm" class="secret-form">
+          <div class="form-group">
+            <label for="guestName">Seu Nome Completo:</label>
+            <input type="text" id="guestName" placeholder="Ex: Felipe Ramos" required>
+          </div>
+
+          <div class="form-group">
+            <label for="guestTotal">Quantidade de Acompanhantes:</label>
+            <select id="guestTotal">
+              <option value="1">Apenas Eu (Solo)</option>
+              <option value="2" selected>Eu + 1 Acompanhante</option>
+              <option value="3">Eu + 2 Acompanhantes</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Presença:</label>
+            <div class="radio-options">
+              <label class="radio-pill">
+                <input type="radio" name="presence" value="sim" checked>
+                <span>🥃 Com certeza! Presença garantida na Secret Party!</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="presence" value="nao">
+                <span>Infelizmente não poderei comparecer</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-secret-submit">
+            <span>Confirmar Nome na Lista (WhatsApp)</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+
+        <div class="secret-feedback hidden" id="secretFeedback">
+          ✓ Nome adicionado à lista secreta do Murilo! Guarde o segredo e nos vemos lá!
+        </div>
+      </div>
+
+      <!-- Rodapé com Marca d'Água Sutil -->
+      <footer class="invite-footer">
+        <p class="footer-sign">"O que acontece na Secret Party, fica na Secret Party!"</p>
+        <div class="watermark-printfoco">
+          <a href="https://www.printfoco.com.br" target="_blank" rel="noopener noreferrer">
+            <span class="watermark-star">✦</span> Convite desenvolvido por <strong>Printfoco</strong> • www.printfoco.com.br
+          </a>
+        </div>
+      </footer>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,767 @@
+/* ========================================================
+   TEMA CARTÃO DE EMBARQUE & PASSAPORTE - PRINTFOCO
+   Estilo Aeroporto / First Class / Destination Wedding
+   ======================================================== */
+
+:root {
+  --color-navy: #0d2238;
+  --color-navy-dark: #071524;
+  --color-gold: #d4af37;
+  --color-gold-light: #f5e8be;
+  --color-paper: #f8fafc;
+  --color-stamp: #dc2626;
+  --font-pass: 'Courier New', Courier, monospace;
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: linear-gradient(135deg, #0b1a2c 0%, #152c46 50%, #0d2035 100%);
+  color: #1e293b;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+#flightCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Header Flutuante */
+.top-controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.control-btn {
+  background: rgba(13, 34, 56, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  padding: 8px 14px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  transition: all 0.25s ease;
+}
+
+.control-btn:hover {
+  background: var(--color-navy);
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.main-container {
+  position: relative;
+  z-index: 10;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+/* ========================================================
+   FASE 1: O CARTÃO DE EMBARQUE (BOARDING PASS)
+   ======================================================== */
+.pass-gate {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.boarding-pass-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #e2e8f0;
+  width: 100%;
+}
+
+.pass-header {
+  background: var(--color-navy);
+  color: #fff;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--color-gold);
+}
+
+.airline-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.airline-logo {
+  font-size: 1.8rem;
+}
+
+.airline-name {
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: #fff;
+  display: block;
+}
+
+.airline-class {
+  font-size: 0.65rem;
+  color: var(--color-gold);
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+.flight-number {
+  font-family: var(--font-pass);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-gold-light);
+  border: 1px dashed rgba(212, 175, 55, 0.5);
+}
+
+/* Rota */
+.route-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 20px 18px;
+  background: #f8fafc;
+  border-bottom: 1px dashed #cbd5e1;
+}
+
+.airport-code {
+  display: flex;
+  flex-direction: column;
+}
+
+.airport-code .code {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--color-navy);
+  line-height: 1;
+  font-family: var(--font-pass);
+}
+
+.airport-code .city {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.flight-path {
+  flex: 1;
+  margin: 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.plane-icon {
+  font-size: 1.3rem;
+  color: var(--color-gold);
+  margin-bottom: 2px;
+}
+
+.flight-line {
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--color-gold), var(--color-gold) 6px, transparent 6px, transparent 12px);
+}
+
+.duration {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Detalhes */
+.pass-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 20px;
+}
+
+.pass-info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.pass-info-item .label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+.pass-info-item .val {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  font-family: var(--font-pass);
+}
+
+.val.status-pending {
+  color: #eab308;
+}
+
+.val.status-confirmed {
+  color: #16a34a;
+}
+
+/* Carimbo de Alfândega */
+.customs-stamp {
+  position: absolute;
+  top: 40%;
+  right: 15%;
+  transform: rotate(-15deg);
+  border: 3px double var(--color-stamp);
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: var(--color-stamp);
+  text-align: center;
+  animation: stampDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  background: rgba(254, 242, 242, 0.9);
+}
+
+.stamp-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stamp-inner strong {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.stamp-inner span {
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+/* Código de Barras */
+.barcode-wrapper {
+  padding: 16px 20px 20px;
+  border-top: 1px dashed #cbd5e1;
+  text-align: center;
+  background: #f8fafc;
+}
+
+.barcode-lines {
+  height: 40px;
+  background: repeating-linear-gradient(90deg, #1e293b, #1e293b 2px, transparent 2px, transparent 4px, #1e293b 4px, #1e293b 7px, transparent 7px, transparent 9px);
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+
+.barcode-numbers {
+  font-family: var(--font-pass);
+  font-size: 0.75rem;
+  color: #64748b;
+  letter-spacing: 2px;
+}
+
+.checkin-action-box {
+  padding: 0 20px 24px;
+  background: #f8fafc;
+}
+
+.btn-checkin {
+  width: 100%;
+  background: linear-gradient(135deg, #0d2238, #1e40af);
+  color: #fff;
+  border: 1px solid var(--color-gold);
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  font-size: 1.05rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(13, 34, 56, 0.4);
+  transition: all 0.25s ease;
+}
+
+.btn-checkin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(13, 34, 56, 0.6);
+}
+
+/* ========================================================
+   FASE 2: CONVITE COMPLETO & ROTEIRO
+   ======================================================== */
+.invite-content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-travel-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e2e8f0;
+}
+
+.travel-badge {
+  display: inline-block;
+  background: #fef9c3;
+  color: #854d0e;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 999px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  border: 1px solid #fef08a;
+}
+
+.couple-travel-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  margin-bottom: 6px;
+}
+
+.travel-quote {
+  font-size: 0.95rem;
+  color: #64748b;
+  font-style: italic;
+  max-width: 440px;
+  margin: 0 auto 20px;
+}
+
+/* Moldura para Fotos */
+.media-placeholder-frame {
+  margin: 18px 0 24px;
+  background: #f8fafc;
+  border: 2px dashed rgba(13, 34, 56, 0.3);
+  border-radius: var(--radius-md);
+  padding: 26px 18px;
+  position: relative;
+  text-align: center;
+  transition: transform 0.25s ease;
+}
+
+.media-placeholder-frame:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-gold);
+}
+
+.compass-rose {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.camera-icon-badge {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+.placeholder-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 6px;
+}
+
+.placeholder-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  max-width: 420px;
+  margin: 0 auto 8px;
+  line-height: 1.5;
+}
+
+.placeholder-hint {
+  display: inline-block;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid #bfdbfe;
+}
+
+/* Contagem Regressiva */
+.countdown-travel {
+  background: #f1f5f9;
+  padding: 16px;
+  border-radius: var(--radius-md);
+}
+
+.countdown-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.time-box {
+  background: var(--color-navy);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  min-width: 58px;
+}
+
+.time-val {
+  font-family: var(--font-pass);
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+}
+
+.time-tag {
+  font-size: 0.65rem;
+  color: var(--color-gold);
+  text-transform: uppercase;
+}
+
+.time-sep {
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0;
+}
+
+.card-icon-header {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+
+.card-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* Timeline */
+.travel-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 18px 0;
+  border-left: 2px solid var(--color-gold);
+  padding-left: 14px;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.step-time {
+  font-family: var(--font-pass);
+  font-weight: 800;
+  background: var(--color-navy);
+  color: var(--color-gold);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.timeline-step strong {
+  font-size: 0.9rem;
+  color: var(--color-navy);
+  display: block;
+}
+
+.timeline-step p {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.destination-address {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  margin-bottom: 14px;
+}
+
+.destination-address strong {
+  color: var(--color-navy);
+  font-size: 0.9rem;
+  display: block;
+}
+
+.destination-address p {
+  color: #64748b;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.map-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-map {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-map.google {
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+}
+
+.btn-map.google:hover { background: #e2e8f0; }
+
+.btn-map.waze {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.btn-map.waze:hover { background: #bfdbfe; }
+
+/* Dicas de Viagem */
+.tips-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: var(--radius-md);
+}
+
+.tip-icon {
+  font-size: 1.4rem;
+}
+
+.tip-item strong {
+  font-size: 0.9rem;
+  color: var(--color-navy);
+  display: block;
+}
+
+.tip-item p {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* Formulário RSVP */
+.travel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  font-size: 0.95rem;
+  color: #1e293b;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--color-navy);
+}
+
+.radio-travel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.btn-travel-submit {
+  background: linear-gradient(135deg, #0d2238, #1e3a8a);
+  color: #fff;
+  border: 1px solid var(--color-gold);
+  padding: 14px 20px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(13, 34, 56, 0.25);
+  transition: all 0.25s;
+  margin-top: 4px;
+}
+
+.btn-travel-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(13, 34, 56, 0.4);
+}
+
+.travel-feedback {
+  margin-top: 14px;
+  padding: 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: #15803d;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Rodapé */
+.invite-footer {
+  text-align: center;
+  padding: 24px 0 10px;
+}
+
+.footer-sign {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.watermark-printfoco {
+  display: inline-block;
+  opacity: 0.75;
+}
+
+.watermark-printfoco a {
+  text-decoration: none;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.watermark-star {
+  color: var(--color-gold);
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stampDown {
+  0% { transform: scale(3) rotate(-25deg); opacity: 0; }
+  100% { transform: scale(1) rotate(-15deg); opacity: 1; }
+}

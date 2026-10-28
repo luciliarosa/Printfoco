@@ -3,7 +3,9 @@ import { siteConfig, interactiveTemplates } from '../data/content';
 import { useLanguage } from '../context/LanguageContext';
 import { 
   Sparkles, ExternalLink, RotateCcw, Smartphone, Laptop, 
-  Crown, TreePine, Footprints, Heart, Baby, Beer, CheckCircle2, MapPin, Clock, ShieldCheck
+  Crown, TreePine, Footprints, Heart, Baby, Beer, 
+  Plane, Ticket, Clapperboard, BookOpen, Gamepad2,
+  CheckCircle2, MapPin, Clock, ShieldCheck
 } from 'lucide-react';
 
 export default function InteractiveInviteSection() {
@@ -11,7 +13,8 @@ export default function InteractiveInviteSection() {
   
   // Device & Theme State
   const [device, setDevice] = useState('mobile'); // 'mobile' | 'desktop'
-  const [selectedThemeId, setSelectedThemeId] = useState('natal'); // 'natal' | 'princesas' | 'dinossauro'
+  const [selectedThemeId, setSelectedThemeId] = useState('natal');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [iframeKey, setIframeKey] = useState(0); // For reloading the invitation envelope
 
   // Current active template
@@ -24,8 +27,27 @@ export default function InteractiveInviteSection() {
     if (id === 'casamento') return Heart;
     if (id === 'cha-revelacao') return Baby;
     if (id === 'aniversario-adulto') return Beer;
+    if (id === 'passaporte') return Plane;
+    if (id === 'ingresso-vip') return Ticket;
+    if (id === 'raspadinha') return Sparkles;
+    if (id === 'stories') return Smartphone;
+    if (id === 'cinema') return Clapperboard;
+    if (id === 'revista') return BookOpen;
+    if (id === 'game') return Gamepad2;
     return Sparkles;
   };
+
+  const getTemplateCategory = (id) => {
+    if (id === 'casamento' || id === 'passaporte') return 'casamento';
+    if (id === 'princesas' || id === 'dinossauro' || id === 'cha-revelacao' || id === 'cinema' || id === 'game') return 'infantil';
+    if (id === 'ingresso-vip' || id === 'stories' || id === 'revista') return '15anos';
+    return 'adulto'; // natal, aniversario-adulto, raspadinha
+  };
+
+  const filteredTemplates = interactiveTemplates.filter(tpl => {
+    if (selectedCategory === 'all') return true;
+    return getTemplateCategory(tpl.id) === selectedCategory;
+  });
 
   const handleReload = () => {
     setIframeKey(prev => prev + 1);
@@ -93,12 +115,37 @@ export default function InteractiveInviteSection() {
           </div>
 
           {/* Theme Selector Tabs */}
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#9f825b]">
-              Selecione o Convite Real para Testar:
+              Selecione o Convite Real para Testar ({filteredTemplates.length} de {interactiveTemplates.length} Modelos):
             </span>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-1.5 p-1 rounded-2xl bg-[#ebe6dc]/40 border border-[#ebe6dc]">
+              {[
+                { id: 'all', label: 'Todos (13)' },
+                { id: 'casamento', label: '💍 Casamentos' },
+                { id: '15anos', label: '👑 15 Anos & Balada' },
+                { id: 'infantil', label: '🎈 Infantil & Games' },
+                { id: 'adulto', label: '🍸 Adulto & Festas' }
+              ].map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                    selectedCategory === cat.id
+                      ? 'bg-[#1c1b1a] text-white shadow-xs'
+                      : 'text-[#555555] hover:text-[#1c1b1a] hover:bg-[#ffffff]/60'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 w-full">
-              {interactiveTemplates.map((tpl) => {
+              {filteredTemplates.map((tpl) => {
                 const IconComponent = iconForTheme(tpl.id);
                 const isSelected = selectedThemeId === tpl.id;
                 return (
@@ -176,6 +223,41 @@ export default function InteractiveInviteSection() {
                     <strong>Tema Boteco 40 Anos:</strong> Estilo lousa, caneca de chopp interativa, batucada de samba, brinde com som de taças, cardápio de petiscos e playlist Spotify!
                   </>
                 )}
+                {selectedThemeId === 'passaporte' && (
+                  <>
+                    <strong>Tema Passaporte & Cartão de Embarque:</strong> Bilhete aéreo com check-in interativo, carimbo sonoro de visto aprovado, roteiro de Destination Wedding na praia e dicas da mala!
+                  </>
+                )}
+                {selectedThemeId === 'ingresso-vip' && (
+                  <>
+                    <strong>Tema Ingresso VIP Festival:</strong> Cartão holográfico 3D com efeito flip frente e verso, line-up da noite, resgate de pulseira neon e batida de DJ!
+                  </>
+                )}
+                {selectedThemeId === 'raspadinha' && (
+                  <>
+                    <strong>Tema Raspadinha Digital:</strong> Película dourada interativa para raspar com o dedo na tela, explosão de fagulhas e revelação de local secreto!
+                  </>
+                )}
+                {selectedThemeId === 'stories' && (
+                  <>
+                    <strong>Tema Stories em Tela Cheia:</strong> Formato nativo vertical igual ao Instagram, toque para avançar stories, barra de progresso e figurinha de enquete!
+                  </>
+                )}
+                {selectedThemeId === 'cinema' && (
+                  <>
+                    <strong>Tema Claquete de Cinema:</strong> Claquete de gravação interativa com som de estalo de madeira, holofotes de pré-estreia, combo de pipoca e pôster do aniversariante!
+                  </>
+                )}
+                {selectedThemeId === 'revista' && (
+                  <>
+                    <strong>Tema Revista Editorial Vogue:</strong> Capa de revista de alta moda, folheamento de páginas editorial, colunas de texto, cronograma e traje gala!
+                  </>
+                )}
+                {selectedThemeId === 'game' && (
+                  <>
+                    <strong>Tema Arcade 8-bits:</strong> Tela de fliperama retrô com som clássico de moeda 1UP, pixel art animada, power-ups da festa e multiplayer!
+                  </>
+                )}
               </span>
             </div>
 
@@ -217,7 +299,7 @@ export default function InteractiveInviteSection() {
           /* REAL INVITATION IN MOBILE PHONE FRAME   */
           /* ======================================= */
           <div className="flex justify-center items-center py-2 sm:py-4">
-            <div className="relative w-full max-w-[340px] sm:max-w-[375px]">
+            <div className="relative w-full max-w-[380px] sm:max-w-[430px] md:max-w-[450px]">
               
               {/* Outer Glow with Theme Color */}
               <div 
@@ -240,7 +322,7 @@ export default function InteractiveInviteSection() {
                     key={`mobile-${currentTheme.id}-${iframeKey}`}
                     src={currentTheme.liveUrl}
                     title={currentTheme.name}
-                    className="w-full h-[600px] sm:h-[660px] border-0 rounded-[36px] bg-[#ffffff]"
+                    className="w-full h-[650px] sm:h-[720px] border-0 rounded-[36px] bg-[#ffffff]"
                     allow="autoplay"
                   />
                 </div>

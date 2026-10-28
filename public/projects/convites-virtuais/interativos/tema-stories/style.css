@@ -1,0 +1,445 @@
+/* ========================================================
+   TEMA STORIES EM TELA CHEIA - PRINTFOCO
+   Estilo Instagram / TikTok Story Interativo
+   ======================================================== */
+
+:root {
+  --color-pink: #ec4899;
+  --color-purple: #8b5cf6;
+  --color-bg: #09090b;
+  --color-card: rgba(24, 24, 27, 0.85);
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.story-viewport {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  background: radial-gradient(circle at 50% 20%, #2e1065 0%, #09090b 70%);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+/* Barras de Progresso */
+.story-progress-bar {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 6px;
+  z-index: 50;
+}
+
+.progress-segment {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #ffffff;
+  transition: width 0.1s linear;
+}
+
+/* Perfil do Autor */
+.story-author-header {
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 50;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border: 2px solid #fff;
+}
+
+.author-names {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-username {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.story-time {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.story-top-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-story-ctrl {
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+/* Zonas de Toque */
+.touch-zone {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  width: 40%;
+  z-index: 40;
+  cursor: pointer;
+}
+
+.touch-zone.left { left: 0; }
+.touch-zone.right { right: 0; width: 60%; }
+
+/* Slides dos Stories */
+.story-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 80px 24px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.story-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.story-inner-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.story-tag {
+  display: inline-block;
+  background: rgba(236, 72, 153, 0.2);
+  border: 1px solid var(--color-pink);
+  color: var(--color-pink);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 999px;
+  letter-spacing: 1px;
+}
+
+.story-heading {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.story-text {
+  font-size: 0.95rem;
+  color: #d1d5db;
+  max-width: 360px;
+  line-height: 1.5;
+}
+
+/* Moldura */
+.story-media-frame {
+  margin-top: 10px;
+  width: 100%;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px dashed rgba(236, 72, 153, 0.4);
+  border-radius: 20px;
+  padding: 30px 16px;
+}
+
+.cam-icon {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.story-media-frame h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.story-media-frame p {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.badge-hint {
+  display: inline-block;
+  background: var(--color-pink);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* Contagem Regressiva */
+.story-countdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 16px 20px;
+  border-radius: 16px;
+  margin: 10px 0;
+}
+
+.c-unit {
+  min-width: 55px;
+}
+
+.c-val {
+  font-size: 1.8rem;
+  font-weight: 900;
+  display: block;
+  line-height: 1;
+}
+
+.c-lbl {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+.c-sep {
+  font-size: 1.4rem;
+  color: var(--color-pink);
+  font-weight: 700;
+}
+
+.sticker-box {
+  background: #ffffff;
+  color: #111;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Localização */
+.story-map-box {
+  background: var(--color-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 340px;
+  margin-top: 10px;
+}
+
+.map-icon-circle {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.story-map-box strong {
+  font-size: 1rem;
+  color: #fff;
+  display: block;
+}
+
+.story-map-box p {
+  font-size: 0.85rem;
+  color: var(--color-pink);
+  margin: 4px 0 14px;
+}
+
+.story-map-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-story-map {
+  background: #27272a;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.btn-story-map.waze {
+  background: #0284c7;
+}
+
+/* Enquete Sticker Instagram */
+.insta-poll-sticker {
+  background: #ffffff;
+  color: #111;
+  padding: 16px;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  margin: 8px 0;
+  z-index: 60;
+  position: relative;
+}
+
+.poll-question {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.poll-option-btn {
+  width: 100%;
+  background: #f4f4f5;
+  border: 1.5px solid #e4e4e7;
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.poll-option-btn:hover {
+  background: #e4e4e7;
+}
+
+.poll-pct {
+  color: var(--color-purple);
+  font-weight: 800;
+}
+
+/* Formulário Story */
+.story-rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+  z-index: 60;
+  position: relative;
+}
+
+.story-rsvp-form input {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.btn-send-rsvp {
+  background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.story-done-msg {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid #22c55e;
+  padding: 10px;
+  border-radius: 12px;
+  color: #4ade80;
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: 100%;
+  max-width: 320px;
+}
+
+.watermark-story {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  opacity: 0.7;
+}
+
+.watermark-story a {
+  color: #cbd5e1;
+  text-decoration: none;
+}
+
+.hidden {
+  display: none !important;
+}
