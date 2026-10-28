@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { siteConfig, interactiveTemplates } from '../data/content';
 import { useLanguage } from '../context/LanguageContext';
+import ServiceRulesModal from './ServiceRulesModal';
 import { 
   Sparkles, ExternalLink, RotateCcw, Smartphone, Laptop, 
   Crown, TreePine, Footprints, Heart, Baby, Beer, 
   Plane, Ticket, Clapperboard, BookOpen, Gamepad2,
-  CheckCircle2, MapPin, Clock, ShieldCheck
+  CheckCircle2, MapPin, Clock, ShieldCheck, FileText, Wifi, Globe
 } from 'lucide-react';
 
 export default function InteractiveInviteSection() {
@@ -16,6 +17,7 @@ export default function InteractiveInviteSection() {
   const [selectedThemeId, setSelectedThemeId] = useState('natal');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [iframeKey, setIframeKey] = useState(0); // For reloading the invitation envelope
+  const [isRulesModalOpen, setIsRulesModalOpen] = useState(false);
 
   // Current active template
   const currentTheme = interactiveTemplates.find(tpl => tpl.id === selectedThemeId) || interactiveTemplates[0];
@@ -75,6 +77,33 @@ export default function InteractiveInviteSection() {
           <p className="text-[#555555] text-xs sm:text-sm md:text-base font-normal leading-relaxed">
             {t.interactiveShowcase?.subtitle || "Veja os convites reais funcionando dentro do simulador! Toque para abrir o lacre do envelope, ouvir a música, interagir com os recursos e testar no celular ou no computador."}
           </p>
+
+          {/* Aviso sobre Entrega Online via Link & Prazo */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-[#555555] bg-white px-3 py-1.5 rounded-full border border-[#ebe6dc] shadow-xs">
+              <Globe className="w-3.5 h-3.5 text-[#c5a880]" />
+              <span>Entrega 100% Online via Link</span>
+            </span>
+
+            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-[#555555] bg-white px-3 py-1.5 rounded-full border border-[#ebe6dc] shadow-xs">
+              <Clock className="w-3.5 h-3.5 text-[#c5a880]" />
+              <span>Disponível até 5 dias após o evento</span>
+            </span>
+
+            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-[#555555] bg-white px-3 py-1.5 rounded-full border border-[#ebe6dc] shadow-xs">
+              <Wifi className="w-3.5 h-3.5 text-[#c5a880]" />
+              <span>Requer conexão à internet</span>
+            </span>
+
+            <button
+              type="button"
+              onClick={() => setIsRulesModalOpen(true)}
+              className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-[#1c1b1a] bg-[#faf8f5] px-3.5 py-1.5 rounded-full border border-[#c5a880] hover:bg-[#c5a880] hover:text-white transition-all shadow-xs"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#c5a880]" />
+              <span>Regras & Como Funciona</span>
+            </button>
+          </div>
         </div>
 
         {/* Controls Container: Device Switcher & Theme Selector */}
@@ -476,6 +505,12 @@ export default function InteractiveInviteSection() {
         </div>
 
       </div>
+
+      {/* Modal de Regras de Serviços e Prazos */}
+      <ServiceRulesModal 
+        isOpen={isRulesModalOpen} 
+        onClose={() => setIsRulesModalOpen(false)} 
+      />
     </section>
   );
 }

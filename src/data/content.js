@@ -399,23 +399,23 @@ export const interactiveTemplates = [
 export const retrospectivesList = [
   {
     title: "Aniversário Infantil",
-    desc: "Cronologia visual do desenvolvimento da criança com animações temáticas e trilha sonora sincronizada.",
-    themes: ["Dinossauros", "Safari", "Circo", "Princesas", "Elementos Florais"]
+    desc: "Cronologia visual do desenvolvimento da criança com animações temáticas, link online exclusivo ativo até 5 dias pós-evento e download do vídeo em MP4 (Full HD).",
+    themes: ["Homem-Aranha (Aranhaverso)", "Reino das Princesas", "Safari dos Bichinhos", "Jardim Floral & Borboletas", "Dinossauros & Aventura"]
   },
   {
     title: "Aniversário Adulto & 15 Anos",
-    desc: "Edição comemorativa destacando marcos históricos, trajetória profissional, acadêmica e pessoal.",
-    themes: ["Linha do Tempo", "Momentos Marcantes", "Depoimentos em Vídeo", "Comemorações Especiais"]
+    desc: "Edição comemorativa destacando marcos históricos, trajetória pessoal e depoimentos em vídeo, entregue via link web para projeção e download permanente em MP4.",
+    themes: ["Linha do Tempo", "Jardim Floral Elegante", "Momentos Marcantes", "Depoimentos em Vídeo", "Comemorações Especiais"]
   },
   {
     title: "Retrospectiva de Viagens",
-    desc: "Montagem dinâmica reunindo registros fotográficos e gravações em formato cinematográfico.",
+    desc: "Montagem dinâmica reunindo registros fotográficos e gravações em formato cinematográfico com link online e arquivo em alta definição.",
     themes: ["Viagens Internacionais", "Expedições", "Roteiros em Família"]
   },
   {
     title: "Homenagens & Bodas",
-    desc: "Produção audiovisual para celebrações de casamento, bodas e datas comemorativas institucionais.",
-    themes: ["Bodas de Prata / Ouro", "Tributos Institucionais", "Homenagens Familiares"]
+    desc: "Produção audiovisual para celebrações de casamento, bodas e datas comemorativas, com link para a festa e arquivo MP4 vitalício.",
+    themes: ["Bodas de Prata / Ouro", "Casamento Floral & Rústico", "Tributos Institucionais", "Homenagens Familiares"]
   }
 ];
 

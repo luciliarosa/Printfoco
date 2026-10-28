@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { retrospectivesList, siteConfig } from '../data/content';
-import { Film, Play, Sparkles, MessageCircle } from 'lucide-react';
+import RetrospectiveVideoPlayer from '../components/RetrospectiveVideoPlayer';
+import ServiceRulesModal from '../components/ServiceRulesModal';
+import { Film, Play, Sparkles, MessageCircle, FileText, Globe, Clock, Download, Wifi } from 'lucide-react';
 
 export default function RetrospectivesPage() {
+  const [isRulesModalOpen, setIsRulesModalOpen] = useState(false);
+
   return (
     <div className="pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-24 bg-[#faf8f5] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,19 +19,59 @@ export default function RetrospectivesPage() {
           <span className="text-[#1c1b1a] font-bold">Retrospectivas Cinematográficas</span>
         </div>
 
-        {/* Header */}
-        <div className="max-w-3xl mb-10 sm:mb-16 space-y-3 sm:space-y-4">
+        {/* Header com Informações de Entrega Online & Download MP4 */}
+        <div className="max-w-4xl mb-8 sm:mb-12 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#c5a880] bg-[#ffffff] text-xs font-semibold uppercase tracking-wider text-[#9f825b]">
             <Film className="w-3.5 h-3.5 text-[#c5a880]" />
-            <span>Vídeos que Marcam Época</span>
+            <span>Vídeos que Marcam Época • Online via Link & Download MP4</span>
           </div>
+
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif-luxury text-[#1c1b1a]">
             Retrospectivas <span className="text-[#c5a880] italic font-normal">Cinematográficas</span>
           </h1>
+
           <p className="text-sm sm:text-base md:text-lg text-[#555555] leading-relaxed">
             Transformamos as fotografias e pequenos vídeos da sua família em uma narrativa tocante, sincronizada com músicas inesquecíveis para emocionar todos os convidados durante a festa.
           </p>
+
+          {/* Destaque das Regras e Modelo Online Exclusivo */}
+          <div className="pt-2 flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-1.5 text-xs text-[#555555] bg-white px-3 py-1.5 rounded-full border border-[#ebe6dc] shadow-xs">
+              <Globe className="w-3.5 h-3.5 text-[#c5a880]" />
+              <span>Link Online Exclusivo para Telão ou Celular</span>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 text-xs text-[#555555] bg-white px-3 py-1.5 rounded-full border border-[#ebe6dc] shadow-xs">
+              <Clock className="w-3.5 h-3.5 text-[#c5a880]" />
+              <span>No ar até 5 dias pós-evento</span>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 text-xs text-[#555555] bg-white px-3 py-1.5 rounded-full border border-[#ebe6dc] shadow-xs">
+              <Download className="w-3.5 h-3.5 text-[#c5a880]" />
+              <span>Download vitalício do vídeo em MP4 (Full HD)</span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsRulesModalOpen(true)}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1c1b1a] bg-[#faf8f5] px-3.5 py-1.5 rounded-full border border-[#c5a880] hover:bg-[#c5a880] hover:text-white transition-all shadow-xs"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#c5a880]" />
+              <span>Ver Regras & Como Funciona</span>
+            </button>
+          </div>
+
+          {/* Aviso sobre Conexão com a Internet */}
+          <div className="p-3 rounded-2xl bg-[#ffffff] border border-[#ebe6dc] flex items-center gap-2.5 text-xs text-[#666666]">
+            <Wifi className="w-4 h-4 text-[#c5a880] shrink-0" />
+            <span>
+              <strong>Atenção:</strong> Como tudo é entregue de forma 100% online via link web seguro, você e seus convidados precisam de <strong>conexão com a internet</strong> ativa para reproduzir os vídeos e convites.
+            </span>
+          </div>
         </div>
+
+        {/* Player de Demonstração em Vídeo com Molduras e Múltiplos Temas */}
+        <RetrospectiveVideoPlayer />
 
         {/* Categorias Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-10 sm:mb-16">
@@ -86,18 +130,33 @@ export default function RetrospectivesPage() {
             </p>
           </div>
 
-          <a
-            href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent("Olá! Gostaria de um orçamento para retrospectiva em vídeo.")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full md:w-auto shrink-0 px-7 py-3.5 sm:py-4 rounded-full font-bold text-xs tracking-wider uppercase bg-[#1c1b1a] text-white hover:bg-[#c5a880] shadow-md flex items-center justify-center gap-2 transition-all text-center"
-          >
-            <MessageCircle className="w-4 h-4 fill-white" />
-            <span>Fazer Orçamento no WhatsApp</span>
-          </a>
+          <div className="flex items-center gap-3 w-full md:w-auto">
+            <button
+              type="button"
+              onClick={() => setIsRulesModalOpen(true)}
+              className="px-5 py-3.5 sm:py-4 rounded-full font-bold text-xs tracking-wider uppercase border border-[#c5a880] text-[#1c1b1a] hover:bg-[#faf8f5] transition-all shrink-0"
+            >
+              Regras do Serviço
+            </button>
+            <a
+              href={`https://wa.me/${siteConfig.contact.whatsappClean}?text=${encodeURIComponent("Olá! Gostaria de um orçamento para retrospectiva em vídeo.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full md:w-auto shrink-0 px-7 py-3.5 sm:py-4 rounded-full font-bold text-xs tracking-wider uppercase bg-[#1c1b1a] text-white hover:bg-[#c5a880] shadow-md flex items-center justify-center gap-2 transition-all text-center"
+            >
+              <MessageCircle className="w-4 h-4 fill-white" />
+              <span>Fazer Orçamento no WhatsApp</span>
+            </a>
+          </div>
         </div>
 
       </div>
+
+      {/* Modal de Regras e Prazos dos Serviços */}
+      <ServiceRulesModal 
+        isOpen={isRulesModalOpen} 
+        onClose={() => setIsRulesModalOpen(false)} 
+      />
     </div>
   );
 }
